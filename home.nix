@@ -32,10 +32,10 @@
   programs.nixvim = {
     enable = true;
     colorschemes.gruvbox.enable = true;
-    plugins.treesitter.enable = true;
-#     plugins.treesitter.settings = {
-#       ensure_installed = [ "c" ];
-#     };
+    plugins.treesitter = {
+      enable = true;
+      ensure_installed = ["c"];
+    };
     keymaps = [
       {
         mode = "i";
