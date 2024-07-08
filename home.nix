@@ -34,7 +34,9 @@
     colorschemes.gruvbox.enable = true;
     plugins.treesitter = {
       enable = true;
-      ensure_installed = ["c"];
+      extraOptions = {
+        ensure_installed = ["c"];
+      };
     };
     keymaps = [
       {
