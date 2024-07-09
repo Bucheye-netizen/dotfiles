@@ -34,9 +34,7 @@
     colorschemes.gruvbox.enable = true;
     plugins.treesitter = {
       enable = true;
-      extraOptions = {
-        ensure_installed = ["c"];
-      };
+      grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
     };
     keymaps = [
       {
