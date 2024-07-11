@@ -47,15 +47,21 @@
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+    prime = {
+      nvidiaBusId = "PCI:01:0:0";
+      amdgpuBusId = "PCI:05:0:0";
+      sync.enable = true;
+    };
   };
 
   services.xserver = {
     layout = "us";
     xkbVariant = "";
     enable = true;
-    displayManager.sddm.wayland.enable = true;
+    # displayManagersddm.wayland.enable = true;
+    displayManager.gdm.enable = true;
   };
-  services.desktopManager.plasma6.enable = true;
+  # services.desktopManager.plasma6.enable = true;
   services.printing.enable = true;
 
   hardware.pulseaudio.enable = false;
@@ -98,7 +104,6 @@
     packages = with pkgs; [
     ];
   };
-
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};

@@ -21,7 +21,7 @@
     # EDITOR = "emacs";
   };
   programs.home-manager.enable = true;
-  # wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.enable = true;
   programs.git = {
     enable = true;
     userName  = "Lisan";
