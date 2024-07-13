@@ -16,7 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; 
-  # networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -30,11 +30,6 @@
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
-  };
-
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE = "1";
-    NIXOS_OZONE_WL = "1";
   };
 
   xdg.portal.enable = true;
@@ -58,10 +53,10 @@
     layout = "us";
     xkbVariant = "";
     enable = true;
-    # displayManagersddm.wayland.enable = true;
-    displayManager.gdm.enable = true;
+    displayManager.sddm.enable = true;
   };
-  # services.desktopManager.plasma6.enable = true;
+  programs.hyprland.enable = true;
+
   services.printing.enable = true;
 
   hardware.pulseaudio.enable = false;
@@ -72,7 +67,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  networking.networkmanager.enable = true;
 
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -91,6 +85,8 @@
     swww
     lshw
     pciutils
+    gtk3
+    wl-clipboard
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
