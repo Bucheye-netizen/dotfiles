@@ -10,8 +10,12 @@ let rootPath = ../.; in
 
   home.stateVersion = "24.05";
 
+  fonts.fontconfig.enable = true;
+
   home.packages = [
+    (pkgs.nerdfonts.override { fonts = ["JetBrainsMono"]; })
   ];
+  fonts.fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
 
   home.file = {
 
@@ -19,6 +23,7 @@ let rootPath = ../.; in
 
   home.sessionVariables = {
     "EDITOR" = "nvim";
+    VISUAL = "nvim";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
   };
@@ -62,15 +67,16 @@ let rootPath = ../.; in
   programs.kitty = {
     enable = true;
     theme = "Gruvbox Dark Hard";
+    # font = "JetBrainsMono Nerd Font";
   };
 
 
-  # TODO: Figure out how to make this a relative path
   programs.nushell = {
     enable = true;
-    configFile.source = rootPath + /config.nu;
+    configFile.source = ./config.nu;
     shellAliases = {
       vim = "nvim";
+      vi = "nvim";
     };
   };
 
@@ -80,6 +86,7 @@ let rootPath = ../.; in
   };
 
   programs.starship = {
+    enable = true;
     settings = {
       add_newline = true;
       character = {
@@ -102,7 +109,6 @@ let rootPath = ../.; in
       enable = true;
       grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
     };
-    
     keymaps = [
       {
         mode = "i";

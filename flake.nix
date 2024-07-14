@@ -19,21 +19,28 @@
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
-        ./configuration.nix
         inputs.home-manager.nixosModules.default
+        ./configuration.nix
+	home-manager.nixosModules.home-manager 
+	{
+          home-manager.extraSpecialArgs = {inherit inputs;};
+	  home-manager.useGlobalPkgs = true;
+	  home-manager.useUserPackages = true;
+	  home-manager.users.lisan = import ./home.nix;
+	}
       ];
     };
 
-    homeConfigurations = {
-      mee = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {inherit inputs;};
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [
-          inputs.nixvim.homeManagerModules.nixvim
-          ./home.nix
-        ];
-      };
-    };
+    # homeConfigurations = {
+    #   mee = home-manager.lib.homeManagerConfiguration {
+    #     extraSpecialArgs = {inherit inputs;};
+    #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    #     modules = [
+    #       inputs.nixvim.homeManagerModules.nixvim
+    #       ./home.nix
+    #     ];
+    #   };
+    # };
   };
 }
 

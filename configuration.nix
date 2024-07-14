@@ -8,9 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+      # inputs.home-manager.nixosModules.default
     ];
-
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -54,7 +53,10 @@
     xkbVariant = "";
     enable = true;
   };
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "Breeze";
+  };
   programs.hyprland.enable = true;
 
   services.printing.enable = true;
@@ -87,6 +89,7 @@
     pciutils
     gtk3
     wl-clipboard
+    tree
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
@@ -102,12 +105,12 @@
     shell = pkgs.nushell;
   };
 
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "lisan" = import ./home.nix;
-    };
-  };
+  # home-manager = {
+  #   extraSpecialArgs = {inherit inputs;};
+  #   users = {
+  #     "lisan" = import ./home.nix;
+  #   };
+  # };
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
   
