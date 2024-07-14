@@ -90,7 +90,8 @@
     gtk3
     wl-clipboard
     tree
-	vivid
+		vivid
+		tmux
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

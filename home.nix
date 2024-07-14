@@ -25,33 +25,37 @@ let rootPath = ../.; in
 
   wayland.windowManager.hyprland = {
     enable = true;
-	#    decoration = {
-	#      rounding = 10;
-	#      active_opacity = 1.0;
-	#      inactive_opacity = 0.9;
-	#      drop_shadow = true;
-	#      shadow_range = 4;
-	#      shadow_render_poewr = 3;
-	#      blur = {
-	# enabled = true; 
-	# size = 3;
-	# passes = 1;
-	# vibrancy = 0.1696;
-	#     };
-	#    };
+		settings = {
+			decoration = {
+				rounding = 10;
+				active_opacity = 1.0;
+				inactive_opacity = 0.9;
+				drop_shadow = true;
+				shadow_range = 4;
+				shadow_render_power = 3;
+				blur = {
+					enabled = true; 
+					size = 3;
+					passes = 1;
+					vibrancy = 0.1696;
+				};
+			};
+		};
+
+
     settings = {
       bind = [
-        "SUPER,Q,exec,kitty"
-	"SUPER, X, exec, firefox"
-	"ALT, Tab, cyclenext"
-	"ALT, Tab, bringactivetotop"
-	"SUPER, T, togglefloating"
-	"SUPER, W, closewindow"
-	"SUPER, F, fullscreen"
+				"SUPER,Q,exec,kitty"
+				"SUPER, X, exec, firefox"
+				"ALT, Tab, cyclenext"
+				"ALT, Tab, bringactivetotop"
+				"SUPER, T, togglefloating"
+				"SUPER, W, closewindow"
+				"SUPER, F, fullscreen"
       ];
       bindm = [
-	"SUPER_SHIFT, mouse:272, resizewindow"
-	"SUPER, mouse:272, movewindow"
+				"SUPER_SHIFT, mouse:272, resizewindow"
+				"SUPER, mouse:272, movewindow"
       ];
     };
   };
@@ -60,9 +64,20 @@ let rootPath = ../.; in
   programs.kitty = {
     enable = true;
     theme = "Gruvbox Dark Hard";
-    # font = "JetBrainsMono Nerd Font";
+		font = {
+			size = 9;
+			name = "JetBrainsMono Nerd Font";
+		};
+		keybindings = {
+			"ctrl+t" = "new_tab";
+			"ctrl+w" = "close_tab";
+			"ctrl+alt" = "next_tab";
+			"ctrl+shift+alt" = "previous_tab";
+		};
+		settings = {
+			tab_bar_style = "powerline";
+		};
   };
-
 
   programs.nushell = {
     enable = true;
@@ -97,16 +112,21 @@ let rootPath = ../.; in
 
   programs.nixvim = {
     enable = true;
-    colorschemes.gruvbox.enable = true;
+    colorschemes.gruvbox = {
+		  enable = true;
+			settings = {
+				contrast = "hard";
+				terminal_colors = true;
+			};
+		};
     plugins = {
       treesitter = {
         enable = true;
         grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
       };
+			fzf-lua.enable = true;
     };
-	extraPlugins = with pkgs.vimPlugins; [
-	  nvim-fzf
-	];
+
     keymaps = [
       {
         mode = "i";
