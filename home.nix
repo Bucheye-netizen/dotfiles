@@ -21,13 +21,6 @@ let rootPath = ../.; in
 
   };
 
-  home.sessionVariables = {
-    "EDITOR" = "nvim";
-    VISUAL = "nvim";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
-  };
-
   programs.home-manager.enable = true;
 
   wayland.windowManager.hyprland = {
@@ -74,6 +67,7 @@ let rootPath = ../.; in
   programs.nushell = {
     enable = true;
     configFile.source = ./config.nu;
+    envFile.source = ./env.nu;
     shellAliases = {
       vim = "nvim";
       vi = "nvim";
@@ -88,11 +82,10 @@ let rootPath = ../.; in
   programs.starship = {
     enable = true;
     settings = {
-      add_newline = true;
-      character = {
-        sucess_symbol = "[->](bold green)";
-	error_symbol = "[->](bold red)";
-      };
+      add_newline = false;
+      aws.disabled = true;
+      gcloud.disabled = true;
+      line_break.disabled = true;
     };
   };
 
@@ -105,10 +98,15 @@ let rootPath = ../.; in
   programs.nixvim = {
     enable = true;
     colorschemes.gruvbox.enable = true;
-    plugins.treesitter = {
-      enable = true;
-      grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+    plugins = {
+      treesitter = {
+        enable = true;
+        grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+      };
     };
+	extraPlugins = with pkgs.vimPlugins; [
+	  nvim-fzf
+	];
     keymaps = [
       {
         mode = "i";
@@ -117,7 +115,8 @@ let rootPath = ../.; in
       }
     ];
     opts = {
-      shiftwidth = 4;
+      shiftwidth = 2;
+      tabstop = 2;
       clipboard = "unnamedplus";
       autoindent = true;
     };

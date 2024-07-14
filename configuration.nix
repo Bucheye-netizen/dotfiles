@@ -90,6 +90,7 @@
     gtk3
     wl-clipboard
     tree
+	vivid
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
