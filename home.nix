@@ -1,5 +1,6 @@
 { config, pkgs, inputs, ... }:
 
+let rootPath = ../.; in 
 {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
@@ -17,7 +18,7 @@
   };
 
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    "EDITOR" = "nvim";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
   };
@@ -26,20 +27,20 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    decoration = {
-      rounding = 10;
-      active_opacity = 1.0;
-      inactive_opacity = 0.9;
-      drop_shadow = true;
-      shadow_range = 4;
-      shadow_render_poewr = 3;
-      blur = {
-	enabled = true; 
-	size = 3;
-	passes = 1;
-	vibrancy = 0.1696;
-     };
-    };
+	#    decoration = {
+	#      rounding = 10;
+	#      active_opacity = 1.0;
+	#      inactive_opacity = 0.9;
+	#      drop_shadow = true;
+	#      shadow_range = 4;
+	#      shadow_render_poewr = 3;
+	#      blur = {
+	# enabled = true; 
+	# size = 3;
+	# passes = 1;
+	# vibrancy = 0.1696;
+	#     };
+	#    };
     settings = {
       bind = [
         "SUPER,Q,exec,kitty"
@@ -47,6 +48,8 @@
 	"ALT, Tab, cyclenext"
 	"ALT, Tab, bringactivetotop"
 	"SUPER, T, togglefloating"
+	"SUPER, W, closewindow"
+	"SUPER, F, fullscreen"
       ];
       bindm = [
 	"SUPER_SHIFT, mouse:272, resizewindow"
@@ -60,8 +63,12 @@
     enable = true;
     theme = "Gruvbox Dark Hard";
   };
+
+
+  # TODO: Figure out how to make this a relative path
   programs.nushell = {
     enable = true;
+    configFile.source = rootPath + /config.nu;
     shellAliases = {
       vim = "nvim";
     };
@@ -70,6 +77,16 @@
   programs.carapace = {
     enable = true;
     enableNushellIntegration = true;
+  };
+
+  programs.starship = {
+    settings = {
+      add_newline = true;
+      character = {
+        sucess_symbol = "[->](bold green)";
+	error_symbol = "[->](bold red)";
+      };
+    };
   };
 
   programs.git = {
@@ -85,20 +102,18 @@
       enable = true;
       grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
     };
+    
     keymaps = [
       {
         mode = "i";
         key = "kj";
         action = "<Esc>";
       }
-      {
-        mode = "n";
-	key = "<C-v>";
-	action = ":call system(\"wl-paste\", @\")<CR>";
-      }
     ];
     opts = {
       shiftwidth = 4;
+      clipboard = "unnamedplus";
+      autoindent = true;
     };
   };
 }

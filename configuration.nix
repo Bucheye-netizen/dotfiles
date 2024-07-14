@@ -99,6 +99,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     ];
+    shell = pkgs.nushell;
   };
 
   home-manager = {
