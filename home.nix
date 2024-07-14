@@ -26,10 +26,31 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    decoration = {
+      rounding = 10;
+      active_opacity = 1.0;
+      inactive_opacity = 0.9;
+      drop_shadow = true;
+      shadow_range = 4;
+      shadow_render_poewr = 3;
+      blur = {
+	enabled = true; 
+	size = 3;
+	passes = 1;
+	vibrancy = 0.1696;
+     };
+    };
     settings = {
       bind = [
         "SUPER,Q,exec,kitty"
 	"SUPER, X, exec, firefox"
+	"ALT, Tab, cyclenext"
+	"ALT, Tab, bringactivetotop"
+	"SUPER, T, togglefloating"
+      ];
+      bindm = [
+	"SUPER_SHIFT, mouse:272, resizewindow"
+	"SUPER, mouse:272, movewindow"
       ];
     };
   };
@@ -38,6 +59,17 @@
   programs.kitty = {
     enable = true;
     theme = "Gruvbox Dark Hard";
+  };
+  programs.nushell = {
+    enable = true;
+    shellAliases = {
+      vim = "nvim";
+    };
+  };
+
+  programs.carapace = {
+    enable = true;
+    enableNushellIntegration = true;
   };
 
   programs.git = {
@@ -62,7 +94,7 @@
       {
         mode = "n";
 	key = "<C-v>";
-	action = ":call system(\"wl-copy\", @\")<CR>";
+	action = ":call system(\"wl-paste\", @\")<CR>";
       }
     ];
     opts = {

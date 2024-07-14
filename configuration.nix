@@ -53,8 +53,8 @@
     layout = "us";
     xkbVariant = "";
     enable = true;
-    displayManager.sddm.enable = true;
   };
+  services.displayManager.sddm.enable = true;
   programs.hyprland.enable = true;
 
   services.printing.enable = true;
