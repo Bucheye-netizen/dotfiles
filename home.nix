@@ -27,9 +27,9 @@ let rootPath = ../.; in
     enable = true;
 		settings = {
 			decoration = {
-				rounding = 10;
+				rounding = 5;
 				active_opacity = 1.0;
-				inactive_opacity = 0.9;
+				inactive_opacity = 0.95;
 				drop_shadow = true;
 				shadow_range = 4;
 				shadow_render_power = 3;
@@ -40,21 +40,24 @@ let rootPath = ../.; in
 					vibrancy = 0.1696;
 				};
 			};
+			general = {
+				gaps_out = 10;
+			};
 		};
-
 
     settings = {
       bind = [
 				"SUPER,Q,exec,kitty"
 				"SUPER, X, exec, firefox"
-				"ALT, Tab, cyclenext"
-				"ALT, Tab, bringactivetotop"
+				"SUPER, Tab, cyclenext"
+				"SUPER, Tab, bringactivetotop"
 				"SUPER, T, togglefloating"
-				"SUPER, W, closewindow"
+				"SUPER, W, killactive"
 				"SUPER, F, fullscreen"
+				"SUPER, K, fakefullscreen"
       ];
       bindm = [
-				"SUPER_SHIFT, mouse:272, resizewindow"
+				"SUPER, mouse:273, resizewindow"
 				"SUPER, mouse:272, movewindow"
       ];
     };
@@ -67,12 +70,6 @@ let rootPath = ../.; in
 		font = {
 			size = 9;
 			name = "JetBrainsMono Nerd Font";
-		};
-		keybindings = {
-			"ctrl+t" = "new_tab";
-			"ctrl+w" = "close_tab";
-			"ctrl+alt" = "next_tab";
-			"ctrl+shift+alt" = "previous_tab";
 		};
 		settings = {
 			tab_bar_style = "powerline";
@@ -141,4 +138,77 @@ let rootPath = ../.; in
       autoindent = true;
     };
   };
+
+	# Inspired by https://hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/
+	programs.tmux = {
+		enable = true;
+		extraConfig = ''
+			unbind C-b
+			unbind '"'
+			unbind %
+			unbind n
+			unbind x
+
+			set-option -g mouse on
+			set-option -g prefix C-j
+
+			bind-key C-j send-prefix
+			bind i split-window -h
+			bind v split-window -v
+
+			bind -n M-w select-pane -U
+			bind -n M-a select-pane -L
+			bind -n M-s select-pane -D
+			bind -n M-d select-pane -R
+
+			bind -n C-Tab select-window -n
+			bind -n C-S-Tab select-window -p
+
+			bind -n C-w kill-window
+			bind -n C-t new-window
+
+			# DESIGN TWEAKS
+
+			# don't do anything when a 'bell' rings
+			set -g visual-activity off
+			set -g visual-bell off
+			set -g visual-silence off
+			setw -g monitor-activity off
+			set -g bell-action none
+
+			# clock mode
+			setw -g clock-mode-colour colour1
+
+			# copy mode
+			setw -g mode-style 'fg=colour1 bg=colour18 bold'
+
+			# pane borders
+			set -g pane-border-style 'fg=colour1'
+			set -g pane-active-border-style 'fg=colour3'
+
+			# statusbar
+			set -g status-position 
+			set -g status-justify left
+			set -g status-style 'fg=colour5'
+			set -g status-left '''
+			set -g status-right '%Y-%m-%d %H:%M '
+			set -g status-right-length 50
+			set -g status-left-length 10
+
+			setw -g window-status-current-style 'fg=colour0 bg=colour4 bold'
+			setw -g window-status-current-format ' #I #W #F '
+
+			setw -g window-status-style 'fg=colour1 dim'
+			setw -g window-status-format ' #I #[fg=colour7]#W #[fg=colour1]#F '
+
+			setw -g window-status-bell-style 'fg=colour2 bg=colour1 bold'
+
+			# messages
+			set -g message-style 'fg=colour2 bg=colour0 bold'
+
+		'';
+	};
 }
+
+
+
