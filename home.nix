@@ -55,6 +55,9 @@ let rootPath = ../.; in
 				"SUPER, W, killactive"
 				"SUPER, F, fullscreen"
 				"SUPER, K, fakefullscreen"
+			  # maximizing windows without eliminating tab bar
+				"SUPER, M, fullscreen, 1"
+				"SUPER, C, centerwindow"
       ];
       bindm = [
 				"SUPER, mouse:273, resizewindow"
@@ -73,6 +76,10 @@ let rootPath = ../.; in
 		};
 		settings = {
 			tab_bar_style = "powerline";
+		};
+		keybindings = {
+			"ctrl+tab" = "no_op";
+			"ctrl+shift+tab" = "no_op";
 		};
   };
 
@@ -151,6 +158,7 @@ let rootPath = ../.; in
 			unbind %
 			unbind n
 			unbind x
+			unbind p
 
 			set-option -g mouse on
 			set-option -g prefix C-j
@@ -171,6 +179,7 @@ let rootPath = ../.; in
 			bind -n C-t new-window
 
 			# DESIGN TWEAKS
+			set -g default-terminal "tmux-256color"
 
 			# don't do anything when a 'bell' rings
 			set -g visual-activity off
@@ -208,7 +217,6 @@ let rootPath = ../.; in
 
 			# messages
 			set -g message-style 'fg=colour2 bg=colour0 bold'
-
 		'';
 	};
 }
