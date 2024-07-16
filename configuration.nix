@@ -94,6 +94,7 @@
     tree
 		vivid
 		htop
+		trashy
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

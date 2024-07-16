@@ -78,8 +78,7 @@ let rootPath = ../.; in
 			tab_bar_style = "powerline";
 		};
 		keybindings = {
-			"ctrl+tab" = "no_op";
-			"ctrl+shift+tab" = "no_op";
+			"alt+shift+tab" = "no_op";
 		};
   };
 
@@ -90,8 +89,9 @@ let rootPath = ../.; in
     shellAliases = {
       vim = "nvim";
       vi = "nvim";
+			rm = "trash put";
 
-		rebuild = "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
+			rebuild = "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
     };
   };
 
@@ -172,8 +172,8 @@ let rootPath = ../.; in
 			bind -n M-s select-pane -D
 			bind -n M-d select-pane -R
 
-			bind -n C-Tab select-window -n
-			bind -n C-S-Tab select-window -p
+			bind -n M-Tab select-window -n
+			bind -n M-S-Tab select-window -p
 
 			bind -n C-w kill-window
 			bind -n C-t new-window
