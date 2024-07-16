@@ -83,6 +83,8 @@ let rootPath = ../.; in
     shellAliases = {
       vim = "nvim";
       vi = "nvim";
+
+		rebuild = "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
     };
   };
 
@@ -136,6 +138,7 @@ let rootPath = ../.; in
       tabstop = 2;
       clipboard = "unnamedplus";
       autoindent = true;
+			number = true;
     };
   };
 

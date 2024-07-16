@@ -17,3 +17,4 @@ $env.config = {
   }
 }
 $env.path = ($env.path | split row (char esep) | prepend /home/lisan/.apps | append /user/bin/env)
+
