@@ -24,6 +24,19 @@ let rootPath = ../.; in
 	# Colors
 
   programs.home-manager.enable = true;
+	programs.zellij = {
+		enable = true;
+		settings = {
+			simplified_ui = true;
+			pane_frames = false;
+			default_frame = "compact";
+			mouse_mode = true;
+			theme_dir = "/zellij";
+			hide_session_name = true;
+			theme = "gruvbox-dark";
+		};
+	};
+
 
   wayland.windowManager.hyprland = {
     enable = true;
