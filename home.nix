@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, self ... }:
 
 let rootPath = ../.; in 
 {
@@ -31,7 +31,7 @@ let rootPath = ../.; in
 			pane_frames = false;
 			default_frame = "compact";
 			mouse_mode = true;
-			theme_dir = "/zellij";
+			# theme_dir = "${self}/zellij";
 			hide_session_name = true;
 			theme = "gruvbox-dark";
 		};
@@ -172,6 +172,3 @@ let rootPath = ../.; in
 		extraConfig = builtins.readFile ./tmux.conf;
 	};
 }
-
-
-
