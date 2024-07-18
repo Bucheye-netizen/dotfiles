@@ -77,11 +77,8 @@
 
   environment.systemPackages = with pkgs; [
     neofetch
-    neovim
     wget
     sl
-    git
-    fzf
     rofi-wayland
     dunst
     kitty
@@ -95,6 +92,7 @@
 		vivid
 		htop
 		trashy
+		fzf
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

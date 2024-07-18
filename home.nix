@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, self ... }:
+{ config, pkgs, inputs, self, ... }:
 
 let rootPath = ../.; in 
 {
@@ -24,6 +24,7 @@ let rootPath = ../.; in
 	# Colors
 
   programs.home-manager.enable = true;
+
 	programs.zellij = {
 		enable = true;
 		settings = {
@@ -84,7 +85,6 @@ let rootPath = ../.; in
     };
   };
 
-  programs.waybar.enable = true;
   programs.kitty = {
     enable = true;
     theme = "Gruvbox Dark Hard";
