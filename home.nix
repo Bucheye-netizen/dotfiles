@@ -31,9 +31,9 @@ let rootPath = ../.; in
 			simplified_ui = true;
 			pane_frames = false;
 			mouse_mode = true;
-			default_layout = "simple.kdl";
-			theme_dir = "${inputs.self}/zellij";
-			layout_dir = "${inputs.self}/zellij";
+			default_layout = "${inputs.self}/zellij/layouts/simple.kdl";
+			theme_dir = "${inputs.self}/zellij/themes";
+			layout_dir = "${inputs.self}/zellij/layouts";
 			hide_session_name = true;
 			theme = "gruvbox-dark";
 		};
