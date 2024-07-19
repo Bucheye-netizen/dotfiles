@@ -27,6 +27,7 @@ let rootPath = ../.; in
 
 	programs.zellij = {
 		enable = true;
+
 		settings = {
 			simplified_ui = true;
 			pane_frames = false;
@@ -34,7 +35,7 @@ let rootPath = ../.; in
 			default_layout = "${inputs.self}/zellij/layouts/simple.kdl";
 			theme_dir = "${inputs.self}/zellij/themes";
 			layout_dir = "${inputs.self}/zellij/layouts";
-			hide_session_name = true;
+			ui.pane_frames.hide_session_name = true;
 			theme = "gruvbox-dark";
 		};
 	};
