@@ -30,9 +30,10 @@ let rootPath = ../.; in
 		settings = {
 			simplified_ui = true;
 			pane_frames = false;
-			default_frame = "compact";
 			mouse_mode = true;
-			# theme_dir = "${self}/zellij";
+			default_layout = "simple";
+			theme_dir = "${inputs.self}/zellij";
+			layout_dir = "${inputs.self}/zellij";
 			hide_session_name = true;
 			theme = "gruvbox-dark";
 		};
