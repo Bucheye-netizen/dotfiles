@@ -1,6 +1,8 @@
 { config, pkgs, inputs, self, zjstatus, ... }:
 
-let rootPath = ../.; in 
+let 
+	rootPath = ../.; 
+in 
 {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
@@ -15,6 +17,7 @@ let rootPath = ../.; in
   home.packages = [
     (pkgs.nerdfonts.override { fonts = ["JetBrainsMono"]; })
   ];
+
   fonts.fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
 
   home.file = {
@@ -33,7 +36,6 @@ let rootPath = ../.; in
 
 	programs.zellij = {
 		enable = true;
-
 		settings = {
 			simplified_ui = true;
 			pane_frames = false;
@@ -45,7 +47,6 @@ let rootPath = ../.; in
 			theme = "gruvbox-dark";
 		};
 	};
-
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -116,6 +117,7 @@ let rootPath = ../.; in
       vim = "nvim";
       vi = "nvim";
 			rm = "trash put";
+			btm = "btm --color gruvbox ";
 
 			rebuild = "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
     };
@@ -156,7 +158,18 @@ let rootPath = ../.; in
     plugins = {
       treesitter = {
         enable = true;
-        grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+
+				settings = {
+					ensure_installed = [
+						"c"
+						"rust"
+						"cpp"
+						"nix"
+					];
+					highlight.enable = true;
+				};
+
+				nixGrammars = true;
       };
 			fzf-lua.enable = true;
     };
