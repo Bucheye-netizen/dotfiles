@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, self, ... }:
+{ config, pkgs, inputs, self, zjstatus, ... }:
 
 let rootPath = ../.; in 
 {
@@ -19,6 +19,13 @@ let rootPath = ../.; in
 
   home.file = {
   };
+
+	nixpkgs.overlays = with inputs; [
+		(final: prev: {
+			zjstatus = zjstatus.packages.${prev.system}.default; # adding pkgs.
+		})
+		zjstatus
+	];
 
 	# Colors
 

@@ -94,6 +94,7 @@
 		trashy
 		fzf
 		nsnake
+		gcc
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

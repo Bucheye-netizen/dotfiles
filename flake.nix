@@ -19,19 +19,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, zjstatus, ... }@inputs: 
-  let
-    overlays = with inputs; [
-      (final: prev: {
-        zjstatus = zjstatus.packages.${prev.system}.default;
-      })
-    ];
-	in {
+  outputs = { self, nixpkgs, home-manager, nixvim, zjstatus, ... }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix
-				home-manager.nixosModules.home-manager 
+				home-manager.nixosModules.home-manager
 				{
 					home-manager.extraSpecialArgs = {inherit inputs;};
 					home-manager.useGlobalPkgs = true;
