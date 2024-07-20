@@ -19,7 +19,14 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, zjstatus, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nixvim, zjstatus, ... }@inputs: 
+  let
+    overlays = with inputs; [
+      (final: prev: {
+        zjstatus = zjstatus.packages.${prev.system}.default;
+      })
+    ];
+	in {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [

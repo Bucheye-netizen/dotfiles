@@ -93,6 +93,7 @@
 		htop
 		trashy
 		fzf
+		nsnake
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

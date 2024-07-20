@@ -18,7 +18,6 @@ let rootPath = ../.; in
   fonts.fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
 
   home.file = {
-
   };
 
 	# Colors
@@ -130,10 +129,12 @@ let rootPath = ../.; in
     };
   };
 
+	programs.gh.enable = true;
   programs.git = {
     enable = true;
     userName  = "Lisan";
     userEmail = "lisan.kontra@gmail.com";
+		extraConfig.init.defaultBranch = "main";
   };
 
   programs.nixvim = {
