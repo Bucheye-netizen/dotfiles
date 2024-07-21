@@ -1,12 +1,15 @@
 { config, pkgs, inputs, self, zjstatus, ... }:
 
+
 let 
 	rootPath = ../.; 
+	colors = import ./colors.nix;
 in 
 {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
   ];
+
   home.username = "lisan";
   home.homeDirectory = "/home/lisan";
 
@@ -30,12 +33,9 @@ in
 		zjstatus
 	];
 
-	# Colors
-
   programs.home-manager.enable = true;
 
-	programs.zellij = {
-		enable = true;
+	programs.zellij = { enable = true;
 		settings = {
 			simplified_ui = true;
 			pane_frames = false;
@@ -65,8 +65,18 @@ in
 					vibrancy = 0.1696;
 				};
 			};
-			general = {
+			general = { 
 				gaps_out = 10;
+				sensitivity = 0.4;
+				"col.active_border" = (
+					"rgb(${colors.toHypr colors.gruv.bright_orange})" 
+					+ " rgb(${colors.toHypr colors.gruv.bright_red})"
+				);
+
+				"col.inactive_border" = (
+					"rgb(${colors.toHypr colors.gruv.faded_aqua})" 
+					+ " rgb(${colors.toHypr colors.gruv.faded_blue})"
+				);
 			};
 		};
 

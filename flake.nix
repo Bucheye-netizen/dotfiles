@@ -14,14 +14,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		zjstatus = {
-      url = "github:dj95/zjstatus";
-    };
+		zjstatus.url = "github:dj95/zjstatus";
+
+		nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, zjstatus, ... }@inputs: {
+
+  outputs = { self, nixpkgs, home-manager, nixvim, zjstatus, nix-colors, ... }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
 				home-manager.nixosModules.home-manager
@@ -35,4 +36,3 @@
     };
   };
 }
-
