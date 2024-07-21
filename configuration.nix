@@ -76,7 +76,6 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    neofetch
     wget
     sl
     rofi-wayland
@@ -95,6 +94,7 @@
 		fzf
 		nsnake
 		gcc
+		fastfetch
 		bottom
 
     (waybar.overrideAttrs (oldAttrs: {

@@ -17,7 +17,14 @@ in
 
   fonts.fontconfig.enable = true;
 
+	nixpkgs.overlays = with inputs; [
+		(final: prev: {
+			zjstatus = zjstatus.packages.${prev.system}.default; # adding pkgs.
+		})
+	];
+
   home.packages = [
+		# pkgs.zjstatus
     (pkgs.nerdfonts.override { fonts = ["JetBrainsMono"]; })
   ];
 
@@ -25,13 +32,6 @@ in
 
   home.file = {
   };
-
-	nixpkgs.overlays = with inputs; [
-		(final: prev: {
-			zjstatus = zjstatus.packages.${prev.system}.default; # adding pkgs.
-		})
-		zjstatus
-	];
 
   programs.home-manager.enable = true;
 
@@ -41,10 +41,36 @@ in
 			pane_frames = false;
 			mouse_mode = true;
 			default_layout = "${inputs.self}/zellij/layouts/simple.kdl";
-			theme_dir = "${inputs.self}/zellij/themes";
 			layout_dir = "${inputs.self}/zellij/layouts";
 			ui.pane_frames.hide_session_name = true;
+
 			theme = "gruvbox-dark";
+
+			themes = {
+				gruvbox-dark = {
+					fg = [ 213 196 161 ];
+					bg = [ 40 40 40 ];
+					black = [ 60 56 54 ];
+					red = [ 204 36 29 ];
+					green = [ 152 151 26 ];
+					yellow = [ 215 153 33 ];
+					blue = [ 69 133 136 ];
+					magenta = [ 177 98 134 ];
+					cyan = [ 104 157 106 ];
+					white = [ 251 241 199 ];
+					orange = [ 214 93 14 ];
+				};
+			};
+
+			layout = {
+					pane = {
+						_props = {
+							size = 1;
+							borderless = true;
+						};
+						plugin._props.location = "compact-bar";
+					};
+			};
 		};
 	};
 
@@ -128,6 +154,7 @@ in
       vi = "nvim";
 			rm = "trash put";
 			btm = "btm --color gruvbox ";
+			neofetch = "fastfetch";
 
 			rebuild = "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
     };
