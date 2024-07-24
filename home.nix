@@ -12,20 +12,17 @@ in
 
   home.username = "lisan";
   home.homeDirectory = "/home/lisan";
-
   home.stateVersion = "24.05";
-
   fonts.fontconfig.enable = true;
 
 	nixpkgs.overlays = with inputs; [
 		(final: prev: {
-			zjstatus = zjstatus.packages.${prev.system}.default; # adding pkgs.
+			zjstatus = zjstatus.packages.default;
 		})
 	];
 
-  home.packages = [
-		# pkgs.zjstatus
-    (pkgs.nerdfonts.override { fonts = ["JetBrainsMono"]; })
+  home.packages = with pkgs; [
+    (nerdfonts.override { fonts = ["JetBrainsMono"]; })
   ];
 
   fonts.fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
@@ -35,7 +32,8 @@ in
 
   programs.home-manager.enable = true;
 
-	programs.zellij = { enable = true;
+	programs.zellij = { 
+		enable = true;
 		settings = {
 			simplified_ui = true;
 			pane_frames = false;
@@ -59,6 +57,17 @@ in
 					cyan = [ 104 157 106 ];
 					white = [ 251 241 199 ];
 					orange = [ 214 93 14 ];
+				};
+
+				keybinds = {
+					_props.clear-defaults = true;
+					resize = {
+						"bind \"Ctrl n\"" = { 
+							SwitchMode = {
+								_args = [ "Normal" ];
+							};
+						};
+					};
 				};
 			};
 
@@ -202,6 +211,7 @@ in
 						"rust"
 						"cpp"
 						"nix"
+						"kdl"
 					];
 					highlight.enable = true;
 				};

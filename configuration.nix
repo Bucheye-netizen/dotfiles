@@ -96,6 +96,7 @@
 		gcc
 		fastfetch
 		bottom
+		pueue
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
