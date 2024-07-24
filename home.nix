@@ -17,6 +17,7 @@ in
 
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = ["JetBrainsMono"]; })
+		hyprpaper
   ];
 
   fonts.fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
@@ -30,6 +31,7 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
 		settings = {
+			# exec-once = ["hyprpaper"];
 			decoration = {
 				rounding = 5;
 				active_opacity = 1.0;
@@ -83,6 +85,16 @@ in
 			];
     };
   };
+
+	services.hyprpaper = {
+		enable = true;
+		settings =  {
+      ipc = "off";
+      splash = false;
+			preload = ["${inputs.self}/wallpaper/gruvbox.jpg"];
+			wallpaper = ["eDP-1,${inputs.self}/wallpaper/gruvbox.jpg"];
+		};
+	};
 
   programs.kitty = {
     enable = true;
