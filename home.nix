@@ -31,7 +31,6 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
 		settings = {
-			# exec-once = ["hyprpaper"];
 			decoration = {
 				rounding = 5;
 				active_opacity = 1.0;
@@ -72,7 +71,6 @@ in
 				"SUPER, W, killactive"
 				"SUPER, F, fullscreen"
 				"SUPER, K, fakefullscreen"
-			  # maximizing windows without eliminating tab bar
 				"SUPER, M, fullscreen, 1"
 				"SUPER, C, centerwindow"
       ];
@@ -81,7 +79,7 @@ in
 				"SUPER, mouse:272, movewindow"
       ];
 			windowrule = [
-				"opacity 0.95 0.9,^(kitty)"
+				"opacity 0.85 0.7,^(kitty)"
 			];
     };
   };
@@ -91,8 +89,8 @@ in
 		settings =  {
       ipc = "off";
       splash = false;
-			preload = ["${inputs.self}/wallpaper/gruvbox.jpg"];
-			wallpaper = ["eDP-1,${inputs.self}/wallpaper/gruvbox.jpg"];
+			preload = ["${inputs.self}/wallpaper/gruvbox.png"];
+			wallpaper = ["eDP-1,${inputs.self}/wallpaper/gruvbox.png"];
 		};
 	};
 
