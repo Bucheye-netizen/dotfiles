@@ -24,6 +24,7 @@ in
   home.file = {
   };
 
+	services.pueue.enable = true;
   programs.home-manager.enable = true;
 
   wayland.windowManager.hyprland = {
@@ -61,6 +62,7 @@ in
     settings = {
       bind = [
 				"SUPER,Q,exec,kitty"
+				"SUPER, R, exec, tofi-drun"
 				"SUPER, X, exec, firefox"
 				"SUPER, Tab, cyclenext"
 				"SUPER, Tab, bringactivetotop"
@@ -96,6 +98,25 @@ in
 			"alt+shift+tab" = "no_op";
 		};
   };
+
+	programs.tofi = {
+		enable = true;
+		settings = {
+			# Inspired by https://github.com/iruzo/gruvbox-tofi/blob/main/gruvbox-dark
+			text-color = "${colors.toHypr colors.gruv.light1}";
+			prompt-color = "${colors.toHypr colors.gruv.bright_red}";
+			selection-color = "${colors.toHypr colors.gruv.bright_yellow}";
+			background-color = "${colors.toHypr colors.gruv.dark0_hard}";
+			outline-width = 0;
+			border-width = 0;
+			font-size = 15;
+			font = "JetBrainsMono Nerd Font";
+			corner-radius = 10;
+			width = "30%";
+			height = "40%";
+			drun-launch = true;
+		};
+	};
 
   programs.nushell = {
     enable = true;

@@ -78,7 +78,6 @@
   environment.systemPackages = with pkgs; [
     wget
     sl
-    rofi-wayland
     dunst
     kitty
     libnotify
@@ -96,7 +95,6 @@
 		gcc
 		fastfetch
 		bottom
-		pueue
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
