@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      # inputs.home-manager.nixosModules.default
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -95,10 +94,11 @@
 		gcc
 		fastfetch
 		bottom
+		cbonsai
 
-    (waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-    }))
+    # (waybar.overrideAttrs (oldAttrs: {
+    #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    # }))
   ];
 
   users.users.lisan = {

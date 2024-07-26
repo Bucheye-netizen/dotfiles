@@ -9,8 +9,7 @@ in
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
   ];
-
-  home.username = "lisan";
+home.username = "lisan";
   home.homeDirectory = "/home/lisan";
   home.stateVersion = "24.05";
   fonts.fontconfig.enable = true;
@@ -31,10 +30,14 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
 		settings = {
+			misc = {
+				disable_splash_rendering = true;
+				disable_hyprland_logo = true;
+			};
 			decoration = {
 				rounding = 5;
 				active_opacity = 1.0;
-				inactive_opacity = 0.95;
+				inactive_opacity = 0.85;
 				drop_shadow = true;
 				shadow_range = 4;
 				shadow_render_power = 3;
@@ -45,7 +48,7 @@ in
 					vibrancy = 0.1696;
 				};
 			};
-			general = { 
+			general = {
 				gaps_out = 10;
 				sensitivity = 0.4;
 				"col.active_border" = (
@@ -79,7 +82,7 @@ in
 				"SUPER, mouse:272, movewindow"
       ];
 			windowrule = [
-				"opacity 0.85 0.7,^(kitty)"
+				"opacity 0.8 0.7,^(kitty)"
 			];
     };
   };
@@ -214,5 +217,9 @@ in
 	programs.tmux = {
 		enable = true;
 		extraConfig = builtins.readFile ./tmux.conf;
+	};
+
+	programs.waybar = {
+		enable = true;
 	};
 }
