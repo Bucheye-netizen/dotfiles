@@ -1,6 +1,5 @@
 { config, pkgs, inputs, self, ... }:
 
-
 let 
 	rootPath = ../.; 
 	colors = import ./colors.nix;
@@ -83,6 +82,7 @@ home.username = "lisan";
       ];
 			windowrule = [
 				"opacity 0.8 0.7,^(kitty)"
+				"opacity 0.8 0.7,^(thunar)"
 			];
     };
   };
@@ -221,5 +221,13 @@ home.username = "lisan";
 
 	programs.waybar = {
 		enable = true;
+	};
+
+	gtk = {
+		enable = true;
+		theme = {
+			package = pkgs.gruvbox-gtk-theme; 
+			name = "gruvbox";
+		};
 	};
 }

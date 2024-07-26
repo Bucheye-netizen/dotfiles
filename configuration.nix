@@ -59,6 +59,7 @@
   };
 
   programs.hyprland.enable = true;
+	programs.thunar.enable = true;
 
   services.printing.enable = true;
 
@@ -95,6 +96,7 @@
 		fastfetch
 		bottom
 		cbonsai
+		gtk-engine-murrine
 
     # (waybar.overrideAttrs (oldAttrs: {
     #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
