@@ -96,7 +96,6 @@
 		fastfetch
 		bottom
 		cbonsai
-		gtk-engine-murrine
 
     # (waybar.overrideAttrs (oldAttrs: {
     #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

@@ -8,7 +8,7 @@ in
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
   ];
-home.username = "lisan";
+	home.username = "lisan";
   home.homeDirectory = "/home/lisan";
   home.stateVersion = "24.05";
   fonts.fontconfig.enable = true;
@@ -16,6 +16,7 @@ home.username = "lisan";
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = ["JetBrainsMono"]; })
 		hyprpaper
+		gruvbox-gtk-theme
   ];
 
   fonts.fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
@@ -141,6 +142,7 @@ home.username = "lisan";
 			rm = "trash put";
 			btm = "btm --color gruvbox ";
 			neofetch = "fastfetch";
+			icat = "kitty icat";
 
 			rebuild = "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
     };
@@ -223,11 +225,10 @@ home.username = "lisan";
 		enable = true;
 	};
 
-	gtk = {
-		enable = true;
-		theme = {
-			package = pkgs.gruvbox-gtk-theme; 
-			name = "gruvbox";
-		};
-	};
+	# gtk = {
+	# 	enable = true;
+	# 		package = pkgs.gruvbox-gtk-theme; 
+	# 		name = "gtk-Dark";
+	# 	};
+	# };
 }
