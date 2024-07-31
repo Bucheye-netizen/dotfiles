@@ -70,6 +70,8 @@ in
 				"SUPER, X, exec, firefox"
 				"SUPER, Tab, cyclenext"
 				"SUPER, Tab, bringactivetotop"
+				"SUPER_SHIFT, Tab, cyclenext, prev"
+				"SUPER_SHIFT, Tab, bringactivetotop"
 				"SUPER, T, togglefloating"
 				"SUPER, W, killactive"
 				"SUPER, F, fullscreen"
@@ -223,6 +225,40 @@ in
 
 	programs.waybar = {
 		enable = true;
+	};
+
+	programs.vscode = {
+		enable = true;
+		extensions = with pkgs.vscode-extensions; [ 
+			vscodevim.vim
+			jdinhlife.gruvbox
+			rust-lang.rust-analyzer
+		];
+		userSettings = {
+			"vim.insertModeKeyBindings" = [
+				{
+					"before" = ["k" "j"];
+					"after" = ["<Esc>"];
+				}
+			];
+			"workbench.colorTheme" = "Gruvbox Dark Hard";
+			"workbench.activityBar.location" = "hidden";
+			"workbench.panel.defaultLocation" = "right";
+			"editor.wordWrap" = "on";
+			"editor.fontSize" = 12;
+			"editor.fontFamily" = "JetBrains Mono Nerd Font";
+			"terminal.integrated.fontSize" = 10;
+			"window.titleBarStyle" = "custom";
+			"window.customTitleBarVisibility" = "windowed";
+			"window.menuBarVisibility" = "toggle";
+		};
+		keybindings = [
+			{
+				"key" = "ctrl+alt k";
+				"command" = "workbench.action.toggleZenMode";
+				"when" = "!isAuxiliaryWindowFocusedContext";
+			}
+		];
 	};
 
 	# gtk = {

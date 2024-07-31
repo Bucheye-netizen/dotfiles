@@ -287,7 +287,28 @@
         "home-manager": "home-manager",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "rust-overlay": "rust-overlay"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1722305989,
+        "narHash": "sha256-ljiuTGSFuEtudqFqp/5Wr1OuEsVCjur/F2CmlNujSjc=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "38c2f156fca1868c8be7195ddac150522752f6ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "systems": {

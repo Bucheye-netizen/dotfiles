@@ -47,6 +47,12 @@
     };
   };
 
+	hardware.bluetooth = {
+		enable = true;
+		powerOnBoot = true;
+	};
+	services.blueman.enable = true;
+
   services.xserver = {
     layout = "us";
     xkbVariant = "";
@@ -96,6 +102,8 @@
 		fastfetch
 		bottom
 		cbonsai
+		libclang
+		libgcc
 
     # (waybar.overrideAttrs (oldAttrs: {
     #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

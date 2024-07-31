@@ -9,12 +9,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+	 nix-colors.url = "github:misterio77/nix-colors";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		nix-colors.url = "github:misterio77/nix-colors";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
 
@@ -30,6 +34,10 @@
 					home-manager.useUserPackages = true;
 					home-manager.users.lisan = import ./home.nix;
 				}
+				({ pkgs, ... }: {
+					nixpkgs.overlays = [ inputs.rust-overlay.overlays.default ];
+					environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
+				})
       ];
     };
   };
