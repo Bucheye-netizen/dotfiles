@@ -236,20 +236,33 @@ in
 			jdinhlife.gruvbox
 			rust-lang.rust-analyzer
 			llvm-vs-code-extensions.vscode-clangd
+			
+		] ++pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+			{
+				name = "gruvbox-material"; 
+				publisher = "sainnhe";
+				version = "6.5.1";
+				sha256 = "sha256-D+SZEQQwjZeuyENOYBJGn8tqS3cJiWbEkmEqhNRY/i4";
+			}
 		];
 		userSettings = {
+			"workbench.colorTheme" = "Gruvbox Dark Hard";
+			"editor.fontFamily" = "JetBrainsMonoNerdFont";
+			"gruvboxMaterial.darkPalette" = "original";
+			"gruvboxMaterial.darkContrast" = "hard";
+			"gruvboxMaterial.highContrast" = true;
+
 			"vim.insertModeKeyBindings" = [
 				{
 					"before" = ["k" "j"];
 					"after" = ["<Esc>"];
 				}
 			];
-			"workbench.colorTheme" = "Gruvbox Dark Hard";
+
 			"workbench.activityBar.location" = "hidden";
 			"workbench.panel.defaultLocation" = "right";
 			"editor.wordWrap" = "on";
 			"editor.fontSize" = 13;
-			"editor.fontFamily" = "Jetbrains Mono Nerd Font";
 			"terminal.integrated.fontSize" = 11;
 			"window.titleBarStyle" = "custom";
 			"window.customTitleBarVisibility" = "windowed";
