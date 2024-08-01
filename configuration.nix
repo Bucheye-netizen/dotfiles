@@ -30,6 +30,8 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+	nixpkgs.config.pulseaudio = true;
+
   xdg.portal.enable = true;
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 
@@ -52,6 +54,7 @@
 		powerOnBoot = true;
 	};
 	services.blueman.enable = true;
+	services.expressvpn.enable = true;
 
   services.xserver = {
     layout = "us";
@@ -104,6 +107,7 @@
 		cbonsai
 		libclang
 		libgcc
+		expressvpn
 
     # (waybar.overrideAttrs (oldAttrs: {
     #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

@@ -83,9 +83,11 @@ in
 				"SUPER, mouse:273, resizewindow"
 				"SUPER, mouse:272, movewindow"
       ];
-			windowrule = [
-				"opacity 0.8 0.7,^(kitty)"
-				"opacity 0.8 0.7,^(thunar)"
+			windowrulev2 = [
+				"opacity 0.8 0.7,class:^(thunar)"
+				"opacity 0.9 0.8,class:^(code-url-handler)"
+				"opacity 0.8 0.7,class:^(kitty)"
+				"float,class:^(thunar)"
 			];
     };
   };
@@ -245,18 +247,44 @@ in
 			"workbench.activityBar.location" = "hidden";
 			"workbench.panel.defaultLocation" = "right";
 			"editor.wordWrap" = "on";
-			"editor.fontSize" = 12;
-			"editor.fontFamily" = "JetBrains Mono Nerd Font";
-			"terminal.integrated.fontSize" = 10;
+			"editor.fontSize" = 13;
+			"editor.fontFamily" = "Jetbrains Mono Nerd Font";
+			"terminal.integrated.fontSize" = 11;
 			"window.titleBarStyle" = "custom";
 			"window.customTitleBarVisibility" = "windowed";
 			"window.menuBarVisibility" = "toggle";
+			"window.zoomLevel" = -1;
+			"editor.minimap.enabled" = false;
+			"zenMode.showTabs" = "none";
+			"editor.formatOnSave" = true;
 		};
 		keybindings = [
 			{
 				"key" = "ctrl+alt k";
 				"command" = "workbench.action.toggleZenMode";
 				"when" = "!isAuxiliaryWindowFocusedContext";
+			}
+
+			{
+					"key" = "ctrl+p";
+					"command" = "-extension.vim_ctrl+p";
+					"when" = "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'";
+			}
+
+			{
+					"key" = "alt+j alt+j";
+					"command" = "workbench.action.toggleActivityBarVisibility";
+			}
+
+			{
+					"key" = "ctrl+alt+k";
+					"command" = "workbench.action.toggleZenMode";
+					"when" = "!isAuxiliaryWindowFocusedContext";
+			}
+			{
+					"key" = "ctrl+k z";
+					"command" = "-workbench.action.toggleZenMode";
+					"when" = "!isAuxiliaryWindowFocusedContext";
 			}
 		];
 	};
