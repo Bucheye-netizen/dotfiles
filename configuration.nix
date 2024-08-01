@@ -105,13 +105,12 @@
 		fastfetch
 		bottom
 		cbonsai
-		libclang
 		libgcc
 		expressvpn
 
-    # (waybar.overrideAttrs (oldAttrs: {
-    #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-    # }))
+		clang-tools
+		clang
+		rustup
   ];
 
   users.users.lisan = {

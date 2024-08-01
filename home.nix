@@ -235,6 +235,7 @@ in
 			vscodevim.vim
 			jdinhlife.gruvbox
 			rust-lang.rust-analyzer
+			llvm-vs-code-extensions.vscode-clangd
 		];
 		userSettings = {
 			"vim.insertModeKeyBindings" = [
