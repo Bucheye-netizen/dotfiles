@@ -1,140 +1,120 @@
 { config, pkgs, inputs, self, ... }:
 
-let 
-	rootPath = ../.; 
-	colors = import ./colors.nix;
-in 
-{
-  imports = [
-    inputs.nixvim.homeManagerModules.nixvim
-  ];
-	home.username = "lisan";
+let
+  rootPath = ../.;
+  colors = import ./colors.nix;
+in {
+  imports = [ inputs.nixvim.homeManagerModules.nixvim ];
+  home.username = "lisan";
   home.homeDirectory = "/home/lisan";
   home.stateVersion = "24.05";
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = ["JetBrainsMono"]; })
-		hyprpaper
-		gruvbox-gtk-theme
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    source-serif-pro
+    hyprpaper
+    gruvbox-gtk-theme
+    gruvbox-dark-icons-gtk
+    gruvbox-plus-icons
+    # hyprcursor
+    nixfmt-classic
+    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    inputs.hyprcursor.packages.${pkgs.system}.default
   ];
 
-  fonts.fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
+  home.sessionVariables = { TERMINAL = "kitty"; };
 
-  home.file = {
-  };
+  fonts.fontconfig.defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
+  fonts.fontconfig.defaultFonts.serif = [ "Source Serif Pro" ];
 
-	services.pueue.enable = true;
+  home.file = { };
+
+  services.pueue.enable = true;
   programs.home-manager.enable = true;
 
   wayland.windowManager.hyprland = {
     enable = true;
-		settings = {
-			misc = {
-				disable_splash_rendering = true;
-				disable_hyprland_logo = true;
-			};
-			decoration = {
-				rounding = 5;
-				active_opacity = 1.0;
-				inactive_opacity = 0.85;
-				drop_shadow = true;
-				shadow_range = 4;
-				shadow_render_power = 3;
-				blur = {
-					enabled = true; 
-					size = 8;
-					passes = 1;
-					vibrancy = 0.1696;
-				};
-			};
-			general = {
-				gaps_out = 10;
-				sensitivity = 0.4;
-				"col.active_border" = (
-					"rgb(${colors.toHypr colors.gruv.bright_orange})" 
-					+ " rgb(${colors.toHypr colors.gruv.bright_red})"
-				);
+    settings = {
+      misc = {
+        disable_splash_rendering = true;
+        disable_hyprland_logo = true;
+      };
+      decoration = {
+        rounding = 5;
+        active_opacity = 1.0;
+        inactive_opacity = 0.85;
+        drop_shadow = true;
+        shadow_range = 4;
+        shadow_render_power = 3;
+        blur = {
+          enabled = true;
+          size = 8;
+          passes = 1;
+          vibrancy = 0.1696;
+        };
+      };
+      general = {
+        gaps_out = 10;
+        sensitivity = 0.4;
+        "col.active_border" = ("rgb(${colors.toHypr colors.gruv.bright_orange})"
+          + " rgb(${colors.toHypr colors.gruv.bright_red})");
 
-				"col.inactive_border" = (
-					"rgb(${colors.toHypr colors.gruv.faded_aqua})" 
-					+ " rgb(${colors.toHypr colors.gruv.faded_blue})"
-				);
-			};
-		};
+        "col.inactive_border" = ("rgb(${colors.toHypr colors.gruv.faded_aqua})"
+          + " rgb(${colors.toHypr colors.gruv.faded_blue})");
+      };
+    };
 
     settings = {
       bind = [
-				"SUPER,Q,exec,kitty"
-				"SUPER, R, exec, tofi-drun"
-				"SUPER, X, exec, firefox"
-				"SUPER, Tab, cyclenext"
-				"SUPER, Tab, bringactivetotop"
-				"SUPER_SHIFT, Tab, cyclenext, prev"
-				"SUPER_SHIFT, Tab, bringactivetotop"
-				"SUPER, T, togglefloating"
-				"SUPER, W, killactive"
-				"SUPER, F, fullscreen"
-				"SUPER, K, fakefullscreen"
-				"SUPER, M, fullscreen, 1"
-				"SUPER, C, centerwindow"
+        "SUPER,Q,exec,kitty"
+        "SUPER, R, exec, fuzzel"
+        "SUPER, X, exec, firefox"
+        "SUPER, Tab, cyclenext"
+        "SUPER, Tab, bringactivetotop"
+        "SUPER_SHIFT, Tab, cyclenext, prev"
+        "SUPER_SHIFT, Tab, bringactivetotop"
+        "SUPER, T, togglefloating"
+        "SUPER, W, killactive"
+        "SUPER, F, fullscreen"
+        "SUPER, K, fakefullscreen"
+        "SUPER, M, fullscreen, 1"
+        "SUPER, C, centerwindow"
       ];
-      bindm = [
-				"SUPER, mouse:273, resizewindow"
-				"SUPER, mouse:272, movewindow"
+      bindm =
+        [ "SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow" ];
+      windowrulev2 = [
+        "opacity 0.8 0.7,class:^(thunar)"
+        "opacity 0.9 0.8,class:^(code-url-handler)"
+        "opacity 0.8 0.7,class:^(kitty)"
+        "float,class:^(thunar)"
+        "float,class:^(swayimg)"
+        "sizee70% 70%, class:^(swayimg)"
       ];
-			windowrulev2 = [
-				"opacity 0.8 0.7,class:^(thunar)"
-				"opacity 0.9 0.8,class:^(code-url-handler)"
-				"opacity 0.8 0.7,class:^(kitty)"
-				"float,class:^(thunar)"
-			];
+      env = [ "HYPRCURSOR_THEME,rose-pine-hyprcursor" "HYPRCURSOR_SIZE,24" ];
     };
   };
 
-	services.hyprpaper = {
-		enable = true;
-		settings =  {
+  services.hyprpaper = {
+    enable = true;
+    settings = {
       ipc = "off";
       splash = false;
-			preload = ["${inputs.self}/wallpaper/gruvbox.png"];
-			wallpaper = ["eDP-1,${inputs.self}/wallpaper/gruvbox.png"];
-		};
-	};
+      preload = [ "${inputs.self}/wallpaper/gruvbox.png" ];
+      wallpaper = [ "eDP-1,${inputs.self}/wallpaper/gruvbox.png" ];
+    };
+  };
 
   programs.kitty = {
     enable = true;
     theme = "Gruvbox Dark Hard";
-		font = {
-			size = 9;
-			name = "JetBrainsMono Nerd Font";
-		};
-		settings = {
-			tab_bar_style = "powerline";
-		};
-		keybindings = {
-			"alt+shift+tab" = "no_op";
-		};
+    font = {
+      size = 9;
+      name = "JetBrainsMono Nerd Font";
+    };
+    settings = { tab_bar_style = "powerline"; };
+    keybindings = { "alt+shift+tab" = "no_op"; };
   };
-
-	programs.tofi = {
-		enable = true;
-		settings = {
-			# Inspired by https://github.com/iruzo/gruvbox-tofi/blob/main/gruvbox-dark
-			text-color = "${colors.toHypr colors.gruv.light1}";
-			prompt-color = "${colors.toHypr colors.gruv.bright_red}";
-			selection-color = "${colors.toHypr colors.gruv.bright_yellow}";
-			background-color = "${colors.toHypr colors.gruv.dark0_hard}";
-			outline-width = 0;
-			border-width = 0;
-			font-size = 15;
-			font = "JetBrainsMono Nerd Font";
-			corner-radius = 10;
-			width = "30%";
-			height = "40%";
-			drun-launch = true;
-		};
-	};
 
   programs.nushell = {
     enable = true;
@@ -143,12 +123,13 @@ in
     shellAliases = {
       vim = "nvim";
       vi = "nvim";
-			rm = "trash put";
-			btm = "btm --color gruvbox ";
-			neofetch = "fastfetch";
-			icat = "kitty icat";
+      rm = "trash put";
+      btm = "btm --color gruvbox ";
+      neofetch = "fastfetch";
+      icat = "kitty icat";
 
-			rebuild = "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
+      rebuild =
+        "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
     };
   };
 
@@ -167,133 +148,148 @@ in
     };
   };
 
-	programs.gh.enable = true;
+  programs.gh.enable = true;
   programs.git = {
     enable = true;
-    userName  = "Lisan";
+    userName = "Lisan";
     userEmail = "lisan.kontra@gmail.com";
-		extraConfig.init.defaultBranch = "main";
+    extraConfig.init.defaultBranch = "main";
   };
 
   programs.nixvim = {
     enable = true;
     colorschemes.gruvbox = {
-		  enable = true;
-			settings = {
-				contrast = "hard";
-				terminal_colors = true;
-			};
-		};
+      enable = true;
+      settings = {
+        contrast = "hard";
+        terminal_colors = true;
+      };
+    };
     plugins = {
       treesitter = {
         enable = true;
 
-				settings = {
-					ensure_installed = [
-						"c"
-						"rust"
-						"cpp"
-						"nix"
-						"kdl"
-					];
-					highlight.enable = true;
-				};
+        settings = {
+          ensure_installed = [ "c" "rust" "cpp" "nix" "kdl" ];
+          highlight.enable = true;
+        };
 
-				nixGrammars = true;
+        nixGrammars = true;
       };
-			fzf-lua.enable = true;
+      fzf-lua.enable = true;
     };
 
-    keymaps = [
-      {
-        mode = "i";
-        key = "kj";
-        action = "<Esc>";
-      }
-    ];
+    keymaps = [{
+      mode = "i";
+      key = "kj";
+      action = "<Esc>";
+    }];
     opts = {
       shiftwidth = 2;
       tabstop = 2;
       clipboard = "unnamedplus";
       autoindent = true;
-			number = true;
+      number = true;
     };
   };
 
-	programs.tmux = {
-		enable = true;
-		extraConfig = builtins.readFile ./tmux.conf;
-	};
+  programs.tmux = {
+    enable = true;
+    extraConfig = builtins.readFile ./tmux.conf;
+  };
 
-	programs.waybar = {
-		enable = true;
-	};
+  programs.waybar = { enable = true; };
 
-	programs.vscode = {
-		enable = true;
-		extensions = with pkgs.vscode-extensions; [ 
-			vscodevim.vim
-			jdinhlife.gruvbox
-			rust-lang.rust-analyzer
-			llvm-vs-code-extensions.vscode-clangd
-		];
-		userSettings = {
-			"vim.insertModeKeyBindings" = [
-				{
-					"before" = ["k" "j"];
-					"after" = ["<Esc>"];
-				}
-			];
-			"workbench.colorTheme" = "Gruvbox Dark Hard";
-			"workbench.activityBar.location" = "hidden";
-			"workbench.panel.defaultLocation" = "right";
-			"editor.wordWrap" = "on";
-			"editor.fontSize" = 13;
-			"editor.fontFamily" = "Jetbrains Mono Nerd Font";
-			"terminal.integrated.fontSize" = 11;
-			"window.titleBarStyle" = "custom";
-			"window.customTitleBarVisibility" = "windowed";
-			"window.menuBarVisibility" = "toggle";
-			"window.zoomLevel" = -1;
-			"editor.minimap.enabled" = false;
-			"zenMode.showTabs" = "none";
-			"editor.formatOnSave" = true;
-		};
-		keybindings = [
-			{
-				"key" = "ctrl+alt k";
-				"command" = "workbench.action.toggleZenMode";
-				"when" = "!isAuxiliaryWindowFocusedContext";
-			}
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions;
+      [
+        vscodevim.vim
+        jdinhlife.gruvbox
+        rust-lang.rust-analyzer
+        llvm-vs-code-extensions.vscode-clangd
+        bbenoist.nix
+        brettm12345.nixfmt-vscode
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "gruvbox-material";
+          publisher = "sainnhe";
+          version = "6.5.1";
+          sha256 = "sha256-D+SZEQQwjZeuyENOYBJGn8tqS3cJiWbEkmEqhNRY/i4";
+        }
+        {
+          name = "magic-racket";
+          publisher = "evzen-wybitul";
+          version = "0.6.7";
+          sha256 = "sha256-1A4j8710AYuV8gA+sybv6WSavPVcCPMvI71h4n4Jx0w=";
+        }
+      ];
+    userSettings = {
+      "workbench.colorTheme" = "Gruvbox Dark Hard";
+      "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
+      "gruvboxMaterial.darkPalette" = "original";
+      "gruvboxMaterial.darkContrast" = "hard";
+      "gruvboxMaterial.highContrast" = true;
+      "vim.insertModeKeyBindings" = [{
+        "before" = [ "k" "j" ];
+        "after" = [ "<Esc>" ];
+      }];
+      "workbench.activityBar.location" = "hidden";
+      "workbench.panel.defaultLocation" = "right";
+      "editor.wordWrap" = "on";
+      "editor.fontSize" = 14;
+      "terminal.integrated.fontSize" = 12;
+      "window.titleBarStyle" = "custom";
+      "window.customTitleBarVisibility" = "windowed";
+      "window.menuBarVisibility" = "toggle";
+      "window.zoomLevel" = -1;
+      "editor.minimap.enabled" = false;
+      "zenMode.showTabs" = "none";
+      "editor.formatOnSave" = true;
+      "editor.inlayHints.enabled" = "offUnlessPressed";
+    };
+    keybindings = [
+      {
+        "key" = "ctrl+alt k";
+        "command" = "workbench.action.toggleZenMode";
+        "when" = "!isAuxiliaryWindowFocusedContext";
+      }
 
-			{
-					"key" = "ctrl+p";
-					"command" = "-extension.vim_ctrl+p";
-					"when" = "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'";
-			}
+      {
+        "key" = "ctrl+p";
+        "command" = "-extension.vim_ctrl+p";
+        "when" =
+          "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'";
+      }
 
-			{
-					"key" = "alt+j alt+j";
-					"command" = "workbench.action.toggleActivityBarVisibility";
-			}
+      {
+        "key" = "alt+j alt+j";
+        "command" = "workbench.action.toggleActivityBarVisibility";
+      }
 
-			{
-					"key" = "ctrl+alt+k";
-					"command" = "workbench.action.toggleZenMode";
-					"when" = "!isAuxiliaryWindowFocusedContext";
-			}
-			{
-					"key" = "ctrl+k z";
-					"command" = "-workbench.action.toggleZenMode";
-					"when" = "!isAuxiliaryWindowFocusedContext";
-			}
-		];
-	};
+      {
+        "key" = "ctrl+alt+k";
+        "command" = "workbench.action.toggleZenMode";
+        "when" = "!isAuxiliaryWindowFocusedContext";
+      }
+      {
+        "key" = "ctrl+k z";
+        "command" = "-workbench.action.toggleZenMode";
+        "when" = "!isAuxiliaryWindowFocusedContext";
+      }
+    ];
+  };
 
-	# gtk = {
-	# 	enable = true;
-	# 		package = pkgs.gruvbox-gtk-theme; 
-	# 		name = "gtk-Dark";
-	# 	};
-	# };
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      colors.background = "${colors.toHypr colors.gruv.dark0_hard}ff";
+      colors.text = "${colors.toHypr colors.gruv.light1}ff";
+      colors.selection = "${colors.toHypr colors.gruv.dark4}ff";
+      colors.selection-text = "${colors.toHypr colors.gruv.light2}ff";
+      colors.selection-match = "${colors.toHypr colors.gruv.faded_orange}ff";
+      colors.border = "${colors.toHypr colors.gruv.bright_orange}ff";
+      main.icon-theme = "Gruvbox-Plus-Dark";
+    };
+  };
 }

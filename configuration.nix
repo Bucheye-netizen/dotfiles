@@ -5,15 +5,14 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; 
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
@@ -30,7 +29,10 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-	nixpkgs.config.pulseaudio = true;
+  environment.sessionVariables = {
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+  };
+  nixpkgs.config.pulseaudio = true;
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
@@ -49,16 +51,18 @@
     };
   };
 
-	hardware.bluetooth = {
-		enable = true;
-		powerOnBoot = true;
-	};
-	services.blueman.enable = true;
-	services.expressvpn.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
+  services.expressvpn.enable = true;
 
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      variant = "";
+      layout = "us";
+    };
     enable = true;
   };
 
@@ -68,7 +72,7 @@
   };
 
   programs.hyprland.enable = true;
-	programs.thunar.enable = true;
+  programs.thunar.enable = true;
 
   services.printing.enable = true;
 
@@ -96,33 +100,40 @@
     gtk3
     wl-clipboard
     tree
-		vivid
-		htop
-		trashy
-		fzf
-		nsnake
-		gcc
-		fastfetch
-		bottom
-		cbonsai
-		libgcc
-		expressvpn
+    vivid
+    htop
+    trashy
+    fzf
+    nsnake
+    gcc
+    fastfetch
+    bottom
+    cbonsai
+    libgcc
+    expressvpn
 
-		clang-tools
-		clang
-		rustup
+    clang-tools
+    clang
+    rustup
+    openssl
+    pkg-config
+    swayimg
+    bk
+    betterdiscordctl
+    pulseaudio
+    foliate
+    racket-minimal
   ];
 
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    ];
+    packages = with pkgs; [ ];
     shell = pkgs.nushell;
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  system.stateVersion = "24.05"; 
+  system.stateVersion = "24.05";
 }
