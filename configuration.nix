@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -97,7 +97,6 @@
     swww
     lshw
     pciutils
-    gtk3
     wl-clipboard
     tree
     vivid
@@ -123,13 +122,18 @@
     pulseaudio
     foliate
     racket-minimal
+    unzip
+
+    gtk4
+    gtk3
+    gtk2
   ];
 
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
+    packages =  [ ];
     shell = pkgs.nushell;
   };
 

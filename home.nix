@@ -1,7 +1,6 @@
-{ config, pkgs, inputs, self, ... }:
+{ pkgs, inputs, ... }:
 
 let
-  rootPath = ../.;
   colors = import ./colors.nix;
 in {
   imports = [ inputs.nixvim.homeManagerModules.nixvim ];
@@ -17,13 +16,23 @@ in {
     gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
     gruvbox-plus-icons
-    # hyprcursor
     nixfmt-classic
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     inputs.hyprcursor.packages.${pkgs.system}.default
+		nil
   ];
 
-  home.sessionVariables = { TERMINAL = "kitty"; };
+  home.pointerCursor = {
+      package = pkgs.capitaine-cursors-themed;
+      name = "Capitaine Cursors (Gruvbox)";
+      size = 18;
+  };
+
+  home.sessionVariables = { 
+    TERMINAL = "kitty"; 
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
 
   fonts.fontconfig.defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
   fonts.fontconfig.defaultFonts.serif = [ "Source Serif Pro" ];
@@ -81,6 +90,9 @@ in {
         "SUPER, M, fullscreen, 1"
         "SUPER, C, centerwindow"
       ];
+      exec-once = [
+        "hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 18"
+      ];
       bindm =
         [ "SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow" ];
       windowrulev2 = [
@@ -89,9 +101,9 @@ in {
         "opacity 0.8 0.7,class:^(kitty)"
         "float,class:^(thunar)"
         "float,class:^(swayimg)"
-        "sizee70% 70%, class:^(swayimg)"
+        "size 70% 70%, class:^(swayimg)"
       ];
-      env = [ "HYPRCURSOR_THEME,rose-pine-hyprcursor" "HYPRCURSOR_SIZE,24" ];
+      env = [ "XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,18" ];
     };
   };
 
@@ -210,6 +222,7 @@ in {
         llvm-vs-code-extensions.vscode-clangd
         bbenoist.nix
         brettm12345.nixfmt-vscode
+				jnoortheen.nix-ide
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "gruvbox-material";
@@ -223,6 +236,12 @@ in {
           version = "0.6.7";
           sha256 = "sha256-1A4j8710AYuV8gA+sybv6WSavPVcCPMvI71h4n4Jx0w=";
         }
+				{
+					name = "vscode-nushell-lang";
+					publisher = "TheNuProjectContributors";
+					version ="1.9.0";
+					sha256 = "sha256-E9CK/GChd/yZT+P3ttROjL2jHtKPJ0KZzc32/nbuE4w";
+				}
       ];
     userSettings = {
       "workbench.colorTheme" = "Gruvbox Dark Hard";
@@ -247,6 +266,9 @@ in {
       "zenMode.showTabs" = "none";
       "editor.formatOnSave" = true;
       "editor.inlayHints.enabled" = "offUnlessPressed";
+			"nix.formatterPath" = "nixpkgs-fmt";
+			"nix.enableLanguageServer" = true;
+			"nix.serverPath" = "nil";
     };
     keybindings = [
       {
@@ -272,6 +294,7 @@ in {
         "command" = "workbench.action.toggleZenMode";
         "when" = "!isAuxiliaryWindowFocusedContext";
       }
+
       {
         "key" = "ctrl+k z";
         "command" = "-workbench.action.toggleZenMode";
