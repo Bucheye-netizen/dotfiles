@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }:
 
-let
-  colors = import ./colors.nix;
+let colors = import ./colors.nix;
 in {
   imports = [ inputs.nixvim.homeManagerModules.nixvim ];
   home.username = "lisan";
@@ -19,17 +18,18 @@ in {
     nixfmt-classic
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     inputs.hyprcursor.packages.${pkgs.system}.default
-		nil
+    nil
   ];
 
   home.pointerCursor = {
-      package = pkgs.capitaine-cursors-themed;
-      name = "Capitaine Cursors (Gruvbox)";
-      size = 18;
+    package = pkgs.capitaine-cursors-themed;
+    name = "Capitaine Cursors (Gruvbox)";
+    size = 18;
+    gtk.enable = true;
   };
 
-  home.sessionVariables = { 
-    TERMINAL = "kitty"; 
+  home.sessionVariables = {
+    TERMINAL = "kitty";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
   };
@@ -90,9 +90,7 @@ in {
         "SUPER, M, fullscreen, 1"
         "SUPER, C, centerwindow"
       ];
-      exec-once = [
-        "hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 18"
-      ];
+      exec-once = [ "hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 18" ];
       bindm =
         [ "SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow" ];
       windowrulev2 = [
@@ -221,8 +219,7 @@ in {
         rust-lang.rust-analyzer
         llvm-vs-code-extensions.vscode-clangd
         bbenoist.nix
-        brettm12345.nixfmt-vscode
-				jnoortheen.nix-ide
+        jnoortheen.nix-ide
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "gruvbox-material";
@@ -236,14 +233,24 @@ in {
           version = "0.6.7";
           sha256 = "sha256-1A4j8710AYuV8gA+sybv6WSavPVcCPMvI71h4n4Jx0w=";
         }
-				{
-					name = "vscode-nushell-lang";
-					publisher = "TheNuProjectContributors";
-					version ="1.9.0";
-					sha256 = "sha256-E9CK/GChd/yZT+P3ttROjL2jHtKPJ0KZzc32/nbuE4w";
-				}
+        {
+          name = "vscode-nushell-lang";
+          publisher = "TheNuProjectContributors";
+          version = "1.9.0";
+          sha256 = "sha256-E9CK/GChd/yZT+P3ttROjL2jHtKPJ0KZzc32/nbuE4w";
+        }
+        {
+          name = "gruvbox-material-icon-theme";
+          publisher = "JonathanHarty";
+          version = "1.1.5";
+          sha256 = "sha256-86UWUuWKT6adx4hw4OJw3cSZxWZKLH4uLTO+Ssg75gY=";
+        }
       ];
     userSettings = {
+      "nix.serverSettings" = {
+        "nil" = { "formatting" = { "command" = [ "nixfmt" ]; }; };
+      };
+
       "workbench.colorTheme" = "Gruvbox Dark Hard";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
       "gruvboxMaterial.darkPalette" = "original";
@@ -266,9 +273,9 @@ in {
       "zenMode.showTabs" = "none";
       "editor.formatOnSave" = true;
       "editor.inlayHints.enabled" = "offUnlessPressed";
-			"nix.formatterPath" = "nixpkgs-fmt";
-			"nix.enableLanguageServer" = true;
-			"nix.serverPath" = "nil";
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "nil";
+      "workbench.iconTheme" = "gruvbox-material-icon-theme";
     };
     keybindings = [
       {
@@ -315,4 +322,5 @@ in {
       main.icon-theme = "Gruvbox-Plus-Dark";
     };
   };
+  gtk.enable = true;
 }

@@ -31,6 +31,9 @@
 
   environment.sessionVariables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    TERMINAL = "kitty";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
   };
   nixpkgs.config.pulseaudio = true;
 
@@ -72,6 +75,7 @@
   };
 
   programs.hyprland.enable = true;
+  programs.dconf.enable = true;
   programs.thunar.enable = true;
 
   services.printing.enable = true;
@@ -123,17 +127,14 @@
     foliate
     racket-minimal
     unzip
-
-    gtk4
-    gtk3
-    gtk2
+    marker
   ];
 
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages =  [ ];
+    packages = [ ];
     shell = pkgs.nushell;
   };
 
