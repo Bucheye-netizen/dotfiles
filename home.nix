@@ -251,7 +251,7 @@ in {
         "nil" = { "formatting" = { "command" = [ "nixfmt" ]; }; };
       };
 
-      "workbench.colorTheme" = "Gruvbox Dark Hard";
+      "workbench.colorTheme" = "Gruvbox Material Dark";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
       "gruvboxMaterial.darkPalette" = "original";
       "gruvboxMaterial.darkContrast" = "hard";
@@ -322,5 +322,11 @@ in {
       main.icon-theme = "Gruvbox-Plus-Dark";
     };
   };
-  gtk.enable = true;
+  gtk = {
+    enable = true;
+    theme = {
+      package = pkgs.gruvbox-gtk-theme;
+      name = "Gruvbox-Plus-Dark";
+    };
+  };
 }
