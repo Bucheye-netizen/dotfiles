@@ -41,6 +41,14 @@ in {
 
   services.pueue.enable = true;
   programs.home-manager.enable = true;
+	qt = {
+		enable = true;
+		platformTheme = "gtk";
+		style = {
+			name = "adwaita-dark";
+			package = pkgs.adwaita-qt;
+		};
+	};
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -66,8 +74,8 @@ in {
       general = {
         gaps_out = 10;
         sensitivity = 0.4;
-        "col.active_border" = ("rgb(${colors.toHypr colors.gruv.bright_orange})"
-          + " rgb(${colors.toHypr colors.gruv.bright_red})");
+        "col.active_border" = ("rgb(${colors.toHypr colors.gruv.bright_green})"
+          + " rgb(${colors.toHypr colors.gruv.bright_aqua})");
 
         "col.inactive_border" = ("rgb(${colors.toHypr colors.gruv.faded_aqua})"
           + " rgb(${colors.toHypr colors.gruv.faded_blue})");
@@ -251,7 +259,7 @@ in {
         "nil" = { "formatting" = { "command" = [ "nixfmt" ]; }; };
       };
 
-      "workbench.colorTheme" = "Gruvbox Material Dark";
+      "workbench.colorTheme" = "Gruvbox Dark Hard";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
       "gruvboxMaterial.darkPalette" = "original";
       "gruvboxMaterial.darkContrast" = "hard";
@@ -326,7 +334,11 @@ in {
     enable = true;
     theme = {
       package = pkgs.gruvbox-gtk-theme;
-      name = "Gruvbox-Plus-Dark";
+      name = "Gruvbox-Dark";
     };
+		iconTheme = {
+			name = "Gruvbox-Plus-Dark";
+			package = pkgs.gruvbox-dark-icons-gtk;
+		};
   };
 }

@@ -71,7 +71,7 @@
 
   services.displayManager.sddm = {
     enable = true;
-    theme = "Breeze";
+    theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
   };
 
   programs.hyprland.enable = true;
@@ -128,6 +128,7 @@
     racket-minimal
     unzip
     marker
+		libsForQt5.qt5.qtgraphicaleffects
   ];
 
   users.users.lisan = {
