@@ -89,7 +89,7 @@
     pulse.enable = true;
   };
 
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -128,7 +128,8 @@
     racket-minimal
     unzip
     marker
-		libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.qt5.qtgraphicaleffects
+    newsflash
   ];
 
   users.users.lisan = {

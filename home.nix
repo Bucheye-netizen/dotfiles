@@ -1,11 +1,13 @@
 { pkgs, inputs, ... }:
 
-let colors = import ./colors.nix;
+let
+  colors = import ./colors.nix;
+  stateVersion = "24.05";
 in {
   imports = [ inputs.nixvim.homeManagerModules.nixvim ];
   home.username = "lisan";
   home.homeDirectory = "/home/lisan";
-  home.stateVersion = "24.05";
+  home.stateVersion = stateVersion;
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
@@ -41,14 +43,14 @@ in {
 
   services.pueue.enable = true;
   programs.home-manager.enable = true;
-	qt = {
-		enable = true;
-		platformTheme = "gtk";
-		style = {
-			name = "adwaita-dark";
-			package = pkgs.adwaita-qt;
-		};
-	};
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style = {
+      name = "adwaita-dark";
+      package = pkgs.adwaita-qt;
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -73,7 +75,7 @@ in {
       };
       general = {
         gaps_out = 10;
-        sensitivity = 0.4;
+        sensitivity = 0.7;
         "col.active_border" = ("rgb(${colors.toHypr colors.gruv.bright_green})"
           + " rgb(${colors.toHypr colors.gruv.bright_aqua})");
 
@@ -228,6 +230,7 @@ in {
         llvm-vs-code-extensions.vscode-clangd
         bbenoist.nix
         jnoortheen.nix-ide
+        tamasfe.even-better-toml
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "gruvbox-material";
@@ -321,12 +324,13 @@ in {
   programs.fuzzel = {
     enable = true;
     settings = {
-      colors.background = "${colors.toHypr colors.gruv.dark0_hard}ff";
+      colors.background = "${colors.toHypr colors.gruv.dark0_hard}C8";
       colors.text = "${colors.toHypr colors.gruv.light1}ff";
       colors.selection = "${colors.toHypr colors.gruv.dark4}ff";
       colors.selection-text = "${colors.toHypr colors.gruv.light2}ff";
       colors.selection-match = "${colors.toHypr colors.gruv.faded_orange}ff";
-      colors.border = "${colors.toHypr colors.gruv.bright_orange}ff";
+      colors.border = "${colors.toHypr colors.gruv.neutral_orange}ff";
+      border.width = 2;
       main.icon-theme = "Gruvbox-Plus-Dark";
     };
   };
@@ -336,9 +340,101 @@ in {
       package = pkgs.gruvbox-gtk-theme;
       name = "Gruvbox-Dark";
     };
-		iconTheme = {
-			name = "Gruvbox-Plus-Dark";
-			package = pkgs.gruvbox-dark-icons-gtk;
-		};
+    iconTheme = {
+      name = "Gruvbox-Plus-Dark";
+      package = pkgs.gruvbox-dark-icons-gtk;
+    };
+  };
+
+  programs.firefox = {
+    enable = true;
+    profiles.lisan = {
+      bookmarks = [{
+        name = "Blogs";
+        toolbar = true;
+        bookmarks = [
+          {
+            name = "vaxry";
+            tags = [ "vaxry" "blog" ];
+            url = "http://vaxry.net/";
+          }
+          {
+            name = "fasterthanlime";
+            tags = [ "fasterthanlime" "blog" ];
+            url = "https://fasterthanli.me/";
+          }
+        ];
+      }];
+
+      search.engines = {
+        "Nix Packages" = {
+          urls = [{
+            template = "https://search.nixos.org/packages";
+            params = [
+              {
+                name = "type";
+                value = "packages";
+              }
+              {
+                name = "query";
+                value = "{searchTerms}";
+              }
+            ];
+            icon =
+              "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = [ "@np" ];
+          }];
+        };
+        "Home Manager Options" = {
+          urls = [{
+            template = "https://home-manager-options.extranix.com/";
+            params = [
+              {
+                name = "release";
+                value = "release-${stateVersion}";
+              }
+              {
+                name = "query";
+                value = "{searchTerms}";
+              }
+            ];
+            icon =
+              "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = [ "@hmo" ];
+          }];
+        };
+      };
+
+      search.force = true;
+    };
+  };
+
+  services.dunst = {
+    enable = true;
+    iconTheme = {
+      name = "Gruvbox-Plus-Dark";
+      package = pkgs.gruvbox-dark-icons-gtk;
+    };
+
+    settings = {
+      global = {
+        notification_limit = 5;
+        width = 300;
+        height = 300;
+        offset = "30x50";
+        origin = "top-right";
+        transparency = 10;
+        frame_color = "${colors.toHypr colors.gruv.bright_aqua}";
+      };
+    };
+  };
+
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
+    };
   };
 }
