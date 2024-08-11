@@ -3,6 +3,25 @@
 let
   colors = import ./colors.nix;
   stateVersion = "24.05";
+  # gtk-material-theme = pkgs.stdenv.mkDerivation {
+  #   name = "gtk-theme";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "TheGreatMcPain";
+  #     repo = "gruvbox-material-gtk";
+  #     rev = "808959bcfe8b9409b49a7f92052198f0882ae8bc";
+  #     sha256 = "sha256-NHjE/HI/BJyjrRfoH9gOKIU8HsUIBPV9vyvuW12D01M=";
+  #   };
+  #   propagatedUserEnvPkgs = [ pkgs.gtk-engine-murrine ];
+
+  #   installPhase = ''
+  #     		runHook preInstall
+  #     		mkdir -p $out/share/themes/gruvbox-material-dark
+  #         rm -rf README.md LICENSE icons themes/Gruvbox-Material-Dark-HIDPI
+  #         cp -r themes/Gruvbox-Material-Dark/* $out/share/themes/gruvbox-material-dark
+  #     		runHook preInstall
+  #   '';
+  # };
+  gtk-material-theme = import ./gtk-theme.nix { inherit pkgs; };
 in {
   imports = [ inputs.nixvim.homeManagerModules.nixvim ];
   home.username = "lisan";
@@ -14,7 +33,6 @@ in {
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     source-serif-pro
     hyprpaper
-    gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
     gruvbox-plus-icons
     nixfmt-classic
@@ -41,14 +59,13 @@ in {
 
   home.file = { };
 
-  services.pueue.enable = true;
   programs.home-manager.enable = true;
   qt = {
     enable = true;
     platformTheme.name = "gtk";
     style = {
-      name = "adwaita-dark";
-      package = pkgs.adwaita-qt;
+      name = "gruvbox-material-dark";
+      package = gtk-material-theme;
     };
   };
 
@@ -62,25 +79,16 @@ in {
       decoration = {
         rounding = 5;
         active_opacity = 1.0;
-        inactive_opacity = 0.85;
         drop_shadow = true;
         shadow_range = 4;
         shadow_render_power = 3;
-        blur = {
-          enabled = true;
-          size = 8;
-          passes = 1;
-          vibrancy = 0.1696;
-        };
       };
       general = {
         gaps_out = 10;
         sensitivity = 0.7;
-        "col.active_border" = ("rgb(${colors.toHypr colors.gruv.bright_green})"
-          + " rgb(${colors.toHypr colors.gruv.bright_aqua})");
-
-        "col.inactive_border" = ("rgb(${colors.toHypr colors.gruv.faded_aqua})"
-          + " rgb(${colors.toHypr colors.gruv.faded_blue})");
+        "col.active_border" = "rgb(${colors.toHypr colors.gruv.dark2})";
+        "col.inactive_border" = "rgb(${colors.toHypr colors.gruv.dark1})";
+        border_size = 2;
       };
     };
 
@@ -104,15 +112,14 @@ in {
       bindm =
         [ "SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow" ];
       windowrulev2 = [
-        "opacity 0.8 0.7,class:^(org.gnome.Nautilus)"
-        "opacity 0.9 0.8,class:^(code-url-handler)"
-        "opacity 0.8 0.7,class:^(kitty)"
+        # "opacity 0.8 0.7,class:^(org.gnome.Nautilus)"
+        # "opacity 0.9 0.8,class:^(code-url-handler)"
+        # "opacity 0.8 0.7,class:^(kitty)"
         "float,class:^(org.gnome.Nautilus)"
         "float,class:^(.blueman-manager-wrapped)"
-        "opacity 0.8 0.7,class:^(.blueman-manager-wrapped)"
+        # "opacity 0.8 0.7,class:^(.blueman-manager-wrapped)"
         "float,class:^(swayimg)"
         "size 70% 70%, class:^(swayimg)"
-			
       ];
       env = [ "XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,18" ];
     };
@@ -130,7 +137,7 @@ in {
 
   programs.kitty = {
     enable = true;
-    theme = "Gruvbox Dark Hard";
+    theme = "Gruvbox Material Dark Medium";
     font = {
       size = 9;
       name = "JetBrainsMono Nerd Font";
@@ -150,7 +157,7 @@ in {
       btm = "btm --color gruvbox ";
       neofetch = "fastfetch";
       icat = "kitty icat";
-			pkgsearch = "nix search nixpkgs";
+      pkgsearch = "nix search nixpkgs";
 
       rebuild =
         "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
@@ -182,13 +189,8 @@ in {
 
   programs.nixvim = {
     enable = true;
-    colorschemes.gruvbox = {
-      enable = true;
-      settings = {
-        contrast = "hard";
-        terminal_colors = true;
-      };
-    };
+    colorscheme = "gruvbox-material";
+    extraPlugins = with pkgs.vimPlugins; [ gruvbox-material-nvim ];
     plugins = {
       treesitter = {
         enable = true;
@@ -266,7 +268,7 @@ in {
         "nil" = { "formatting" = { "command" = [ "nixfmt" ]; }; };
       };
 
-      "workbench.colorTheme" = "Gruvbox Dark Hard";
+      "workbench.colorTheme" = "Gruvbox Material Dark";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
       "gruvboxMaterial.darkPalette" = "original";
       "gruvboxMaterial.darkContrast" = "hard";
@@ -291,6 +293,7 @@ in {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
       "workbench.iconTheme" = "gruvbox-material-icon-theme";
+      "editor.guides.indentation" = false;
     };
     keybindings = [
       {
@@ -341,8 +344,8 @@ in {
   gtk = {
     enable = true;
     theme = {
-      package = pkgs.gruvbox-gtk-theme;
-      name = "Gruvbox-Dark";
+      package = gtk-material-theme;
+      name = "gruvbox-material-dark";
     };
     iconTheme = {
       name = "Gruvbox-Plus-Dark";
@@ -428,10 +431,10 @@ in {
         offset = "30x50";
         origin = "top-right";
         transparency = 10;
-        frame_color = "${colors.gruv.neutral_aqua}";
-				frame_width = 1;
-        background = "${colors.gruv.dark0_hard}";
-				corner_radius = 3;
+        frame_color = "${colors.gruv.light4}";
+        frame_width = 1;
+        background = "${colors.gruv.dark1}";
+        corner_radius = 3;
       };
     };
   };
