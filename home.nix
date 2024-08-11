@@ -104,12 +104,15 @@ in {
       bindm =
         [ "SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow" ];
       windowrulev2 = [
-        "opacity 0.8 0.7,class:^(thunar)"
+        "opacity 0.8 0.7,class:^(org.gnome.Nautilus)"
         "opacity 0.9 0.8,class:^(code-url-handler)"
         "opacity 0.8 0.7,class:^(kitty)"
-        "float,class:^(thunar)"
+        "float,class:^(org.gnome.Nautilus)"
+        "float,class:^(.blueman-manager-wrapped)"
+        "opacity 0.8 0.7,class:^(.blueman-manager-wrapped)"
         "float,class:^(swayimg)"
         "size 70% 70%, class:^(swayimg)"
+			
       ];
       env = [ "XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,18" ];
     };
@@ -147,6 +150,7 @@ in {
       btm = "btm --color gruvbox ";
       neofetch = "fastfetch";
       icat = "kitty icat";
+			pkgsearch = "nix search nixpkgs";
 
       rebuild =
         "sudo nixos-rebuild switch --flake /home/lisan/.config/nixos#default";
@@ -424,7 +428,10 @@ in {
         offset = "30x50";
         origin = "top-right";
         transparency = 10;
-        frame_color = "${colors.toHypr colors.gruv.bright_aqua}";
+        frame_color = "${colors.gruv.neutral_aqua}";
+				frame_width = 1;
+        background = "${colors.gruv.dark0_hard}";
+				corner_radius = 3;
       };
     };
   };
@@ -432,9 +439,7 @@ in {
   dconf = {
     enable = true;
     settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
+      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
     };
   };
 }

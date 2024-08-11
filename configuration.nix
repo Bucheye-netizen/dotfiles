@@ -76,7 +76,6 @@
 
   programs.hyprland.enable = true;
   programs.dconf.enable = true;
-  programs.thunar.enable = true;
 
   services.printing.enable = true;
 
@@ -130,6 +129,9 @@
     marker
     libsForQt5.qt5.qtgraphicaleffects
     newsflash
+		obsidian
+		nautilus
+		wike
   ];
 
   users.users.lisan = {
