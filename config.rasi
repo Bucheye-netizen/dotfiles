@@ -1,8 +1,0 @@
-configuration {
-    show-icons: true;
-
-    display-ssh:    "󰣀 ssh:";
-    display-run:    "󱓞 run:";
-    display-drun:   "󰣖 drun:";
-    display-window: "󱂬 window:";
-}

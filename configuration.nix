@@ -71,7 +71,7 @@
 
   services.displayManager.sddm = {
     enable = true;
-    theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
+    theme = "${import ./derivations/sddm-theme.nix { inherit pkgs; }}";
   };
 
   programs.hyprland.enable = true;
@@ -129,9 +129,9 @@
     marker
     libsForQt5.qt5.qtgraphicaleffects
     newsflash
-		obsidian
-		nautilus
-		wike
+    obsidian
+    nautilus
+    hyprshot
   ];
 
   users.users.lisan = {
