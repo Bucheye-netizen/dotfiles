@@ -13,6 +13,7 @@ in {
     ./modules/hyprland.nix
     ./modules/nvim.nix
     ./modules/terminal/terminal.nix
+    inputs.ags.homeManagerModules.default
   ];
   home.username = "lisan";
   home.homeDirectory = "/home/lisan";
@@ -26,7 +27,6 @@ in {
     gruvbox-dark-icons-gtk
     gruvbox-plus-icons
     nixfmt-classic
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     inputs.hyprcursor.packages.${pkgs.system}.default
     nil
   ];
@@ -72,12 +72,12 @@ in {
   programs.fuzzel = {
     enable = true;
     settings = {
-      colors.background = "${colors.toHypr colors.gruv.dark0_hard}C8";
+      colors.background = "${colors.toHypr colors.gruv.dark1}ff";
       colors.text = "${colors.toHypr colors.gruv.light1}ff";
       colors.selection = "${colors.toHypr colors.gruv.dark4}ff";
       colors.selection-text = "${colors.toHypr colors.gruv.light2}ff";
       colors.selection-match = "${colors.toHypr colors.gruv.faded_orange}ff";
-      colors.border = "${colors.toHypr colors.gruv.neutral_orange}ff";
+      colors.border = "${colors.toHypr colors.gruv.dark1}ff";
       border.width = 2;
       main.icon-theme = "Gruvbox-Plus-Dark";
     };
@@ -101,8 +101,8 @@ in {
     };
   };
 
-  services.swayosd = {
+  programs.ags = {
     enable = true;
-    display = "eDP-1";
+    configDir = ./ags;
   };
 }

@@ -88,7 +88,6 @@
     pulse.enable = true;
   };
 
-  # programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -132,6 +131,10 @@
     obsidian
     nautilus
     hyprshot
+    whatsapp-for-linux
+    brightnessctl
+		prettierd
+		ripgrep
   ];
 
   users.users.lisan = {
@@ -145,4 +148,18 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "24.05";
+
+  powerManagement.enable = true;
+  powerManagement.powertop.enable = true;
+  services.tlp.enable = true;
+	services.auto-cpufreq.settings = {
+		battery = {
+			 governor = "powersave";
+			 turbo = "never";
+		};
+		charger = {
+			 governor = "performance";
+			 turbo = "auto";
+		};
+	};
 }
