@@ -72,7 +72,7 @@ in {
   programs.fuzzel = {
     enable = true;
     settings = {
-      colors.background = "${colors.toHypr colors.gruv.dark1}ff";
+      colors.background = "282828ff";
       colors.text = "${colors.toHypr colors.gruv.light1}ff";
       colors.selection = "${colors.toHypr colors.gruv.dark4}ff";
       colors.selection-text = "${colors.toHypr colors.gruv.light2}ff";

@@ -42,6 +42,7 @@ in {
         "SUPER, M, fullscreen, 1"
         "SUPER, C, centerwindow"
         "SUPER, L, exec, hyprlock"
+        "SUPER, P, exec, hyprpicker -a"
         ",XF86MonBrightnessUp, exec, brightnessctl set +10%"
         ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
       ];

@@ -41,7 +41,7 @@
             };
             settings = { winopts = { height = 0.7; }; };
           };
-          "<C-l>" = "live_grep";
+          "<C-l>" = "live_grep_native";
         };
       };
     };

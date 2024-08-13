@@ -38,7 +38,10 @@
   nixpkgs.config.pulseaudio = true;
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = with pkgs; [
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
+  ];
 
   hardware.graphics.enable = true;
   hardware.nvidia = {
@@ -126,6 +129,7 @@
     racket-minimal
     unzip
     marker
+    # Required for SDDM login theme to work. 
     libsForQt5.qt5.qtgraphicaleffects
     newsflash
     obsidian
@@ -135,6 +139,12 @@
     brightnessctl
     prettierd
     ripgrep
+    bun
+    libdbusmenu-gtk3
+    ani-cli
+    mov-cli
+    hyprpicker
+    doggo
   ];
 
   users.users.lisan = {
@@ -151,5 +161,7 @@
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
+  services.upower.enable = true;
   services.tlp.enable = true;
+  services.gvfs.enable = true;
 }
