@@ -133,8 +133,8 @@
     hyprshot
     whatsapp-for-linux
     brightnessctl
-		prettierd
-		ripgrep
+    prettierd
+    ripgrep
   ];
 
   users.users.lisan = {
@@ -152,14 +152,4 @@
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   services.tlp.enable = true;
-	services.auto-cpufreq.settings = {
-		battery = {
-			 governor = "powersave";
-			 turbo = "never";
-		};
-		charger = {
-			 governor = "performance";
-			 turbo = "auto";
-		};
-	};
 }

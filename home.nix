@@ -77,7 +77,7 @@ in {
       colors.selection = "${colors.toHypr colors.gruv.dark4}ff";
       colors.selection-text = "${colors.toHypr colors.gruv.light2}ff";
       colors.selection-match = "${colors.toHypr colors.gruv.faded_orange}ff";
-      colors.border = "${colors.toHypr colors.gruv.dark1}ff";
+      colors.border = "${colors.toHypr colors.gruv.dark3}ff";
       border.width = 2;
       main.icon-theme = "Gruvbox-Plus-Dark";
     };

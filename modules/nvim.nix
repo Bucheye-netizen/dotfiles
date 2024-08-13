@@ -20,11 +20,14 @@
           javascript = [ "prettierd" ];
           nix = [ "nixfmt" ];
           rust = [ "rustfmt" ];
+          c = [ "clang-format" ];
+          cpp = [ "clang-format" ];
         };
-				formatOnSave = ''{
-					lsp_format = "fallback",
-					timeout_ms = 500,
-				}'';
+        formatOnSave = ''
+                    {
+                    					lsp_format = "fallback",
+                    					timeout_ms = 500,
+          					}'';
       };
       neogit.enable = true;
       fzf-lua = {

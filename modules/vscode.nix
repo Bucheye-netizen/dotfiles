@@ -10,6 +10,7 @@
         bbenoist.nix
         jnoortheen.nix-ide
         tamasfe.even-better-toml
+        esbenp.prettier-vscode
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "gruvbox-material";
@@ -67,6 +68,9 @@
       "nix.serverPath" = "nil";
       "workbench.iconTheme" = "gruvbox-material-icon-theme";
       "editor.guides.indentation" = false;
+      "[javascript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
     };
     keybindings = [
       {
