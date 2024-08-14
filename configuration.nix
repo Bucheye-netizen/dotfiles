@@ -12,7 +12,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
+  networking.hostName = "buchela";
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
@@ -89,6 +89,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -145,6 +146,8 @@
     mov-cli
     hyprpicker
     doggo
+    vesktop
+    mpv
   ];
 
   users.users.lisan = {
