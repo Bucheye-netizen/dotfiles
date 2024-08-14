@@ -35,7 +35,6 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
   };
-  nixpkgs.config.pulseaudio = true;
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = with pkgs; [
@@ -82,7 +81,6 @@
 
   services.printing.enable = true;
 
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -116,7 +114,6 @@
     cbonsai
     libgcc
     expressvpn
-
     clang-tools
     clang
     rustup
@@ -125,7 +122,6 @@
     swayimg
     bk
     betterdiscordctl
-    pulseaudio
     foliate
     racket-minimal
     unzip
@@ -148,6 +144,7 @@
     doggo
     vesktop
     mpv
+    pavucontrol
   ];
 
   users.users.lisan = {
