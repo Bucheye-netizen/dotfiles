@@ -1,5 +1,8 @@
 { inputs, ... }:
-let colors = import ../util/colors.nix;
+let
+  colors = import ../util/colors.nix;
+  active = "rgb(${colors.toHypr colors.gruv.light2})";
+  inactive = "rgb(${colors.toHypr colors.gruv.dark3})";
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -75,20 +78,61 @@ in {
     };
   };
 
+  # Basically copied from https://github.com/binEpilo/hyprland-gruvbox-rice-/blob/main/hypr/hyprlock.conf
   programs.hyprlock = {
     settings = {
-      general = {
-        disable_loading_bar = true;
-        grace = 0;
-        hide_cursor = false;
-        no_fade_in = false;
+      general = { hide_cursor = 0; };
+
+      background = {
+        path = "${inputs.self}/wallpaper/hyprlock.png";
+        blur_passes = 1;
+        blur_size = 8;
+        noise = 1.17e-2;
+        contrast = 0.8916;
+        brightness = 0.5172;
+        vibrancy = 0.1696;
+        vibrancy_darkness = 0.0;
       };
 
-      background = [{
-        path = "screenshot";
-        blur_passes = 3;
-        blur_size = 8;
-      }];
+      label = {
+        monitor = "eDP-1";
+        text = "$TIME";
+        color = active;
+        font_size = 100;
+        rotate = 0;
+        position = "0, 80";
+        halign = "center";
+        valign = "center";
+      };
+
+      input-field = {
+        monitor = "eDP-1";
+        size = "200, 50";
+        outline_thickness = 3;
+        dots_size = 0.33;
+        dots_spacing = 0.15;
+        dots_center = false;
+        dots_rounding = -1;
+        outer_color = inactive;
+        inner_color = inactive;
+        font_color = active;
+        fade_on_empty = true;
+        fade_timeout = 1000;
+        placeholder_text = "<i></i>";
+        hide_input = 0;
+        rounding = -1;
+        check_color = active;
+        fail_color = active;
+        fail_transition = 300;
+        capslock_color = -1;
+        numlock_color = -1;
+        bothlock_color = -1;
+        invert_numlock = false;
+        swap_font_color = false;
+        position = "0, -20";
+        halign = "center";
+        valign = "center";
+      };
     };
     enable = true;
   };

@@ -145,6 +145,11 @@
     vesktop
     mpv
     pavucontrol
+    meson
+    ninja
+    tldr
+    libreoffice
+    coreutils-full
   ];
 
   users.users.lisan = {
