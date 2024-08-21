@@ -150,6 +150,8 @@
     tldr
     libreoffice
     coreutils-full
+    man-pages
+    gparted
   ];
 
   users.users.lisan = {
@@ -169,4 +171,5 @@
   services.upower.enable = true;
   services.tlp.enable = true;
   services.gvfs.enable = true;
+  programs.firefox.enable = true;
 }

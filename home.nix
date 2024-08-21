@@ -8,7 +8,6 @@ in {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./modules/dunst.nix
-    (import ./modules/firefox.nix { inherit stateVersion; })
     ./modules/vscode.nix
     ./modules/hyprland.nix
     ./modules/nvim.nix
