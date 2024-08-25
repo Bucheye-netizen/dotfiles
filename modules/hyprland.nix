@@ -20,7 +20,7 @@ in {
       };
       general = {
         gaps_out = 10;
-        sensitivity = 0.7;
+        sensitivity = 0.5;
         "col.active_border" = "rgb(${colors.toHypr colors.gruv.dark3})";
         "col.inactive_border" = "rgb(${colors.toHypr colors.gruv.dark1})";
         border_size = 2;
@@ -63,8 +63,11 @@ in {
         "float,class:^(swayimg)"
         "size 70% 70%, class:^(swayimg)"
         "float, class:^(org.pulseaudio.pavucontrol)"
+        "float, class:^(org.bucheye.debug)"
+        "float, class:^(xdg-desktop-portal-gtk)"
       ];
       env = [ "XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,18" ];
+      xwayland = { force_zero_scaling = true; };
     };
   };
 
@@ -141,25 +144,33 @@ in {
     enable = true;
     settings = {
       general = {
-        ignore_dbus_inhibit = false;
         lock_cmd = "pidof hyprlock || hyprlock";
         before_sleep_cmd = "loginctl lock-session";
         after_sleep_cmd = "hyprctl dispatch dpms on";
       };
-
       listener = [
         {
-          timeout = 290;
-          on-timeout = ''notify-send "Idl" "PC will lock in 10 seconds"'';
+          timeout = 150;
+          on-timeout = "brightnessctl -s set 10";
+          on-resume = "brightnessctl -r";
+        }
+        {
+          timeout = 150;
+          on-timeout = "brightnessctl -sd rgb:kbd_backlight set 0";
+          on-resume = "brightnessctl -rd rgb:kbd_backlight";
         }
         {
           timeout = 300;
+          on-timeout = "loginctl locke-session";
+        }
+        {
+          timeout = 330;
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }
 
         {
-          timeout = 600;
+          timeout = 1800;
           on-timeout = "systemctl suspend";
         }
       ];

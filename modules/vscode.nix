@@ -11,6 +11,7 @@
         jnoortheen.nix-ide
         tamasfe.even-better-toml
         esbenp.prettier-vscode
+        mesonbuild.mesonbuild
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "gruvbox-material";
@@ -44,8 +45,8 @@
 
       "workbench.colorTheme" = "Gruvbox Material Dark";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
-      "gruvboxMaterial.darkPalette" = "original";
-      "gruvboxMaterial.darkContrast" = "hard";
+      "gruvboxMaterial.darkPalette" = "mix";
+      "gruvboxMaterial.darkContrast" = "medium";
       "gruvboxMaterial.highContrast" = true;
       "vim.insertModeKeyBindings" = [{
         "before" = [ "k" "j" ];
@@ -71,6 +72,7 @@
       "[javascript]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
+      "mesonbuild.downloadLanguageServer" = false;
     };
     keybindings = [
       {

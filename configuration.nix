@@ -132,7 +132,6 @@
     obsidian
     nautilus
     hyprshot
-    whatsapp-for-linux
     brightnessctl
     prettierd
     ripgrep
@@ -152,6 +151,8 @@
     coreutils-full
     man-pages
     gparted
+    cmake
+    muon
   ];
 
   users.users.lisan = {

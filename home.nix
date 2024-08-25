@@ -96,12 +96,24 @@ in {
   dconf = {
     enable = true;
     settings = {
-      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        cursor-theme = "Capitaine Cursors (Gruvbox)";
+        cursor-size = 18;
+      };
     };
   };
 
   programs.ags = {
     enable = true;
     configDir = ./ags;
+  };
+
+  programs.cava = {
+    enable = true;
+    settings = {
+      general.framerate = 165;
+      input.method = "pipewire";
+    };
   };
 }
