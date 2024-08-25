@@ -153,6 +153,7 @@
     gparted
     cmake
     muon
+    bemoji
   ];
 
   users.users.lisan = {
