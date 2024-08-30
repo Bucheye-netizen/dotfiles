@@ -14,6 +14,7 @@
 
         nixGrammars = true;
       };
+      guess-indent.enable = true;
       conform-nvim = {
         enable = true;
         formattersByFt = {
@@ -23,11 +24,7 @@
           c = [ "clang-format" ];
           cpp = [ "clang-format" ];
         };
-        formatOnSave = ''
-                    {
-                    					lsp_format = "fallback",
-                    					timeout_ms = 500,
-          					}'';
+        formatOnSave = ''{lsp_format = "fallback", timeout_ms = 500}'';
       };
       neogit.enable = true;
       fzf-lua = {
@@ -61,6 +58,7 @@
       clipboard = "unnamedplus";
       autoindent = true;
       number = true;
+      # smartindent = true;
     };
   };
 }

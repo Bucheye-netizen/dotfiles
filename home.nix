@@ -28,12 +28,17 @@ in {
     nixfmt-classic
     inputs.hyprcursor.packages.${pkgs.system}.default
     nil
+    (texlive.combine {
+      inherit (texlive)
+        scheme-medium latexmk titlesec booktabs multirow chngcntr enumitem
+        xcharter stix2-otf;
+    })
   ];
 
   home.pointerCursor = {
     package = pkgs.capitaine-cursors-themed;
     name = "Capitaine Cursors (Gruvbox)";
-    size = 18;
+    size = 24;
     gtk.enable = true;
   };
 
@@ -99,7 +104,7 @@ in {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
         cursor-theme = "Capitaine Cursors (Gruvbox)";
-        cursor-size = 18;
+        cursor-size = 24;
       };
     };
   };

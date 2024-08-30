@@ -37,6 +37,12 @@
           version = "1.1.5";
           sha256 = "sha256-86UWUuWKT6adx4hw4OJw3cSZxWZKLH4uLTO+Ssg75gY=";
         }
+        {
+          name = "latex-workshop";
+          publisher = "James-Yu";
+          sha256 = "sha256-modm0+XhYltiXOodPpkzNA9llp5/7oVUbpSNdbpMHCY=";
+          version = "10.1.0";
+        }
       ];
     userSettings = {
       "nix.serverSettings" = {
@@ -73,6 +79,47 @@
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
       "mesonbuild.downloadLanguageServer" = false;
+
+      "latex-workshop.latex.recipes" = [
+        {
+          "name" = "latexmk (lualatex)";
+          "tools" = [ "lualatexmk" ];
+        }
+
+        {
+          "name" = "latexmk";
+          "tools" = [ "latexmk" ];
+        }
+        {
+          "name" = "latexmk (latexmkrc)";
+          "tools" = [ "latexmk_rconly" ];
+        }
+
+        {
+          "name" = "latexmk (xelatex)";
+          "tools" = [ "xelatexmk" ];
+        }
+        {
+          "name" = "pdflatex -> bibtex -> pdflatex * 2";
+          "tools" = [ "pdflatex" "bibtex" "pdflatex" "pdflatex" ];
+        }
+        {
+          "name" = "Compile Rnw files";
+          "tools" = [ "rnw2tex" "latexmk" ];
+        }
+        {
+          "name" = "Compile Jnw files";
+          "tools" = [ "jnw2tex" "latexmk" ];
+        }
+        {
+          "name" = "Compile Pnw files";
+          "tools" = [ "pnw2tex" "latexmk" ];
+        }
+        {
+          "name" = "tectonic";
+          "tools" = [ "tectonic" ];
+        }
+      ];
     };
     keybindings = [
       {

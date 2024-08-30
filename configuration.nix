@@ -150,10 +150,10 @@
     libreoffice
     coreutils-full
     man-pages
-    gparted
     cmake
     muon
     bemoji
+    tofi
   ];
 
   users.users.lisan = {

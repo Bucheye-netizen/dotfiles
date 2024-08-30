@@ -35,9 +35,10 @@ in {
         "SUPER, X, exec, firefox"
         "SUPER, Tab, cyclenext"
         "SUPER, Tab, bringactivetotop"
+        "SUPER SHIFT, L, exec, systemctl suspend"
         "SUPER_SHIFT, Tab, cyclenext, prev"
         "SUPER_SHIFT, Tab, bringactivetotop"
-        "SUPER, S, exec, hyprshot -m region --clipboard-only"
+        "SUPER SHIFT, S, exec, hyprshot -m region --clipboard-only"
         "SUPER, T, togglefloating"
         "SUPER, W, killactive"
         "SUPER, F, fullscreen"
@@ -55,7 +56,7 @@ in {
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
-      exec-once = [ "hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 18" ];
+      exec-once = [ "hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 24" ];
       bindm =
         [ "SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow" ];
       windowrulev2 = [
@@ -67,7 +68,7 @@ in {
         "float, class:^(org.bucheye.debug)"
         "float, class:^(xdg-desktop-portal-gtk)"
       ];
-      env = [ "XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,18" ];
+      env = [ "XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,24" ];
       xwayland = { force_zero_scaling = true; };
     };
   };

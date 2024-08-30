@@ -11,4 +11,6 @@
 
 - Battery doesn't NVIDIA GPU.
 - Screen share breaks when windows are maximized.
-- ~~Prevent computer from crashing when brightness is dimmed.~~
+- Prevent computer from crashing when brightness is dimmed.
+    - Previously had this marked as fixed. Apparently, it was not fixed. 
+      I am a _little_ disapointed. 
