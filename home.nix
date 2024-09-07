@@ -18,6 +18,7 @@ in {
   home.homeDirectory = "/home/lisan";
   home.stateVersion = stateVersion;
   fonts.fontconfig.enable = true;
+  xdg.mimeApps.defaultApplications = { "application/pdf" = "firefox.desktop"; };
 
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -86,6 +87,7 @@ in {
       main.icon-theme = "Gruvbox-Plus-Dark";
     };
   };
+
   gtk = {
     enable = true;
     theme = {

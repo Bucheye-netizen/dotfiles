@@ -63,6 +63,7 @@
       "editor.wordWrap" = "on";
       "editor.fontSize" = 14;
       "terminal.integrated.fontSize" = 12;
+      "terminal.integrated.enableMultiLinePasteWarning" = false;
       "window.titleBarStyle" = "custom";
       "window.customTitleBarVisibility" = "windowed";
       "window.menuBarVisibility" = "toggle";

@@ -154,6 +154,8 @@
     muon
     bemoji
     tofi
+    neovide
+    tt
   ];
 
   users.users.lisan = {
