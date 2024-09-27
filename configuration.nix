@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -29,6 +25,11 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = with pkgs; [
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
+  ];
   environment.sessionVariables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     TERMINAL = "kitty";
@@ -36,23 +37,22 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = with pkgs; [
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
-  ];
-
   hardware.graphics.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
       nvidiaBusId = "PCI:01:0:0";
       amdgpuBusId = "PCI:05:0:0";
-      sync.enable = true;
+      # sync.enable = true;
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
     };
   };
 
@@ -69,6 +69,7 @@
       layout = "us";
     };
     enable = true;
+    videoDrivers = [ "nvidia" ];
   };
 
   services.displayManager.sddm = {
@@ -156,13 +157,14 @@
     tofi
     neovide
     tt
+    google-cloud-sdk
   ];
 
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = [ ];
+    packages = with pkgs; [ amfora wtype ];
     shell = pkgs.nushell;
   };
 
@@ -171,9 +173,20 @@
   system.stateVersion = "24.05";
 
   powerManagement.enable = true;
-  powerManagement.powertop.enable = true;
   services.upower.enable = true;
-  services.tlp.enable = true;
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
   services.gvfs.enable = true;
   programs.firefox.enable = true;
 }

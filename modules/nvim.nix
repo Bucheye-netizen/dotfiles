@@ -17,14 +17,16 @@
       guess-indent.enable = true;
       conform-nvim = {
         enable = true;
-        formattersByFt = {
-          javascript = [ "prettierd" ];
-          nix = [ "nixfmt" ];
-          rust = [ "rustfmt" ];
-          c = [ "clang-format" ];
-          cpp = [ "clang-format" ];
+        settings = {
+          formatters_by_ft = {
+            javascript = [ "prettierd" ];
+            nix = [ "nixfmt" ];
+            rust = [ "rustfmt" ];
+            c = [ "clang-format" ];
+            cpp = [ "clang-format" ];
+          };
+          format_on_save = ''{lsp_format = "fallback", timeout_ms = 500}'';
         };
-        formatOnSave = ''{lsp_format = "fallback", timeout_ms = 500}'';
       };
       neogit.enable = true;
       fzf-lua = {

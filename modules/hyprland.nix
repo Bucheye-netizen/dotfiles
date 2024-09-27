@@ -20,41 +20,67 @@ in {
       };
       general = {
         gaps_out = 10;
-        sensitivity = 0.5;
         "col.active_border" = "rgb(${colors.toHypr colors.gruv.dark3})";
         "col.inactive_border" = "rgb(${colors.toHypr colors.gruv.dark1})";
         border_size = 2;
       };
-      input.touchpad.scroll_factor = 0.2;
+      input = {
+        sensitivity = 0.5;
+        touchpad.scroll_factor = 0.2;
+      };
     };
 
+    # Inspired by https://github.com/AymanLyesri/hyprland-conf/blob/master/.config/hypr/configs/keybinds.conf
     settings = {
       bind = [
-        "SUPER,Q,exec,kitty"
+        # Apps
+        "SUPER, Q,exec,kitty"
         "SUPER, R, exec, fuzzel"
         "SUPER, X, exec, firefox"
+        "SUPER, PERIOD, exec, bemoji --type"
+
         "SUPER, Tab, cyclenext"
         "SUPER, Tab, bringactivetotop"
-        "SUPER SHIFT, L, exec, systemctl suspend"
-        "SUPER_SHIFT, Tab, cyclenext, prev"
-        "SUPER_SHIFT, Tab, bringactivetotop"
-        "SUPER SHIFT, S, exec, hyprshot -m region --clipboard-only"
+
+        # Actions 
+        "SUPER_SHIFT, S, exec, hyprshot -m region --clipboard-only"
+        "CTRL_ALT, DELETE, exec, systemctl suspend"
+
         "SUPER, T, togglefloating"
         "SUPER, W, killactive"
         "SUPER, F, fullscreen"
-        "SUPER, K, fakefullscreen"
         "SUPER, M, fullscreen, 1"
+        "SUPER_SHIFT, M, fullscreenstate, -1, 2" # Partial fullscreen
+
+        # Navigation
+        "SUPER_SHIFT, Tab, cyclenext, prev"
+        "SUPER_SHIFT, Tab, bringactivetotop"
+
         "SUPER, C, centerwindow"
-        "SUPER, L, exec, hyprlock"
         "SUPER, P, exec, hyprpicker -a"
-        "SUPER, E, exec, bemoji"
-        ",XF86MonBrightnessUp, exec, brightnessctl set +10%"
-        ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
+
+        "SUPER, H, movefocus, l"
+        "SUPER, L, movefocus, r"
+        "SUPER, J, movefocus, d"
+        "SUPER, K, movefocus, u"
+
+        "SUPER_SHIFT, H, movewindow, l"
+        "SUPER_SHIFT, L, movewindow, r"
+        "SUPER_SHIFT, J, movewindow, d"
+        "SUPER_SHIFT, K, movewindow, u"
       ];
-      bindl = [
+      binde = [
+        "SUPER_CTRL, H, resizeactive,-50 0"
+        "SUPER_CTRL, L, resizeactive,50 0"
+        "SUPER_CTRL, J, resizeactive,0 50"
+        "SUPER_CTRL, K, resizeactive,0 -50"
+
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+        ",XF86MonBrightnessUp, exec, brightnessctl set +10%"
+        ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
       ];
       exec-once = [ "hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 24" ];
       bindm =
@@ -79,7 +105,7 @@ in {
       ipc = "off";
       splash = false;
       preload = [ "${inputs.self}/wallpaper/gruvbox.png" ];
-      wallpaper = [ "eDP-1,${inputs.self}/wallpaper/gruvbox.png" ];
+      wallpaper = [ "eDP-2,${inputs.self}/wallpaper/gruvbox.png" ];
     };
   };
 
@@ -100,7 +126,7 @@ in {
       };
 
       label = {
-        monitor = "eDP-1";
+        monitor = "eDP-2";
         text = "$TIME";
         color = active;
         font_size = 100;
@@ -111,7 +137,7 @@ in {
       };
 
       input-field = {
-        monitor = "eDP-1";
+        monitor = "eDP-2";
         size = "200, 50";
         outline_thickness = 3;
         dots_size = 0.33;

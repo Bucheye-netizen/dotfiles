@@ -44,9 +44,7 @@ in {
   };
 
   home.sessionVariables = {
-    TERMINAL = "kitty";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
+
   };
 
   fonts.fontconfig.defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
@@ -114,13 +112,5 @@ in {
   programs.ags = {
     enable = true;
     configDir = ./ags;
-  };
-
-  programs.cava = {
-    enable = true;
-    settings = {
-      general.framerate = 165;
-      input.method = "pipewire";
-    };
   };
 }
