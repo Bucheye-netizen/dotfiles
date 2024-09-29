@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -35,6 +33,7 @@
     TERMINAL = "kitty";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
+    NIXPKGS_ALLOW_UNFREE = "1";
   };
 
   hardware.graphics.enable = true;
@@ -74,7 +73,7 @@
 
   services.displayManager.sddm = {
     enable = true;
-    theme = "${import ./derivations/sddm-theme.nix { inherit pkgs; }}";
+    theme = "${import ../derivations/sddm-theme.nix { inherit pkgs; }}";
   };
 
   programs.hyprland.enable = true;
@@ -93,78 +92,82 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    wget
-    sl
-    dunst
-    kitty
-    libnotify
-    swww
-    lshw
-    pciutils
-    wl-clipboard
-    tree
-    vivid
-    htop
-    trashy
-    fzf
-    nsnake
-    gcc
-    fastfetch
-    bottom
-    cbonsai
-    libgcc
-    expressvpn
-    clang-tools
-    clang
-    rustup
-    openssl
-    pkg-config
-    swayimg
-    bk
-    betterdiscordctl
-    foliate
-    racket-minimal
-    unzip
-    marker
-    # Required for SDDM login theme to work. 
-    libsForQt5.qt5.qtgraphicaleffects
-    newsflash
-    obsidian
-    nautilus
-    hyprshot
-    brightnessctl
-    prettierd
-    ripgrep
-    bun
-    libdbusmenu-gtk3
-    ani-cli
-    mov-cli
-    hyprpicker
-    doggo
-    vesktop
-    mpv
-    pavucontrol
-    meson
-    ninja
-    tldr
-    libreoffice
-    coreutils-full
-    man-pages
-    cmake
-    muon
-    bemoji
-    tofi
-    neovide
-    tt
-    google-cloud-sdk
-  ];
+  environment.systemPackages = with pkgs;
+    [
+
+    ];
 
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ amfora wtype ];
+    packages = with pkgs; [
+      wget
+      sl
+      dunst
+      kitty
+      libnotify
+      swww
+      lshw
+      pciutils
+      wl-clipboard
+      tree
+      vivid
+      htop
+      trashy
+      fzf
+      nsnake
+      gcc
+      fastfetch
+      bottom
+      cbonsai
+      libgcc
+      expressvpn
+      clang-tools
+      clang
+      rustup
+      openssl
+      pkg-config
+      swayimg
+      bk
+      betterdiscordctl
+      foliate
+      racket-minimal
+      unzip
+      marker
+      libsForQt5.qt5.qtgraphicaleffects
+      newsflash
+      obsidian
+      nautilus
+      hyprshot
+      brightnessctl
+      prettierd
+      ripgrep
+      bun
+      libdbusmenu-gtk3
+      ani-cli
+      mov-cli
+      hyprpicker
+      doggo
+      vesktop
+      mpv
+      pavucontrol
+      meson
+      ninja
+      tldr
+      libreoffice
+      coreutils-full
+      man-pages
+      cmake
+      muon
+      bemoji
+      tofi
+      neovide
+      tt
+      google-cloud-sdk
+      amfora
+      wtype
+    ];
     shell = pkgs.nushell;
   };
 

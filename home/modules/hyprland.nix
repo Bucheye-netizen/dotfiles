@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, ... }:
 let
   colors = import ../util/colors.nix;
   active = "rgb(${colors.toHypr colors.gruv.light2})";
@@ -104,8 +104,8 @@ in {
     settings = {
       ipc = "off";
       splash = false;
-      preload = [ "${inputs.self}/wallpaper/gruvbox.png" ];
-      wallpaper = [ "eDP-2,${inputs.self}/wallpaper/gruvbox.png" ];
+      preload = [ "${self}/wallpaper/gruvbox.png" ];
+      wallpaper = [ "eDP-2,${self}/wallpaper/gruvbox.png" ];
     };
   };
 
@@ -115,7 +115,7 @@ in {
       general = { hide_cursor = 0; };
 
       background = {
-        path = "${inputs.self}/wallpaper/hyprlock.png";
+        path = "${self}/wallpaper/hyprlock.png";
         blur_passes = 1;
         blur_size = 8;
         noise = 1.17e-2;

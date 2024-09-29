@@ -38,3 +38,5 @@
 - Use home manager module instead of flake to speed up changing settings. 
 
 - Commit Newsflash
+
+- Apply performance improvements described [here](https://artemis.sh/2022/09/18/wayland-from-an-x-apologist.html).

@@ -24,7 +24,7 @@
       pkgsearch = "nix search nixpkgs";
 
       rebuild =
-        "sudo nixos-rebuild switch --flake /home/lisan/.config/nix#default";
+        "sudo nixos-rebuild switch --flake /home/lisan/nix/config#default";
     };
   };
 

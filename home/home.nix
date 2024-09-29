@@ -1,22 +1,23 @@
-{ pkgs, inputs, ... }:
+{ pkgs, nixvim, hyprcursor, ... }:
 
 let
   colors = import ./util/colors.nix;
   stateVersion = "24.05";
-  gtk-material-theme = import ./derivations/gtk-theme.nix { inherit pkgs; };
+  gtk-material-theme = import ../derivations/gtk-theme.nix { inherit pkgs; };
 in {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    nixvim.homeManagerModules.nixvim
     ./modules/dunst.nix
     ./modules/vscode.nix
     ./modules/hyprland.nix
     ./modules/nvim.nix
     ./modules/terminal/terminal.nix
-    inputs.ags.homeManagerModules.default
+    # ags.homeManagerModules.default
   ];
   home.username = "lisan";
   home.homeDirectory = "/home/lisan";
   home.stateVersion = stateVersion;
+  nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
   xdg.mimeApps.defaultApplications = { "application/pdf" = "firefox.desktop"; };
 
@@ -27,7 +28,7 @@ in {
     gruvbox-dark-icons-gtk
     gruvbox-plus-icons
     nixfmt-classic
-    inputs.hyprcursor.packages.${pkgs.system}.default
+    hyprcursor.packages.${pkgs.system}.default
     nil
     (texlive.combine {
       inherit (texlive)
@@ -109,8 +110,8 @@ in {
     };
   };
 
-  programs.ags = {
-    enable = true;
-    configDir = ./ags;
-  };
+  # programs.ags = {
+  #   enable = true;
+  #   configDir = ./ags;
+  # };
 }
