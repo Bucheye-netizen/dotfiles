@@ -47,7 +47,6 @@
     prime = {
       nvidiaBusId = "PCI:01:0:0";
       amdgpuBusId = "PCI:05:0:0";
-      # sync.enable = true;
       offload = {
         enable = true;
         enableOffloadCmd = true;
@@ -92,10 +91,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs;
-    [
-
-    ];
+  environment.systemPackages = with pkgs; [ libsForQt5.qt5.qtgraphicaleffects ];
 
   users.users.lisan = {
     isNormalUser = true;
@@ -135,7 +131,6 @@
       racket-minimal
       unzip
       marker
-      libsForQt5.qt5.qtgraphicaleffects
       newsflash
       obsidian
       nautilus

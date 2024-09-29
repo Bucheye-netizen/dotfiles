@@ -1,4 +1,4 @@
-{ pkgs, nixvim, hyprcursor, ... }:
+{ pkgs, nixvim, hyprcursor, ags, ... }:
 
 let
   colors = import ./util/colors.nix;
@@ -12,7 +12,7 @@ in {
     ./modules/hyprland.nix
     ./modules/nvim.nix
     ./modules/terminal/terminal.nix
-    # ags.homeManagerModules.default
+    ags.homeManagerModules.default
   ];
   home.username = "lisan";
   home.homeDirectory = "/home/lisan";
@@ -110,8 +110,8 @@ in {
     };
   };
 
-  # programs.ags = {
-  #   enable = true;
-  #   configDir = ./ags;
-  # };
+  programs.ags = {
+    enable = true;
+    configDir = ./ags;
+  };
 }

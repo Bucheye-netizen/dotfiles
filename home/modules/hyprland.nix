@@ -7,6 +7,7 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      # monitor = "eDP-2, 2560x1600@30, 0x0, 1";
       misc = {
         disable_splash_rendering = true;
         disable_hyprland_logo = true;
