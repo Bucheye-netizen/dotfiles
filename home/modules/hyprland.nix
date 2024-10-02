@@ -9,7 +9,7 @@ in {
     settings = {
       # review https://www.reddit.com/r/hyprland/comments/164qtv5/keybind_to_change_refresh_rate/
       # monitor = "eDP-2, 2560x1600@165.00200, 0x0, 1";
-      monitor = "eDP-2, 2560x1600@60.00200, 0x0, 1";
+      # monitor = "eDP-2, 2560x1600@60.00200, 0x0, 1";
       misc = {
         disable_splash_rendering = true;
         disable_hyprland_logo = true;
