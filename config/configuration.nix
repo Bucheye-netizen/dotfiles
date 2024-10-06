@@ -164,6 +164,7 @@
       amfora
       wtype
       lunar-client
+      gh
     ];
     shell = pkgs.nushell;
   };
@@ -173,6 +174,7 @@
   system.stateVersion = "24.05";
 
   powerManagement.enable = true;
+  powerManagement.powertop.enable = true;
   services.upower.enable = true;
   services.tlp = {
     enable = true;
