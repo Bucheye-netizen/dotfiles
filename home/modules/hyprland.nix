@@ -23,8 +23,7 @@ in {
       };
       general = {
         gaps_out = 10;
-        # "col.active_border" = "rgb(${colors.toHypr colors.gruv.dark3})";
-        "col.active_border" = "rgb(${colors.toHypr colors.gruv.light4})";
+        "col.active_border" = "rgb(${colors.toHypr colors.gruv.dark4})";
         "col.inactive_border" = "rgb(${colors.toHypr colors.gruv.dark1})";
         border_size = 2;
       };

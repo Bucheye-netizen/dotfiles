@@ -109,6 +109,8 @@
       swww
       lshw
       pciutils
+      flutter
+      androidStudioPackages.dev
       wl-clipboard
       tree
       vivid
@@ -165,6 +167,7 @@
       wtype
       lunar-client
       gh
+      notion-app-enhanced
     ];
     shell = pkgs.nushell;
   };

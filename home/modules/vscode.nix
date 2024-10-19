@@ -14,6 +14,12 @@
         mesonbuild.mesonbuild
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
+          name = "flutter";
+          publisher = "Dart-Code";
+          version = "3.99.20240930";
+          sha256 = "sha256-CxamDT8/Q5wOhcRYA4wl2W2km8ymdkoTGlt0z+HwFPI=";
+        }
+        {
           name = "gruvbox-material";
           publisher = "sainnhe";
           version = "6.5.2";
@@ -24,6 +30,12 @@
           publisher = "evzen-wybitul";
           version = "0.6.7";
           sha256 = "sha256-1A4j8710AYuV8gA+sybv6WSavPVcCPMvI71h4n4Jx0w=";
+        }
+        {
+          name = "tera";
+          publisher = "karunamurti";
+          version = "0.0.9";
+          sha256 = "sha256-e72lZXg//vCZwoggRrpJlYiNUMxID3rkDLLBtV1b098=";
         }
         {
           name = "vscode-nushell-lang";
@@ -76,9 +88,7 @@
       "nix.serverPath" = "nil";
       "workbench.iconTheme" = "gruvbox-material-icon-theme";
       "editor.guides.indentation" = false;
-      "[javascript]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "[rust]" = {
         "editor.defaultFormatter" = "rust-lang.rust-analyzer";
         "editor.formatOnSave" = true;
