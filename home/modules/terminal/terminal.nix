@@ -6,7 +6,10 @@
       size = 9;
       name = "JetBrainsMono Nerd Font";
     };
-    settings = { tab_bar_style = "powerline"; };
+    settings = {
+      tab_bar_style = "powerline";
+      cursor_trail = 3;
+    };
     keybindings = { "alt+shift+tab" = "no_op"; };
   };
 

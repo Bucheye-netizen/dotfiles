@@ -7,9 +7,6 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      # review https://www.reddit.com/r/hyprland/comments/164qtv5/keybind_to_change_refresh_rate/
-      # monitor = "eDP-2, 2560x1600@165.00200, 0x0, 1";
-      # monitor = "eDP-2, 2560x1600@60.00200, 0x0, 1";
       misc = {
         disable_splash_rendering = true;
         disable_hyprland_logo = true;
@@ -96,7 +93,6 @@ in {
         "float, class:^(org.pulseaudio.pavucontrol)"
         "float, class:^(org.bucheye.debug)"
         "float, class:^(xdg-desktop-portal-gtk)"
-        "opacity 0.9, class:^(kitty)"
       ];
       env = [ "XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,24" ];
       xwayland = { force_zero_scaling = true; };
