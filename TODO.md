@@ -9,9 +9,10 @@
 
 ## Issues
 
-- While on battery saver: 
-    - Force monitor to enable 60 hz.
-    - Disable Nvidia GPU. 
+- While on battery saver: (Turns out, these optimizations do not increase battery life notably).
+    - ~Force monitor to enable 60 hz.~
+    - ~Disable Nvidia GPU.~
+
 
 - Screen share breaks when windows are maximized.
 
@@ -33,9 +34,9 @@
 
 - Move most currently system-wide packages home manager.
 
-- Prevent computer from crashing when brightness is dimmed.
+- ~Prevent computer from crashing when brightness is dimmed.~
 
-- Use home manager module instead of flake to speed up changing settings. 
+- ~Use home manager module instead of flake to speed up changing settings.~
 
 - Commit Newsflash
 

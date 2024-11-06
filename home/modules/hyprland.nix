@@ -189,7 +189,7 @@ in {
         }
         {
           timeout = 300;
-          on-timeout = "loginctl locke-session";
+          on-timeout = "loginctl lock-session";
         }
         {
           timeout = 330;

@@ -7,7 +7,7 @@ let
 in {
   imports = [
     nixvim.homeManagerModules.nixvim
-    ./modules/dunst.nix
+    # ./modules/dunst.nix
     ./modules/vscode.nix
     ./modules/hyprland.nix
     ./modules/nvim.nix
@@ -111,6 +111,6 @@ in {
 
   programs.ags = {
     enable = true;
-    configDir = ./ags;
+    # configDir = ./ags;
   };
 }

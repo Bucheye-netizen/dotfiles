@@ -12,6 +12,7 @@
         tamasfe.even-better-toml
         esbenp.prettier-vscode
         mesonbuild.mesonbuild
+        ms-python.python
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "flutter";
