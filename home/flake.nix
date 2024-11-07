@@ -28,7 +28,12 @@
         # the path to your home.nix.
         modules = [ ./home.nix ];
 
-        extraSpecialArgs = { inherit nixvim; inherit ags; inherit hyprcursor; inherit self; };
+        extraSpecialArgs = {
+          inherit nixvim;
+          inherit ags;
+          inherit hyprcursor;
+          inherit self;
+        };
       };
     };
 }

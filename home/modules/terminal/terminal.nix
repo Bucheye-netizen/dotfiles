@@ -8,7 +8,7 @@
     };
     settings = {
       tab_bar_style = "powerline";
-      cursor_trail = 3;
+      cursor_trail = 1;
     };
     keybindings = { "alt+shift+tab" = "no_op"; };
   };

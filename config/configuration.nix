@@ -37,6 +37,7 @@
   };
 
   hardware.graphics.enable = true;
+  hardware.opengl.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -142,7 +143,7 @@
       ripgrep
       bun
       libdbusmenu-gtk3
-      # ani-cli
+      ani-cli
       # mov-cli
       hyprpicker
       doggo
