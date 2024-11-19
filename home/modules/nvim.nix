@@ -60,6 +60,7 @@
       clipboard = "unnamedplus";
       autoindent = true;
       number = true;
+      ignorecase = true;
     };
   };
 }

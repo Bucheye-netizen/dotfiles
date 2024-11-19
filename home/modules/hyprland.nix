@@ -35,7 +35,7 @@ in {
       bind = [
         # Apps
         "SUPER, Q,exec,kitty"
-        "SUPER, R, exec, fuzzel"
+        "SUPER, R, exec, fuzzel  --use-bold"
         "SUPER, X, exec, firefox"
         "SUPER, PERIOD, exec, bemoji --type"
 

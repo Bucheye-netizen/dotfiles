@@ -11,6 +11,7 @@
         jnoortheen.nix-ide
         tamasfe.even-better-toml
         esbenp.prettier-vscode
+        xaver.clang-format
         mesonbuild.mesonbuild
         ms-python.python
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
@@ -62,6 +63,7 @@
         "nil" = { "formatting" = { "command" = [ "nixfmt" ]; }; };
       };
 
+      "editor.cursorSmoothCaretAnimation" = true;
       "workbench.colorTheme" = "Gruvbox Material Dark";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
       "gruvboxMaterial.darkPalette" = "mix";
@@ -94,6 +96,8 @@
         "editor.defaultFormatter" = "rust-lang.rust-analyzer";
         "editor.formatOnSave" = true;
       };
+      "[c]" = { "editor.defaultFormatter" = "xaver.clang-format"; };
+      "[cpp]" = { "editor.defaultFormatter" = "xaver.clang-format"; };
       "mesonbuild.downloadLanguageServer" = false;
 
       "latex-workshop.latex.recipes" = [

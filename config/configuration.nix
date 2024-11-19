@@ -1,7 +1,5 @@
 { config, pkgs, ... }: {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -34,17 +32,18 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
+    MOZ_ENABLE_WAYLAND = "1";
   };
 
   hardware.graphics.enable = true;
-  hardware.opengl.enable = true;
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
     prime = {
       nvidiaBusId = "PCI:01:0:0";
       amdgpuBusId = "PCI:05:0:0";
@@ -60,7 +59,7 @@
     powerOnBoot = true;
   };
   services.blueman.enable = true;
-  # services.expressvpn.enable = true;
+  services.expressvpn.enable = true;
 
   services.xserver = {
     xkb = {
@@ -71,11 +70,11 @@
     videoDrivers = [ "nvidia" ];
   };
 
-  services.displayManager.sddm = {
-    enable = true;
-    theme = "${import ../derivations/sddm-theme.nix { inherit pkgs; }}";
-  };
-
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   theme = "${import ../derivations/sddm-theme.nix { inherit pkgs; }}";
+  # };
+  #
   programs.hyprland.enable = true;
   programs.dconf.enable = true;
 
@@ -110,7 +109,6 @@
       lshw
       pciutils
       flutter
-      # androidStudioPackages.dev
       wl-clipboard
       tree
       vivid
@@ -144,7 +142,6 @@
       bun
       libdbusmenu-gtk3
       ani-cli
-      # mov-cli
       hyprpicker
       doggo
       vesktop
@@ -170,6 +167,9 @@
       bun
       fd
       sass
+      expressvpn
+      android-tools
+      lazygit
     ];
     shell = pkgs.nushell;
   };

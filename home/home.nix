@@ -7,7 +7,6 @@ let
 in {
   imports = [
     nixvim.homeManagerModules.nixvim
-    # ./modules/dunst.nix
     ./modules/vscode.nix
     ./modules/hyprland.nix
     ./modules/nvim.nix
