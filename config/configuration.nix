@@ -70,11 +70,6 @@
     videoDrivers = [ "nvidia" ];
   };
 
-  # services.displayManager.sddm = {
-  #   enable = true;
-  #   theme = "${import ../derivations/sddm-theme.nix { inherit pkgs; }}";
-  # };
-  #
   programs.hyprland.enable = true;
   programs.dconf.enable = true;
 
