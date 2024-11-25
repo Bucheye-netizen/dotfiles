@@ -58,6 +58,14 @@
     enable = true;
     powerOnBoot = true;
   };
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+      };
+    };
+  };
   services.blueman.enable = true;
   services.expressvpn.enable = true;
 
@@ -165,6 +173,8 @@
       expressvpn
       android-tools
       lazygit
+      powertop
+      acpi
     ];
     shell = pkgs.nushell;
   };
@@ -177,6 +187,10 @@
   powerManagement.powertop.enable = true;
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
+
+  # Gnome virtual file system. Used to abstract away file systems, 
+  # allowing Linux users to use their configured file explorer to 
+  # navigate a server. Also used by Firefox. 
   services.gvfs.enable = true;
   programs.firefox.enable = true;
 }

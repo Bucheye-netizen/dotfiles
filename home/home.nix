@@ -18,7 +18,7 @@ in {
   home.stateVersion = stateVersion;
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
-  xdg.mimeApps.defaultApplications = { "application/pdf" = "firefox.desktop"; };
+  xdg.mimeApps.defaultApplications = { "pdf" = "firefox.desktop"; };
 
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })

@@ -3,7 +3,7 @@
     enable = true;
     themeFile = "GruvboxMaterialDarkMedium";
     font = {
-      size = 8.5;
+      size = 8;
       name = "JetBrainsMono Nerd Font";
     };
     settings = {
