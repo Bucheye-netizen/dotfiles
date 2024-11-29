@@ -1,4 +1,11 @@
 { ... }: {
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    MANPAGER = "nvim +Man!";
+    MANWIDTH = "100";
+  };
+
   programs.kitty = {
     enable = true;
     themeFile = "GruvboxMaterialDarkMedium";

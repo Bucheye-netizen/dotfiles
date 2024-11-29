@@ -105,7 +105,7 @@ in {
       ipc = "off";
       splash = false;
       preload = [ "${self}/wallpaper/gruvbox.png" ];
-      wallpaper = [ "eDP-2,${self}/wallpaper/gruvbox.png" ];
+      wallpaper = [ "eDP-1,${self}/wallpaper/gruvbox.png" ];
     };
   };
 
@@ -126,7 +126,7 @@ in {
       };
 
       label = {
-        monitor = "eDP-2";
+        monitor = "eDP-1";
         text = "$TIME";
         color = active;
         font_size = 100;
@@ -137,7 +137,7 @@ in {
       };
 
       input-field = {
-        monitor = "eDP-2";
+        monitor = "eDP-1";
         size = "200, 50";
         outline_thickness = 3;
         dots_size = 0.33;
