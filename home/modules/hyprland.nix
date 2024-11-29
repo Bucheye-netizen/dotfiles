@@ -28,9 +28,9 @@ in {
         sensitivity = 0.3;
         touchpad.scroll_factor = 0.2;
       };
+      cursor = { no_hardware_cursors = true; };
     };
 
-    # Inspired by https://github.com/AymanLyesri/hyprland-conf/blob/master/.config/hypr/configs/keybinds.conf
     settings = {
       bind = [
         # Apps

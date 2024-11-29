@@ -33,6 +33,8 @@
     NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
     MOZ_ENABLE_WAYLAND = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
   hardware.graphics.enable = true;
@@ -40,17 +42,13 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = true;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     prime = {
+      sync.enable = true;
       nvidiaBusId = "PCI:01:0:0";
       amdgpuBusId = "PCI:05:0:0";
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
     };
   };
 
@@ -117,7 +115,6 @@
       vivid
       htop
       trashy
-      fzf
       nsnake
       gcc
       fastfetch

@@ -11,12 +11,11 @@
       cursor_trail = 1;
     };
     keybindings = { "alt+shift+tab" = "no_op"; };
+    shellIntegration.enableFishIntegration = true;
   };
 
-  programs.nushell = {
+  programs.fish = {
     enable = true;
-    configFile.source = ./config.nu;
-    envFile.source = ./env.nu;
     shellAliases = {
       vim = "nvim";
       vi = "nvim";
@@ -33,7 +32,7 @@
 
   programs.carapace = {
     enable = true;
-    enableNushellIntegration = true;
+    enableFishIntegration = true;
   };
 
   programs.starship = {
@@ -44,10 +43,16 @@
       gcloud.disabled = true;
       line_break.disabled = false;
     };
+    enableFishIntegration = true;
   };
 
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./tmux.conf;
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
   };
 }
