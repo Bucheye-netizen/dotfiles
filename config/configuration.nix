@@ -97,9 +97,10 @@
   environment.systemPackages = with pkgs; [
     libsForQt5.qt5.qtgraphicaleffects
     linuxKernel.packages.linux_6_11.acpi_call
-    wine64
+    # wine64
   ];
 
+  programs.fish.enable = true;
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
@@ -176,7 +177,7 @@
       powertop
       acpi
     ];
-    shell = pkgs.nushell;
+    shell = pkgs.fish;
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
