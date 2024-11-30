@@ -140,6 +140,7 @@
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
 
   environment.systemPackages = with pkgs; [ neofetch neovim wget sl git fzf ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

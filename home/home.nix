@@ -3,7 +3,7 @@
 let
   colors = import ./util/colors.nix;
   stateVersion = "24.05";
-  gtk-material-theme = import ../derivations/gtk-theme.nix { inherit pkgs; };
+  # gtk-material-theme = import ../derivations/gtk-theme.nix { inherit pkgs; };
 in {
   imports = [
     nixvim.homeManagerModules.nixvim
@@ -57,8 +57,8 @@ in {
     enable = true;
     platformTheme.name = "gtk";
     style = {
-      name = "gruvbox-material-dark";
-      package = gtk-material-theme;
+      name = "Gruvbox-Dark";
+      package = pkgs.gruvbox-gtk-theme;
     };
   };
 
@@ -88,8 +88,8 @@ in {
   gtk = {
     enable = true;
     theme = {
-      package = gtk-material-theme;
-      name = "gruvbox-material-dark";
+      package = pkgs.gruvbox-gtk-theme;
+      name = "Gruvbox-Dark";
     };
     iconTheme = {
       name = "Gruvbox-Plus-Dark";

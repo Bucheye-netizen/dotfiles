@@ -1,14 +1,19 @@
 { pkgs, ... }:
 
+# TODO: Replace with https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme
 pkgs.stdenv.mkDerivation {
   name = "gtk-theme";
   src = pkgs.fetchFromGitHub {
-    owner = "TheGreatMcPain";
-    repo = "gruvbox-material-gtk";
-    rev = "808959bcfe8b9409b49a7f92052198f0882ae8bc";
-    sha256 = "sha256-NHjE/HI/BJyjrRfoH9gOKIU8HsUIBPV9vyvuW12D01M=";
+    owner = "Fausto-Korpsvart";
+    repo = "Gruvbox-GTK-Theme";
+    rev = "d064cd480a1e4802851b35bf051e48c808802c2a";
+    sha256 = "";
   };
-  propagatedUserEnvPkgs = [ pkgs.gtk-engine-murrine ];
+  buildInputs = with pkgs; [
+    gtk-engine-murrine
+    gnome.gnome-themes-extra
+    sassc
+  ];
 
   installPhase = ''
     		runHook preInstall
