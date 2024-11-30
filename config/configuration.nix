@@ -7,6 +7,11 @@
   networking.hostName = "buchela";
   networking.networkmanager.enable = true;
 
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 16 * 1024;
+  }];
+
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
@@ -68,6 +73,7 @@
   };
   services.blueman.enable = true;
   services.expressvpn.enable = true;
+  security.polkit.enable = true;
 
   services.xserver = {
     xkb = {
@@ -97,7 +103,8 @@
   environment.systemPackages = with pkgs; [
     libsForQt5.qt5.qtgraphicaleffects
     linuxKernel.packages.linux_6_11.acpi_call
-    # wine64
+    gparted
+    polkit
   ];
 
   programs.fish.enable = true;
