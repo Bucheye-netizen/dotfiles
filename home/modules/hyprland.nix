@@ -29,6 +29,7 @@ in {
         touchpad.scroll_factor = 0.2;
       };
       cursor = { no_hardware_cursors = true; };
+      animation = [ "windows, 1, 5, default, popin 75%" ];
     };
 
     settings = {

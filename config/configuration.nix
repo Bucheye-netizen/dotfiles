@@ -97,6 +97,7 @@
   environment.systemPackages = with pkgs; [
     libsForQt5.qt5.qtgraphicaleffects
     linuxKernel.packages.linux_6_11.acpi_call
+    wine64
   ];
 
   users.users.lisan = {
@@ -114,7 +115,6 @@
       flutter
       wl-clipboard
       tree
-      vivid
       htop
       trashy
       fzf

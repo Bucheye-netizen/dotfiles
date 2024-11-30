@@ -9,4 +9,4 @@
 
 - Apply performance improvements described [here](https://artemis.sh/2022/09/18/wayland-from-an-x-apologist.html).
 
-- SDDM is broken, silently failing and core dumping (see `journalctl` logs). Remove use `greetd` instead. 
+- Learn how to use workspaces in hyprland.

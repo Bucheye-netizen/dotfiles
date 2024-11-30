@@ -73,14 +73,14 @@ in {
 
   programs.fuzzel = {
     enable = true;
-    settings = {
-      colors.background = "282828ff";
-      colors.text = "${colors.toHypr colors.gruv.light1}ff";
-      colors.selection = "${colors.toHypr colors.gruv.dark4}ff";
-      colors.selection-text = "${colors.toHypr colors.gruv.light2}ff";
-      colors.selection-match = "${colors.toHypr colors.gruv.faded_orange}ff";
-      colors.border = "${colors.toHypr colors.gruv.dark3}ff";
-      border.width = 2;
+    settings = with colors; {
+      colors.background = "${gruvm.bg0}ff";
+      colors.text = "${gruvm.fg0}ff";
+      colors.selection = "${gruvm.bg1}ff";
+      colors.selection-text = "${gruvm.fg0}ff";
+      colors.selection-match = "${gruvm.orange}ff";
+      colors.border = "${gruvm.bg1}ff";
+      border.width = 4;
       main.icon-theme = "Gruvbox-Plus-Dark";
     };
   };

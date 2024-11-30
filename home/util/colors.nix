@@ -43,5 +43,20 @@
     faded_orange = "#af3a03";
   };
 
+  # Material gruvbox colors
+  gruvm = {
+    orange = "E78A4E";
+    yellow = "D8A657";
+    green = "A9B665";
+    aqua = "89B482";
+    blue = "7DAEA3";
+    purple = "D3869B";
+    red = "EA6962";
+    bg0 = "282828";
+    bg1 = "32302F";
+    fg0 = "D4BE98";
+    fg1 = "DDC7A1";
+  };
+
   toHypr = hex: builtins.substring 1 (builtins.stringLength hex) hex;
 }
