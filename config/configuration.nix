@@ -1,7 +1,10 @@
-{ config, pkgs, inputs, ... }:
-
 {
-  imports = [ ./hardware-configuration.nix ];
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [./hardware-configuration.nix];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -11,12 +14,14 @@
 
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = { LC_TIME = "en_US.UTF-8"; };
+  i18n.extraLocaleSettings = {LC_TIME = "en_US.UTF-8";};
 
-  swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 16 * 1024;
-  }];
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 16 * 1024;
+    }
+  ];
 
   programs.hyprland.enable = true;
   xdg.portal.enable = true;
@@ -40,7 +45,7 @@
       variant = "";
     };
     # Disabled to fix stutter. Hopefully this fixes itself in the future.
-    videoDrivers = [ "amdgpu" "nvidia" ];
+    videoDrivers = ["amdgpu" "nvidia"];
   };
 
   # Getting gaming to work
@@ -85,7 +90,7 @@
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       wget
       sl
@@ -171,8 +176,8 @@
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
 
-  environment.systemPackages = with pkgs; [ neofetch neovim wget sl git fzf ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  environment.systemPackages = with pkgs; [neofetch neovim wget sl git fzf];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   system.stateVersion = "24.05";
 }

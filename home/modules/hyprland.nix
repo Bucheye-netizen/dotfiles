@@ -1,5 +1,4 @@
-{ self, ... }:
-let
+{self, ...}: let
   colors = import ../util/colors.nix;
   active = "rgb(${colors.toHypr colors.gruv.light2})";
   inactive = "rgb(${colors.toHypr colors.gruv.dark3})";
@@ -28,8 +27,8 @@ in {
         sensitivity = 0.3;
         touchpad.scroll_factor = 0.2;
       };
-      cursor = { no_hardware_cursors = true; };
-      animation = [ "windows, 1, 5, default, popin 75%" ];
+      cursor = {no_hardware_cursors = true;};
+      animation = ["windows, 1, 5, default, popin 75%"];
     };
 
     settings = {
@@ -43,7 +42,7 @@ in {
         "SUPER, Tab, cyclenext"
         "SUPER, Tab, bringactivetotop"
 
-        # Actions 
+        # Actions
         "SUPER_SHIFT, S, exec, hyprshot -m region --clipboard-only"
         "CTRL_ALT, DELETE, exec, systemctl suspend"
 
@@ -90,9 +89,8 @@ in {
         ",XF86MonBrightnessUp, exec, brightnessctl set +10%"
         ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
       ];
-      exec-once = [ "hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 24" ];
-      bindm =
-        [ "SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow" ];
+      exec-once = ["hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 24"];
+      bindm = ["SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow"];
       windowrulev2 = [
         "float,class:^(org.gnome.Nautilus)"
         "float,class:^(.blueman-manager-wrapped)"
@@ -102,8 +100,8 @@ in {
         "float, class:^(org.bucheye.debug)"
         "float, class:^(xdg-desktop-portal-gtk)"
       ];
-      env = [ "XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,24" ];
-      xwayland = { force_zero_scaling = true; };
+      env = ["XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,24"];
+      xwayland = {force_zero_scaling = true;};
     };
   };
 
@@ -112,15 +110,15 @@ in {
     settings = {
       ipc = "off";
       splash = false;
-      preload = [ "${self}/wallpaper/gruvbox.png" ];
-      wallpaper = [ "eDP-1,${self}/wallpaper/gruvbox.png" ];
+      preload = ["${self}/wallpaper/gruvbox.png"];
+      wallpaper = ["eDP-1,${self}/wallpaper/gruvbox.png"];
     };
   };
 
   # Basically copied from https://github.com/binEpilo/hyprland-gruvbox-rice-/blob/main/hypr/hyprlock.conf
   programs.hyprlock = {
     settings = {
-      general = { hide_cursor = 0; };
+      general = {hide_cursor = 0;};
 
       background = {
         path = "${self}/wallpaper/hyprlock.png";
@@ -213,5 +211,5 @@ in {
     };
   };
 
-  programs.wlogout = { enable = true; };
+  programs.wlogout = {enable = true;};
 }

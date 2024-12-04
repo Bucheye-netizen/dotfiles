@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions;
@@ -14,7 +14,8 @@
         xaver.clang-format
         mesonbuild.mesonbuild
         ms-python.python
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      ]
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "flutter";
           publisher = "Dart-Code";
@@ -60,7 +61,7 @@
       ];
     userSettings = {
       "nix.serverSettings" = {
-        "nil" = { "formatting" = { "command" = [ "nixfmt" ]; }; };
+        "nil" = {"formatting" = {"command" = ["nixfmt"];};};
       };
 
       "editor.cursorSmoothCaretAnimation" = true;
@@ -69,10 +70,12 @@
       "gruvboxMaterial.darkPalette" = "mix";
       "gruvboxMaterial.darkContrast" = "medium";
       "gruvboxMaterial.highContrast" = true;
-      "vim.insertModeKeyBindings" = [{
-        "before" = [ "k" "j" ];
-        "after" = [ "<Esc>" ];
-      }];
+      "vim.insertModeKeyBindings" = [
+        {
+          "before" = ["k" "j"];
+          "after" = ["<Esc>"];
+        }
+      ];
       "workbench.activityBar.location" = "hidden";
       "workbench.panel.defaultLocation" = "right";
       "editor.wordWrap" = "on";
@@ -96,48 +99,48 @@
         "editor.defaultFormatter" = "rust-lang.rust-analyzer";
         "editor.formatOnSave" = true;
       };
-      "[c]" = { "editor.defaultFormatter" = "xaver.clang-format"; };
-      "[cpp]" = { "editor.defaultFormatter" = "xaver.clang-format"; };
+      "[c]" = {"editor.defaultFormatter" = "xaver.clang-format";};
+      "[cpp]" = {"editor.defaultFormatter" = "xaver.clang-format";};
       "mesonbuild.downloadLanguageServer" = false;
 
       "latex-workshop.latex.recipes" = [
         {
           "name" = "latexmk (lualatex)";
-          "tools" = [ "lualatexmk" ];
+          "tools" = ["lualatexmk"];
         }
 
         {
           "name" = "latexmk";
-          "tools" = [ "latexmk" ];
+          "tools" = ["latexmk"];
         }
         {
           "name" = "latexmk (latexmkrc)";
-          "tools" = [ "latexmk_rconly" ];
+          "tools" = ["latexmk_rconly"];
         }
 
         {
           "name" = "latexmk (xelatex)";
-          "tools" = [ "xelatexmk" ];
+          "tools" = ["xelatexmk"];
         }
         {
           "name" = "pdflatex -> bibtex -> pdflatex * 2";
-          "tools" = [ "pdflatex" "bibtex" "pdflatex" "pdflatex" ];
+          "tools" = ["pdflatex" "bibtex" "pdflatex" "pdflatex"];
         }
         {
           "name" = "Compile Rnw files";
-          "tools" = [ "rnw2tex" "latexmk" ];
+          "tools" = ["rnw2tex" "latexmk"];
         }
         {
           "name" = "Compile Jnw files";
-          "tools" = [ "jnw2tex" "latexmk" ];
+          "tools" = ["jnw2tex" "latexmk"];
         }
         {
           "name" = "Compile Pnw files";
-          "tools" = [ "pnw2tex" "latexmk" ];
+          "tools" = ["pnw2tex" "latexmk"];
         }
         {
           "name" = "tectonic";
-          "tools" = [ "tectonic" ];
+          "tools" = ["tectonic"];
         }
       ];
     };
@@ -151,8 +154,7 @@
       {
         "key" = "ctrl+p";
         "command" = "-extension.vim_ctrl+p";
-        "when" =
-          "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'";
+        "when" = "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'";
       }
 
       {

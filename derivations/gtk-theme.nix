@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-
+{pkgs, ...}:
 # TODO: Replace with https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme
 pkgs.stdenv.mkDerivation {
   name = "gtk-theme";
@@ -16,10 +15,10 @@ pkgs.stdenv.mkDerivation {
   ];
 
   installPhase = ''
-    		runHook preInstall
-    		mkdir -p $out/share/themes/gruvbox-material-dark
-        rm -rf README.md LICENSE icons themes/Gruvbox-Material-Dark-HIDPI
-        cp -r themes/Gruvbox-Material-Dark/* $out/share/themes/gruvbox-material-dark
-    		runHook preInstall
+    runHook preInstall
+    mkdir -p $out/share/themes/gruvbox-material-dark
+      rm -rf README.md LICENSE icons themes/Gruvbox-Material-Dark-HIDPI
+      cp -r themes/Gruvbox-Material-Dark/* $out/share/themes/gruvbox-material-dark
+    runHook preInstall
   '';
 }

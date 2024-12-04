@@ -1,14 +1,14 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.nixvim = {
     enable = true;
     colorscheme = "gruvbox-material";
-    extraPlugins = with pkgs.vimPlugins; [ gruvbox-material-nvim ];
+    extraPlugins = with pkgs.vimPlugins; [gruvbox-material-nvim];
     plugins = {
       treesitter = {
         enable = true;
 
         settings = {
-          ensure_installed = [ "c" "rust" "cpp" "nix" "kdl" "javascript" ];
+          ensure_installed = ["c" "rust" "cpp" "nix" "kdl" "javascript"];
           highlight.enable = true;
         };
 
@@ -19,11 +19,11 @@
         enable = true;
         settings = {
           formatters_by_ft = {
-            javascript = [ "prettierd" ];
-            nix = [ "alejandra" ];
-            rust = [ "rustfmt" ];
-            c = [ "clang-format" ];
-            cpp = [ "clang-format" ];
+            javascript = ["prettierd"];
+            nix = ["alejandra"];
+            rust = ["rustfmt"];
+            c = ["clang-format"];
+            cpp = ["clang-format"];
           };
           format_on_save = ''{lsp_format = "fallback", timeout_ms = 500}'';
         };
@@ -38,7 +38,7 @@
               desc = "Fzf-Lua Git Files";
               silent = true;
             };
-            settings = { winopts = { height = 0.7; }; };
+            settings = {winopts = {height = 0.7;};};
           };
           "<C-l>" = "live_grep_native";
         };
@@ -49,11 +49,13 @@
       vim.loader.enable()
     '';
 
-    keymaps = [{
-      mode = "i";
-      key = "kj";
-      action = "<Esc>";
-    }];
+    keymaps = [
+      {
+        mode = "i";
+        key = "kj";
+        action = "<Esc>";
+      }
+    ];
     opts = {
       shiftwidth = 2;
       tabstop = 2;

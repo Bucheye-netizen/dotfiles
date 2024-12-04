@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -17,7 +17,7 @@
       tab_bar_style = "powerline";
       cursor_trail = 1;
     };
-    keybindings = { "alt+shift+tab" = "no_op"; };
+    keybindings = {"alt+shift+tab" = "no_op";};
     shellIntegration.enableFishIntegration = true;
   };
 
@@ -32,8 +32,7 @@
       icat = "kitty icat";
       pkgsearch = "nix search nixpkgs";
 
-      rebuild =
-        "sudo nixos-rebuild switch --flake /home/lisan/nix/config#default";
+      rebuild = "sudo nixos-rebuild switch --flake /home/lisan/nix/config#default";
     };
   };
 

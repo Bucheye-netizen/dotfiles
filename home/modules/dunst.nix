@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-
-let colors = import ../util/colors.nix;
+{pkgs, ...}: let
+  colors = import ../util/colors.nix;
 in {
   services.dunst = {
     enable = true;

@@ -1,6 +1,10 @@
-{ pkgs, nixvim, hyprcursor, ags, ... }:
-
-let
+{
+  pkgs,
+  nixvim,
+  hyprcursor,
+  ags,
+  ...
+}: let
   colors = import ./util/colors.nix;
   stateVersion = "24.05";
   # gtk-material-theme = import ../derivations/gtk-theme.nix { inherit pkgs; };
@@ -18,10 +22,10 @@ in {
   home.stateVersion = stateVersion;
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
-  xdg.mimeApps.defaultApplications = { "application/pdf" = "firefox.desktop"; };
+  xdg.mimeApps.defaultApplications = {"application/pdf" = "firefox.desktop";};
 
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (nerdfonts.override {fonts = ["JetBrainsMono"];})
     source-serif-pro
     hyprpaper
     gruvbox-dark-icons-gtk
@@ -30,9 +34,18 @@ in {
     hyprcursor.packages.${pkgs.system}.default
     nil
     (texlive.combine {
-      inherit (texlive)
-        scheme-medium latexmk titlesec booktabs multirow chngcntr enumitem
-        xcharter stix2-otf;
+      inherit
+        (texlive)
+        scheme-medium
+        latexmk
+        titlesec
+        booktabs
+        multirow
+        chngcntr
+        enumitem
+        xcharter
+        stix2-otf
+        ;
     })
   ];
 
@@ -44,13 +57,12 @@ in {
   };
 
   home.sessionVariables = {
-
   };
 
-  fonts.fontconfig.defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
-  fonts.fontconfig.defaultFonts.serif = [ "Source Serif Pro" ];
+  fonts.fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
+  fonts.fontconfig.defaultFonts.serif = ["Source Serif Pro"];
 
-  home.file = { };
+  home.file = {};
 
   programs.home-manager.enable = true;
   qt = {
@@ -69,7 +81,7 @@ in {
     extraConfig.init.defaultBranch = "main";
   };
 
-  programs.waybar = { enable = true; };
+  programs.waybar = {enable = true;};
 
   programs.fuzzel = {
     enable = true;
