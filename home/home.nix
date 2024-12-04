@@ -18,7 +18,7 @@ in {
   home.stateVersion = stateVersion;
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
-  xdg.mimeApps.defaultApplications = { "pdf" = "firefox.desktop"; };
+  xdg.mimeApps.defaultApplications = { "application/pdf" = "firefox.desktop"; };
 
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -26,7 +26,7 @@ in {
     hyprpaper
     gruvbox-dark-icons-gtk
     gruvbox-plus-icons
-    nixfmt-classic
+    alejandra
     hyprcursor.packages.${pkgs.system}.default
     nil
     (texlive.combine {
@@ -112,4 +112,6 @@ in {
     enable = true;
     # configDir = ./ags;
   };
+
+  programs.neomutt.enable = true;
 }

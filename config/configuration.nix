@@ -1,13 +1,7 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -31,15 +25,33 @@
     xdg-desktop-portal-hyprland
   ];
 
-  environment.sessionVariables = { TERMINAL = "kitty"; };
+  environment.sessionVariables = {
+    TERMINAL = "kitty";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
 
-  services.xserver.enable = true;
   qt.enable = true;
 
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services.xserver = {
+    enable = true;
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
+    # Disabled to fix stutter. Hopefully this fixes itself in the future.
+    videoDrivers = [ "amdgpu" "nvidia" ];
   };
+
+  # Getting gaming to work
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
+  programs.java.enable = true;
+  # programs.steam.package = pkgs.steam.override { withJava = true; };
 
   services.printing.enable = true;
 
@@ -130,12 +142,29 @@
       lazygit
       powertop
       acpi
+      browsh
+      cpupower-gui
+      lynx
     ];
     shell = pkgs.fish;
   };
 
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    prime = {
+      nvidiaBusId = "PCI:1:0:0";
+      amdgpuBusId = "PCI:5:0:0";
+      offload.enable = true;
+    };
+  };
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
@@ -145,11 +174,5 @@
   environment.systemPackages = with pkgs; [ neofetch neovim wget sl git fzf ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.05";
 }

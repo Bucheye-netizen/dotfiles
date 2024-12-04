@@ -69,6 +69,13 @@ in {
         "SUPER_SHIFT, L, movewindow, r"
         "SUPER_SHIFT, J, movewindow, d"
         "SUPER_SHIFT, K, movewindow, u"
+
+        "SUPER, 1, workspace, 1"
+        "SUPER, 2, workspace, 2"
+        "SUPER, 3, workspace, 3"
+        "SUPER_SHIFT, 1, movetoworkspace, 1"
+        "SUPER_SHIFT, 2, movetoworkspace, 2"
+        "SUPER_SHIFT, 3, movetoworkspace, 3"
       ];
       binde = [
         "SUPER_CTRL, H, resizeactive,-50 0"

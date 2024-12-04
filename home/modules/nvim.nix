@@ -20,7 +20,7 @@
         settings = {
           formatters_by_ft = {
             javascript = [ "prettierd" ];
-            nix = [ "nixfmt" ];
+            nix = [ "alejandra" ];
             rust = [ "rustfmt" ];
             c = [ "clang-format" ];
             cpp = [ "clang-format" ];
