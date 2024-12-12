@@ -16,6 +16,7 @@ in {
     ./modules/nvim.nix
     ./modules/terminal/terminal.nix
     ags.homeManagerModules.default
+    ./modules/fastfetch.nix
   ];
   home.username = "lisan";
   home.homeDirectory = "/home/lisan";

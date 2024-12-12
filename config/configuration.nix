@@ -44,8 +44,8 @@
       layout = "us";
       variant = "";
     };
-    # Disabled to fix stutter. Hopefully this fixes itself in the future.
-    videoDrivers = ["amdgpu" "nvidia"];
+    # Disabled nvidia to fix stutter. Hopefully this fixes itself in the future.
+    videoDrivers = ["amdgpu"];
   };
 
   # Getting gaming to work
@@ -56,7 +56,6 @@
     localNetworkGameTransfers.openFirewall = true;
   };
   programs.java.enable = true;
-  # programs.steam.package = pkgs.steam.override { withJava = true; };
 
   services.printing.enable = true;
 
@@ -90,7 +89,7 @@
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "input"];
     packages = with pkgs; [
       wget
       sl
@@ -105,7 +104,6 @@
       fzf
       nsnake
       gcc
-      fastfetch
       bottom
       clang-tools
       clang
@@ -150,6 +148,8 @@
       browsh
       cpupower-gui
       lynx
+      maven
+      dhcpcd
     ];
     shell = pkgs.fish;
   };
