@@ -44,7 +44,6 @@
       layout = "us";
       variant = "";
     };
-    # Disabled nvidia to fix stutter. Hopefully this fixes itself in the future.
     videoDrivers = ["amdgpu"];
   };
 
@@ -73,7 +72,7 @@
     powerOnBoot = true;
   };
   services.blueman.enable = true;
-  services.expressvpn.enable = true;
+  # services.expressvpn.enable = true;
 
   services.greetd = {
     enable = true;

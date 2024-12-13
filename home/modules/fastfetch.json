@@ -14,7 +14,7 @@
     },
     {
       "type": "cpu",
-      "key": "│ ├󰍛CPU",
+      "key": "│ ├󰍛 CPU",
       "showPeCoreCount": true,
       "format": "{1}",
       "keyColor": "green"

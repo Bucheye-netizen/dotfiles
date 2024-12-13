@@ -7,7 +7,6 @@
 }: let
   colors = import ./util/colors.nix;
   stateVersion = "24.05";
-  # gtk-material-theme = import ../derivations/gtk-theme.nix { inherit pkgs; };
 in {
   imports = [
     nixvim.homeManagerModules.nixvim
@@ -26,7 +25,7 @@ in {
   xdg.mimeApps.defaultApplications = {"application/pdf" = "firefox.desktop";};
 
   home.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["JetBrainsMono"];})
+    nerd-fonts.jetbrains-mono
     source-serif-pro
     hyprpaper
     gruvbox-dark-icons-gtk
