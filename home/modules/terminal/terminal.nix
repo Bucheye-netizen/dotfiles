@@ -31,9 +31,11 @@
       neofetch = "fastfetch";
       icat = "kitty icat";
       pkgsearch = "nix search nixpkgs";
-
       rebuild = "sudo nixos-rebuild switch --flake /home/lisan/nix/config#default";
     };
+    shellInit = ''
+      set -g fish_key_bindings fish_vi_key_bindings
+    '';
   };
 
   programs.carapace = {

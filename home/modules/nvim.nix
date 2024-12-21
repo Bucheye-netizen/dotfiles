@@ -8,7 +8,7 @@
         enable = true;
 
         settings = {
-          ensure_installed = ["c" "rust" "cpp" "nix" "kdl" "javascript"];
+          ensure_installed = ["c" "rust" "cpp" "nix" "kdl" "javascript" "haskell"];
           highlight.enable = true;
         };
 
@@ -49,13 +49,13 @@
       vim.loader.enable()
     '';
 
-    keymaps = [
-      {
-        mode = "i";
-        key = "kj";
-        action = "<Esc>";
-      }
-    ];
+    # keymaps = [
+    #   {
+    #     mode = "i";
+    #     key = "kj";
+    #     action = "<Esc>";
+    #   }
+    # ];
     opts = {
       shiftwidth = 2;
       tabstop = 2;

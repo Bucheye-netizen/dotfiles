@@ -13,9 +13,6 @@ in {
       decoration = {
         rounding = 5;
         active_opacity = 1.0;
-        # drop_shadow = true;
-        # shadow_range = 4;
-        # shadow_render_power = 3;
       };
       general = {
         gaps_out = 10;
@@ -26,9 +23,13 @@ in {
       input = {
         sensitivity = 0.3;
         touchpad.scroll_factor = 0.2;
+        # kb_layout = "us,amh";
+        # kb_options = "grp:win_space_toggle";
       };
-      cursor = {no_hardware_cursors = true;};
       animation = ["windows, 1, 5, default, popin 75%"];
+      cursor = {
+        no_hardware_cursors = true;
+      };
     };
 
     settings = {

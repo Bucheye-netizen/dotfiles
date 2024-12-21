@@ -13,7 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprcursor.url = "github:hyprwm/hyprcursor";
-    ags.url = "github:aylur/ags/v1";
+    ags.url = "github:aylur/ags";
   };
 
   outputs = {

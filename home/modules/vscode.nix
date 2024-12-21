@@ -14,6 +14,8 @@
         xaver.clang-format
         mesonbuild.mesonbuild
         ms-python.python
+        haskell.haskell
+        justusadam.language-haskell
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
@@ -60,28 +62,21 @@
         }
       ];
     userSettings = {
-      "nix.serverSettings" = {
-        "nil" = {"formatting" = {"command" = ["nixfmt"];};};
-      };
-
-      "editor.cursorSmoothCaretAnimation" = true;
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "nixd";
+      "nix.formatterPath" = "nixpkgs-fmt";
+      "editor.cursorSmoothCaretAnimation" = "on";
       "workbench.colorTheme" = "Gruvbox Material Dark";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
       "gruvboxMaterial.darkPalette" = "mix";
       "gruvboxMaterial.darkContrast" = "medium";
       "gruvboxMaterial.highContrast" = true;
-      "vim.insertModeKeyBindings" = [
-        {
-          "before" = ["k" "j"];
-          "after" = ["<Esc>"];
-        }
-      ];
       "workbench.activityBar.location" = "hidden";
       "workbench.panel.defaultLocation" = "right";
       "editor.wordWrap" = "on";
       "editor.fontSize" = 14;
       "terminal.integrated.fontSize" = 12;
-      "terminal.integrated.enableMultiLinePasteWarning" = false;
+      "terminal.integrated.enableMultiLinePasteWarning" = "off";
       "window.titleBarStyle" = "custom";
       "window.customTitleBarVisibility" = "windowed";
       "window.menuBarVisibility" = "toggle";
@@ -90,11 +85,12 @@
       "zenMode.showTabs" = "none";
       "editor.formatOnSave" = true;
       "editor.inlayHints.enabled" = "offUnlessPressed";
-      "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "nil";
       "workbench.iconTheme" = "gruvbox-material-icon-theme";
       "editor.guides.indentation" = false;
       "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "[nix]" = {
+        "editor.defaultFormatter" = "jnoortheen.nix-ide";
+      };
       "[rust]" = {
         "editor.defaultFormatter" = "rust-lang.rust-analyzer";
         "editor.formatOnSave" = true;

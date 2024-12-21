@@ -21,18 +21,25 @@ in {
   home.homeDirectory = "/home/lisan";
   home.stateVersion = stateVersion;
   nixpkgs.config.allowUnfree = true;
-  fonts.fontconfig.enable = true;
-  xdg.mimeApps.defaultApplications = {"application/pdf" = "firefox.desktop";};
+  xdg.mimeApps.defaultApplications = {"firefox.desktop" = "application/pdf";};
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-gtk
+      fcitx5-configtool
+      fcitx5-m17n
+    ];
+  };
 
   home.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
     source-serif-pro
+    nerd-fonts.jetbrains-mono
     hyprpaper
-    gruvbox-dark-icons-gtk
     gruvbox-plus-icons
+    breeze-icons
     alejandra
     hyprcursor.packages.${pkgs.system}.default
-    nil
+    nixd
     (texlive.combine {
       inherit
         (texlive)
@@ -59,8 +66,13 @@ in {
   home.sessionVariables = {
   };
 
-  fonts.fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
-  fonts.fontconfig.defaultFonts.serif = ["Source Serif Pro"];
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts.monospace = ["JetBrainsMono NF"];
+    defaultFonts.serif = ["Source Serif Pro"];
+    # TODO: Use different default sans-serif --- the current libre
+    #       version doesn't render non-Latin alphabets.
+  };
 
   home.file = {};
 
@@ -105,7 +117,7 @@ in {
     };
     iconTheme = {
       name = "Gruvbox-Plus-Dark";
-      package = pkgs.gruvbox-dark-icons-gtk;
+      package = pkgs.gruvbox-plus-icons;
     };
   };
 
@@ -122,7 +134,6 @@ in {
 
   programs.ags = {
     enable = true;
-    # configDir = ./ags;
   };
 
   programs.neomutt.enable = true;

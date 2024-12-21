@@ -1,18 +1,20 @@
 {
   config,
   pkgs,
-  inputs,
   ...
 }: {
   imports = [./hardware-configuration.nix];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.extraModulePackages = [
+    pkgs.linuxKernel.packages.linux_6_6.lenovo-legion-module
+  ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  time.timeZone = "America/New_York";
+  time.timeZone = "Africa/Addis_Ababa";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {LC_TIME = "en_US.UTF-8";};
 
@@ -40,11 +42,8 @@
 
   services.xserver = {
     enable = true;
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-    videoDrivers = ["amdgpu"];
+    exportConfiguration = true;
+    videoDrivers = ["amdgpu" "nvidia"];
   };
 
   # Getting gaming to work
@@ -72,7 +71,6 @@
     powerOnBoot = true;
   };
   services.blueman.enable = true;
-  # services.expressvpn.enable = true;
 
   services.greetd = {
     enable = true;
@@ -88,7 +86,7 @@
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
-    extraGroups = ["networkmanager" "wheel" "input"];
+    extraGroups = ["networkmanager" "wheel" "input" "uinput"];
     packages = with pkgs; [
       wget
       sl
@@ -145,10 +143,18 @@
       powertop
       acpi
       browsh
-      cpupower-gui
       lynx
       maven
       dhcpcd
+      vala
+      lunar-client
+      qbittorrent
+      lenovo-legion
+      cbonsai
+      (haskellPackages.ghcWithPackages
+        (pkgs: [pkgs.stack pkgs.haskell-language-server]))
+      yazi
+      ffmpeg
     ];
     shell = pkgs.fish;
   };
@@ -166,7 +172,10 @@
     prime = {
       nvidiaBusId = "PCI:1:0:0";
       amdgpuBusId = "PCI:5:0:0";
-      offload.enable = true;
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
     };
   };
 
@@ -175,7 +184,23 @@
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
 
-  environment.systemPackages = with pkgs; [neofetch neovim wget sl git fzf];
+  services.gvfs.enable = true;
+  services.kanata = {
+    enable = true;
+    keyboards = {
+      "logi".config = ''
+        (defsrc
+          caps
+        )
+
+        (deflayer superior
+          esc
+        )
+      '';
+    };
+  };
+
+  environment.systemPackages = with pkgs; [neovim wget git];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   system.stateVersion = "24.05";
