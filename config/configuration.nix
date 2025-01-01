@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   pkgs,
   ...
 }: {
@@ -7,9 +8,6 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.extraModulePackages = [
-    pkgs.linuxKernel.packages.linux_6_6.lenovo-legion-module
-  ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -25,7 +23,10 @@
     }
   ];
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
   xdg.portal.enable = true;
   xdg.portal.extraPortals = with pkgs; [
     xdg-desktop-portal-gtk
@@ -88,6 +89,16 @@
     description = "Lisan";
     extraGroups = ["networkmanager" "wheel" "input" "uinput"];
     packages = with pkgs; [
+      # Hoping this fixes some hyprland crashes.
+      libva
+      libva-utils
+      glxinfo
+      clinfo
+      virtualglLib
+      vulkan-loader
+      vulkan-tools
+
+      code-cursor
       wget
       sl
       kitty
@@ -155,6 +166,10 @@
         (pkgs: [pkgs.stack pkgs.haskell-language-server]))
       yazi
       ffmpeg
+      inputs.hyprland-qtutils.packages."${pkgs.system}".default
+      wezterm
+      nitch
+      nix
     ];
     shell = pkgs.fish;
   };
@@ -165,18 +180,20 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
       nvidiaBusId = "PCI:1:0:0";
       amdgpuBusId = "PCI:5:0:0";
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
+      # offload = {
+      #   enable = true;
+      #   enableOffloadCmd = true;
+      # };
     };
+  };
+  hardware.opengl = {
+    enable = true;
   };
 
   powerManagement.enable = true;

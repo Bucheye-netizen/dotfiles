@@ -16,6 +16,7 @@
     settings = {
       tab_bar_style = "powerline";
       cursor_trail = 1;
+      touch_scroll_multiplier = 2.0;
     };
     keybindings = {"alt+shift+tab" = "no_op";};
     shellIntegration.enableFishIntegration = true;
@@ -33,8 +34,9 @@
       pkgsearch = "nix search nixpkgs";
       rebuild = "sudo nixos-rebuild switch --flake /home/lisan/nix/config#default";
     };
-    shellInit = ''
+    interactiveShellInit = ''
       set -g fish_key_bindings fish_vi_key_bindings
+      set -g fish_greeting
     '';
   };
 

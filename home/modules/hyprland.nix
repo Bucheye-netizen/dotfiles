@@ -16,20 +16,19 @@ in {
       };
       general = {
         gaps_out = 10;
-        "col.active_border" = "rgb(${colors.toHypr colors.gruv.dark4})";
+        "col.active_border" = "rgb(${colors.gruvm.fg1})";
         "col.inactive_border" = "rgb(${colors.toHypr colors.gruv.dark1})";
-        border_size = 2;
+        border_size = 1;
       };
       input = {
         sensitivity = 0.3;
         touchpad.scroll_factor = 0.2;
-        # kb_layout = "us,amh";
-        # kb_options = "grp:win_space_toggle";
       };
       animation = ["windows, 1, 5, default, popin 75%"];
       cursor = {
         no_hardware_cursors = true;
       };
+      debug.disable_logs = false;
     };
 
     settings = {
@@ -101,7 +100,12 @@ in {
         "float, class:^(org.bucheye.debug)"
         "float, class:^(xdg-desktop-portal-gtk)"
       ];
-      env = ["XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'" "XCURSOR_SIZE,24"];
+      env = [
+        "XCURSOR_THEME,'Capitaine Cursors (Gruvbox)'"
+        "XCURSOR_SIZE,24"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+      ];
       xwayland = {force_zero_scaling = true;};
     };
   };

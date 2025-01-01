@@ -64,7 +64,7 @@
     userSettings = {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nixd";
-      "nix.formatterPath" = "nixpkgs-fmt";
+      "nix.formatterPath" = "alejandra";
       "editor.cursorSmoothCaretAnimation" = "on";
       "workbench.colorTheme" = "Gruvbox Material Dark";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
