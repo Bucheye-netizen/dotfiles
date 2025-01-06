@@ -27,7 +27,7 @@
     shellAliases = {
       vim = "nvim";
       vi = "nvim";
-      rm = "trash put";
+      tp = "trash put";
       btm = "btm --theme gruvbox ";
       neofetch = "fastfetch";
       icat = "kitty icat";
@@ -37,6 +37,15 @@
     interactiveShellInit = ''
       set -g fish_key_bindings fish_vi_key_bindings
       set -g fish_greeting
+
+      function y
+      	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+      	yazi $argv --cwd-file="$tmp"
+      	if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+      		builtin cd -- "$cwd"
+      	end
+      	rm -f -- "$tmp"
+      end
     '';
   };
 
@@ -64,5 +73,12 @@
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  programs.foot = {
+    enable = true;
+    settings = {
+      main.font = "JetBrains Mono NF";
+    };
   };
 }

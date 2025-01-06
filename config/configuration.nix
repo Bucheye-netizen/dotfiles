@@ -8,6 +8,19 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = ["nvidia-drm.fbdev=1"];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    prime = {
+      nvidiaBusId = "PCI:1:0:0";
+      amdgpuBusId = "PCI:5:0:0";
+    };
+  };
+  hardware.graphics.enable = true;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -72,15 +85,7 @@
     powerOnBoot = true;
   };
   services.blueman.enable = true;
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
-      };
-    };
-  };
+  services.displayManager.ly.enable = true;
 
   programs.fish.enable = true;
 
@@ -169,32 +174,14 @@
       inputs.hyprland-qtutils.packages."${pkgs.system}".default
       wezterm
       nitch
-      nix
+      foot
+      raylib-games
     ];
     shell = pkgs.fish;
   };
 
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    prime = {
-      nvidiaBusId = "PCI:1:0:0";
-      amdgpuBusId = "PCI:5:0:0";
-      # offload = {
-      #   enable = true;
-      #   enableOffloadCmd = true;
-      # };
-    };
-  };
-  hardware.opengl = {
-    enable = true;
-  };
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
