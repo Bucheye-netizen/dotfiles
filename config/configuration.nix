@@ -40,6 +40,7 @@
     enable = true;
     xwayland.enable = true;
   };
+
   xdg.portal.enable = true;
   xdg.portal.extraPortals = with pkgs; [
     xdg-desktop-portal-gtk
@@ -102,8 +103,6 @@
       virtualglLib
       vulkan-loader
       vulkan-tools
-
-      code-cursor
       wget
       sl
       kitty
@@ -127,7 +126,6 @@
       foliate
       racket-minimal
       unzip
-      marker
       newsflash
       obsidian
       nautilus
@@ -158,8 +156,6 @@
       lazygit
       powertop
       acpi
-      browsh
-      lynx
       maven
       dhcpcd
       vala
@@ -172,10 +168,7 @@
       yazi
       ffmpeg
       inputs.hyprland-qtutils.packages."${pkgs.system}".default
-      wezterm
       nitch
-      foot
-      raylib-games
     ];
     shell = pkgs.fish;
   };

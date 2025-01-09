@@ -8,7 +8,7 @@
         enable = true;
 
         settings = {
-          ensure_installed = ["c" "rust" "cpp" "nix" "kdl" "javascript" "haskell"];
+          ensure_installed = ["c" "rust" "cpp" "nix" "javascript" "haskell"];
           highlight.enable = true;
         };
 

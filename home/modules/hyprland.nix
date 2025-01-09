@@ -105,7 +105,7 @@ in {
         "XCURSOR_SIZE,24"
         "LIBVA_DRIVER_NAME,nvidia"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "AQ_DRM_DEVICES, /dev/dri/card0:/dev/dri/card1"
+        "AQ_DRM_DEVICES, /dev/dri/card0"
       ];
       xwayland = {force_zero_scaling = true;};
     };
