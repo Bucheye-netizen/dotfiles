@@ -61,7 +61,6 @@
     videoDrivers = ["amdgpu" "nvidia"];
   };
 
-  # Getting gaming to work
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -200,5 +199,5 @@
   environment.systemPackages = with pkgs; [neovim wget git];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
