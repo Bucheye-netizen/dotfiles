@@ -38,6 +38,7 @@
 
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
     xwayland.enable = true;
   };
 
@@ -71,7 +72,7 @@
 
   services.printing.enable = true;
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -168,6 +169,7 @@
       ffmpeg
       inputs.hyprland-qtutils.packages."${pkgs.system}".default
       nitch
+      google-chrome
     ];
     shell = pkgs.fish;
   };

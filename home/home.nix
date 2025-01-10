@@ -1,22 +1,11 @@
 {
   pkgs,
-  nixvim,
   hyprcursor,
-  ags,
   ...
 }: let
   colors = import ./util/colors.nix;
   stateVersion = "24.05";
 in {
-  imports = [
-    nixvim.homeManagerModules.nixvim
-    ./modules/vscode.nix
-    ./modules/hyprland.nix
-    ./modules/nvim.nix
-    ./modules/terminal/terminal.nix
-    ags.homeManagerModules.default
-    ./modules/fastfetch.nix
-  ];
   home.username = "lisan";
   home.homeDirectory = "/home/lisan";
   home.stateVersion = stateVersion;

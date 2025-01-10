@@ -16,6 +16,7 @@
         ms-python.python
         haskell.haskell
         justusadam.language-haskell
+        kamadorueda.alejandra
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
@@ -64,7 +65,6 @@
     userSettings = {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nixd";
-      "nix.formatterPath" = "alejandra";
       "editor.cursorSmoothCaretAnimation" = "on";
       "workbench.colorTheme" = "Gruvbox Material Dark";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
@@ -89,7 +89,7 @@
       "editor.guides.indentation" = false;
       "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "[nix]" = {
-        "editor.defaultFormatter" = "jnoortheen.nix-ide";
+        "editor.defaultFormatter" = "kamadorueda.alejandra";
       };
       "[rust]" = {
         "editor.defaultFormatter" = "rust-lang.rust-analyzer";

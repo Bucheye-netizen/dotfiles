@@ -33,7 +33,16 @@
 
       # Specify your home configuration modules here, for example,
       # the path to your home.nix.
-      modules = [./home.nix];
+      modules = [
+        nixvim.homeManagerModules.nixvim
+        ags.homeManagerModules.default
+        ./home.nix
+        ./hyprland.nix
+        ./vscode.nix
+        ./nvim.nix
+        ./terminal/terminal.nix
+        ./fastfetch.nix
+      ];
 
       extraSpecialArgs = {
         inherit nixvim;

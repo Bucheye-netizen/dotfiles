@@ -1,9 +1,10 @@
 {self, ...}: let
-  colors = import ../util/colors.nix;
+  colors = import ./util/colors.nix;
   active = "rgb(${colors.toHypr colors.gruv.light2})";
   inactive = "rgb(${colors.toHypr colors.gruv.dark3})";
 in {
   wayland.windowManager.hyprland = {
+    systemd.enable = false;
     enable = true;
     settings = {
       misc = {
