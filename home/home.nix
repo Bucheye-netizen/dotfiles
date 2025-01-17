@@ -59,8 +59,6 @@ in {
     enable = true;
     defaultFonts.monospace = ["JetBrainsMono NF"];
     defaultFonts.serif = ["Source Serif Pro"];
-    # TODO: Use different default sans-serif --- the current libre
-    #       version doesn't render non-Latin alphabets.
   };
 
   home.file = {};

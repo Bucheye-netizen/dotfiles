@@ -1,8 +1,15 @@
-{self, ...}: let
+{
+  self,
+  lib,
+  ...
+}: let
   colors = import ./util/colors.nix;
   active = "rgb(${colors.toHypr colors.gruv.light2})";
   inactive = "rgb(${colors.toHypr colors.gruv.dark3})";
 in {
+  systemd.user.services.hypridle.Unit.After = lib.mkForce "graphical-session.target";
+  systemd.user.services.hyprpaper.Unit.After = lib.mkForce "graphical-session.target";
+
   wayland.windowManager.hyprland = {
     systemd.enable = false;
     enable = true;
@@ -25,19 +32,22 @@ in {
         sensitivity = 0.3;
         touchpad.scroll_factor = 0.2;
       };
+
+      device = {
+        name = "razer-razer-viper-mini";
+        sensitivity = 0.01;
+      };
       animation = ["windows, 1, 5, default, popin 75%"];
       cursor = {
         no_hardware_cursors = true;
+        hide_on_touch = false;
       };
       debug.disable_logs = false;
-    };
-
-    settings = {
       bind = [
         # Apps
         "SUPER, Q,exec,kitty"
         "SUPER, R, exec, fuzzel  --use-bold"
-        "SUPER, X, exec, firefox"
+        "SUPER, X, exec, google-chrome-stable"
         "SUPER, PERIOD, exec, bemoji --type"
 
         "SUPER, Tab, cyclenext"
@@ -124,8 +134,6 @@ in {
   # Basically copied from https://github.com/binEpilo/hyprland-gruvbox-rice-/blob/main/hypr/hyprlock.conf
   programs.hyprlock = {
     settings = {
-      general = {hide_cursor = 0;};
-
       background = {
         path = "${self}/wallpaper/hyprlock.png";
         blur_passes = 1;

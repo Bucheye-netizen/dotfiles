@@ -8,7 +8,15 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Graphics
+  hardware.graphics.enable = true;
   boot.kernelParams = ["nvidia-drm.fbdev=1"];
+  services.xserver = {
+    enable = true;
+    exportConfiguration = true;
+    videoDrivers = ["amdgpu" "nvidia"];
+  };
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -20,7 +28,6 @@
       amdgpuBusId = "PCI:5:0:0";
     };
   };
-  hardware.graphics.enable = true;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -41,26 +48,14 @@
     withUWSM = true;
     xwayland.enable = true;
   };
-
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = with pkgs; [
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
-  ];
+  programs.uwsm.enable = true;
 
   environment.sessionVariables = {
     TERMINAL = "kitty";
-    WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
   };
 
   qt.enable = true;
-
-  services.xserver = {
-    enable = true;
-    exportConfiguration = true;
-    videoDrivers = ["amdgpu" "nvidia"];
-  };
 
   programs.steam = {
     enable = true;
@@ -170,6 +165,9 @@
       inputs.hyprland-qtutils.packages."${pkgs.system}".default
       nitch
       google-chrome
+      prismlauncher
+      zip
+      pavucontrol
     ];
     shell = pkgs.fish;
   };
@@ -200,6 +198,7 @@
 
   environment.systemPackages = with pkgs; [neovim wget git];
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   system.stateVersion = "24.11";
 }

@@ -63,8 +63,15 @@
         }
       ];
     userSettings = {
+      # Nix language server configuration
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nixd";
+      "nix.serverSettings.nixd.options" = {
+        "home-manager" = {
+          "expr" = "(builtins.getFlake \"/home/lisan/nix/home\").homeConfigurations.lisan.options";
+        };
+      };
+
       "editor.cursorSmoothCaretAnimation" = "on";
       "workbench.colorTheme" = "Gruvbox Material Dark";
       "editor.fontFamily" = "JetBrainsMonoNerdFont, monospace";
