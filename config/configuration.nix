@@ -81,7 +81,15 @@
     powerOnBoot = true;
   };
   services.blueman.enable = true;
-  services.displayManager.ly.enable = true;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd \"uwsm start hyprland-uwsm.desktop\"";
+      };
+    };
+  };
 
   programs.fish.enable = true;
 
