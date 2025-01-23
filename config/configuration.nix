@@ -11,6 +11,7 @@
 
   # Graphics
   hardware.graphics.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = ["nvidia-drm.fbdev=1"];
   services.xserver = {
     enable = true;
@@ -155,14 +156,12 @@
       gh
       fd
       sass
-      expressvpn
       lazygit
       powertop
       acpi
       maven
       dhcpcd
       vala
-      lunar-client
       qbittorrent
       lenovo-legion
       cbonsai
@@ -176,6 +175,9 @@
       prismlauncher
       zip
       pavucontrol
+      kdePackages.okular
+      gnome-themes-extra
+      expressvpn
     ];
     shell = pkgs.fish;
   };
@@ -203,6 +205,7 @@
       '';
     };
   };
+  services.expressvpn.enable = true;
 
   environment.systemPackages = with pkgs; [neovim wget git];
   nix.settings.experimental-features = ["nix-command" "flakes"];
