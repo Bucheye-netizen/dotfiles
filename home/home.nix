@@ -11,7 +11,12 @@ in {
   home.homeDirectory = "/home/lisan";
   home.stateVersion = stateVersion;
   nixpkgs.config.allowUnfree = true;
-  xdg.mimeApps.defaultApplications = {"firefox.desktop" = "application/pdf";};
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = ["org.gnome.Evince.desktop"];
+    };
+  };
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [
@@ -72,13 +77,6 @@ in {
       name = "Gruvbox-Dark";
       package = pkgs.gruvbox-gtk-theme;
     };
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "Lisan";
-    userEmail = "lisan.kontra@gmail.com";
-    extraConfig.init.defaultBranch = "main";
   };
 
   programs.waybar = {enable = true;};

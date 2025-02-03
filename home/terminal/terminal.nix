@@ -81,4 +81,9 @@
       main.font = "JetBrains Mono NF";
     };
   };
+
+  programs.yazi = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 }

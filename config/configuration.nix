@@ -167,7 +167,6 @@
       cbonsai
       (haskellPackages.ghcWithPackages
         (pkgs: [pkgs.stack pkgs.haskell-language-server]))
-      yazi
       ffmpeg
       inputs.hyprland-qtutils.packages."${pkgs.system}".default
       nitch
@@ -177,7 +176,7 @@
       pavucontrol
       kdePackages.okular
       gnome-themes-extra
-      expressvpn
+      evince
     ];
     shell = pkgs.fish;
   };
@@ -205,7 +204,6 @@
       '';
     };
   };
-  services.expressvpn.enable = true;
 
   environment.systemPackages = with pkgs; [neovim wget git];
   nix.settings.experimental-features = ["nix-command" "flakes"];
