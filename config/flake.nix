@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
+    hyprswitch.url = "github:h3rmt/hyprswitch/release";
   };
 
   outputs = {

@@ -49,13 +49,6 @@
       vim.loader.enable()
     '';
 
-    # keymaps = [
-    #   {
-    #     mode = "i";
-    #     key = "kj";
-    #     action = "<Esc>";
-    #   }
-    # ];
     opts = {
       shiftwidth = 2;
       tabstop = 2;

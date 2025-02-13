@@ -1,7 +1,7 @@
 {
   config,
-  inputs,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -28,6 +28,16 @@
       nvidiaBusId = "PCI:1:0:0";
       amdgpuBusId = "PCI:5:0:0";
     };
+  };
+
+  fonts.packages = with pkgs; [
+    source-serif-pro
+    nerd-fonts.jetbrains-mono
+  ];
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts.monospace = ["JetBrainsMono NF"];
+    defaultFonts.serif = ["Source Serif Pro"];
   };
 
   networking.hostName = "nixos";
@@ -99,7 +109,7 @@
     description = "Lisan";
     extraGroups = ["networkmanager" "wheel" "input" "uinput"];
     packages = with pkgs; [
-      # Hoping this fixes some hyprland crashes.
+      inputs.hyprswitch.packages.x86_64-linux.default
       libva
       libva-utils
       glxinfo
@@ -177,6 +187,11 @@
       kdePackages.okular
       gnome-themes-extra
       evince
+      font-manager
+      conduwuit
+      element-desktop
+      element
+      pomodoro
     ];
     shell = pkgs.fish;
   };

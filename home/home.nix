@@ -17,20 +17,23 @@ in {
       "application/pdf" = ["org.gnome.Evince.desktop"];
     };
   };
+
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-gtk
-      fcitx5-configtool
-      fcitx5-m17n
-    ];
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = with pkgs; [
+        fcitx5-gtk
+        fcitx5-configtool
+        fcitx5-m17n
+        fcitx5-nord
+      ];
+    };
   };
 
   home.packages = with pkgs; [
-    source-serif-pro
-    nerd-fonts.jetbrains-mono
     hyprpaper
-    gruvbox-plus-icons
+    # gruvbox-plus-icons
     breeze-icons
     alejandra
     hyprcursor.packages.${pkgs.system}.default
@@ -59,12 +62,6 @@ in {
   };
 
   home.sessionVariables = {
-  };
-
-  fonts.fontconfig = {
-    enable = true;
-    defaultFonts.monospace = ["JetBrainsMono NF"];
-    defaultFonts.serif = ["Source Serif Pro"];
   };
 
   home.file = {};
@@ -103,7 +100,7 @@ in {
     };
     iconTheme = {
       name = "Gruvbox-Plus-Dark";
-      package = pkgs.gruvbox-plus-icons;
+      # package = pkgs.gruvbox-plus-icons;
     };
   };
 
