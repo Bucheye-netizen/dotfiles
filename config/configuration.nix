@@ -3,7 +3,12 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  invokeAI = import ../derivations/invoke-ai.nix {
+    fetchurl = pkgs.fetchurl;
+    appimageTools = pkgs.appimageTools;
+  };
+in {
   imports = [./hardware-configuration.nix];
 
   boot.loader.systemd-boot.enable = true;
@@ -66,8 +71,6 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  qt.enable = true;
-
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -110,6 +113,7 @@
     extraGroups = ["networkmanager" "wheel" "input" "uinput"];
     packages = with pkgs; [
       inputs.hyprswitch.packages.x86_64-linux.default
+      invokeAI
       libva
       libva-utils
       glxinfo
@@ -184,7 +188,6 @@
       prismlauncher
       zip
       pavucontrol
-      kdePackages.okular
       gnome-themes-extra
       evince
       font-manager
@@ -192,6 +195,10 @@
       element-desktop
       element
       pomodoro
+      timer
+      alacritty
+      helix
+      glow
     ];
     shell = pkgs.fish;
   };

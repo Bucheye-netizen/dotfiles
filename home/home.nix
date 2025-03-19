@@ -33,7 +33,7 @@ in {
 
   home.packages = with pkgs; [
     hyprpaper
-    # gruvbox-plus-icons
+    gruvbox-dark-icons-gtk
     breeze-icons
     alejandra
     hyprcursor.packages.${pkgs.system}.default
@@ -50,6 +50,7 @@ in {
         enumitem
         xcharter
         stix2-otf
+        colophon
         ;
     })
   ];
@@ -69,11 +70,11 @@ in {
   programs.home-manager.enable = true;
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
-    style = {
-      name = "Gruvbox-Dark";
-      package = pkgs.gruvbox-gtk-theme;
-    };
+    # platformTheme.name = "gtk";
+    # style = {
+    #   name = "Gruvbox-Dark";
+    #   package = pkgs.gruvbox-gtk-theme;
+    # };
   };
 
   programs.waybar = {enable = true;};
@@ -99,8 +100,8 @@ in {
       name = "Gruvbox-Dark";
     };
     iconTheme = {
-      name = "Gruvbox-Plus-Dark";
-      # package = pkgs.gruvbox-plus-icons;
+      name = "oomox-gruvbox-dark";
+      package = pkgs.gruvbox-dark-icons-gtk;
     };
   };
 
@@ -130,5 +131,38 @@ in {
     templates = "${config.home.homeDirectory}/templates";
     publicShare = "${config.home.homeDirectory}/public";
     music = "${config.home.homeDirectory}/music";
+  };
+
+  services.dunst = {
+    enable = true;
+    iconTheme = {
+      name = "Gruvbox-Plus-Dark";
+      package = pkgs.gruvbox-dark-icons-gtk;
+    };
+
+    settings = {
+      global = {
+        notification_limit = 5;
+        width = 300;
+        height = 300;
+        offset = "30x50";
+        origin = "top-right";
+        transparency = 10;
+        frame_color = "#${colors.gruvm.orange}";
+        frame_width = 2;
+        background = "#${colors.gruvm.bg0}";
+        foreground = "#${colors.gruvm.fg0}";
+        corner_radius = 5;
+      };
+
+      urgency_critical = {
+        frame_color = "#${colors.gruvm.red}";
+      };
+
+      urgency_low = {
+        frame_color = "#${colors.gruvm.bg1}";
+        foreground = "#${colors.gruvm.fg1}";
+      };
+    };
   };
 }

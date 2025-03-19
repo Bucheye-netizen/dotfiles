@@ -17,6 +17,10 @@
       tab_bar_style = "powerline";
       cursor_trail = 1;
       touch_scroll_multiplier = 2.0;
+      input_delay = 0;
+      repaint_delay = 0;
+      sync_to_monitor = "no";
+      wayland_enable_ime = "no";
     };
     keybindings = {"alt+shift+tab" = "no_op";};
     shellIntegration.enableFishIntegration = true;
