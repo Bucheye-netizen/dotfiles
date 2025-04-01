@@ -1,6 +1,6 @@
 {pkgs, ...}: {
-  programs.vscode = {
-    enable = true;
+  programs.vscode.enable = true;
+  programs.vscode.profiles.default = {
     extensions = with pkgs.vscode-extensions;
       [
         vscodevim.vim
@@ -38,12 +38,6 @@
           sha256 = "sha256-1A4j8710AYuV8gA+sybv6WSavPVcCPMvI71h4n4Jx0w=";
         }
         {
-          name = "tera";
-          publisher = "karunamurti";
-          version = "0.0.9";
-          sha256 = "sha256-e72lZXg//vCZwoggRrpJlYiNUMxID3rkDLLBtV1b098=";
-        }
-        {
           name = "vscode-nushell-lang";
           publisher = "TheNuProjectContributors";
           version = "1.9.0";
@@ -60,6 +54,13 @@
           publisher = "James-Yu";
           sha256 = "sha256-modm0+XhYltiXOodPpkzNA9llp5/7oVUbpSNdbpMHCY=";
           version = "10.1.0";
+        }
+
+        {
+          name = "wgsl-analyzer";
+          publisher = "wgsl-analyzer";
+          version = "0.9.4";
+          sha256 = "sha256-R51SBq5pGroL6kYFvHbjtIDjnXisXfBO++Xc0g1O5lQ=";
         }
       ];
     userSettings = {
@@ -105,7 +106,7 @@
       "[c]" = {"editor.defaultFormatter" = "xaver.clang-format";};
       "[cpp]" = {"editor.defaultFormatter" = "xaver.clang-format";};
       "mesonbuild.downloadLanguageServer" = false;
-
+      "wgsl-analyzer.server.path" = "/home/lisan/.cargo/bin/wgsl-analyzer";
       "latex-workshop.latex.recipes" = [
         {
           "name" = "latexmk (lualatex)";

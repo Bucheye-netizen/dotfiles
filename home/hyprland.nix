@@ -50,8 +50,8 @@ in {
         "SUPER, X, exec, google-chrome-stable"
         "SUPER, PERIOD, exec, bemoji --type"
 
-        "SUPER, Tab, cyclenext"
-        "SUPER, Tab, bringactivetotop"
+        # "SUPER, Tab, cyclenext"
+        # "SUPER, Tab, bringactivetotop"
 
         # Actions
         "SUPER_SHIFT, S, exec, hyprshot -m region --clipboard-only"
@@ -80,12 +80,18 @@ in {
         "SUPER_SHIFT, J, movewindow, d"
         "SUPER_SHIFT, K, movewindow, u"
 
+        # Workspace keybinds
         "SUPER, 1, workspace, 1"
         "SUPER, 2, workspace, 2"
         "SUPER, 3, workspace, 3"
+        "SUPER, 4, workspace, 4"
+
         "SUPER_SHIFT, 1, movetoworkspace, 1"
         "SUPER_SHIFT, 2, movetoworkspace, 2"
         "SUPER_SHIFT, 3, movetoworkspace, 3"
+        "SUPER_SHIFT, 4, movetoworkspace, 4"
+
+        "SUPER, TAB, exec, hyprswitch gui --mod-key super --key tab --max-switch-offset 9 --hide-active-window-border"
       ];
       binde = [
         "SUPER_CTRL, H, resizeactive,-50 0"
@@ -100,7 +106,10 @@ in {
         ",XF86MonBrightnessUp, exec, brightnessctl set +10%"
         ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
       ];
-      exec-once = ["hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 24"];
+      exec-once = [
+        "hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 24"
+        "hyprswitch init --show-title --size-factor 5.5 --workspaces-per-row 4 &"
+      ];
       bindm = ["SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow"];
       windowrulev2 = [
         "float,class:^(org.gnome.Nautilus)"

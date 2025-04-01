@@ -33,9 +33,9 @@ in {
 
   home.packages = with pkgs; [
     hyprpaper
-    gruvbox-dark-icons-gtk
-    breeze-icons
+    gruvbox-plus-icons
     alejandra
+    gruvbox-gtk-theme
     hyprcursor.packages.${pkgs.system}.default
     nixd
     (texlive.combine {
@@ -51,6 +51,7 @@ in {
         xcharter
         stix2-otf
         colophon
+        fira
         ;
     })
   ];
@@ -70,11 +71,6 @@ in {
   programs.home-manager.enable = true;
   qt = {
     enable = true;
-    # platformTheme.name = "gtk";
-    # style = {
-    #   name = "Gruvbox-Dark";
-    #   package = pkgs.gruvbox-gtk-theme;
-    # };
   };
 
   programs.waybar = {enable = true;};
@@ -96,12 +92,10 @@ in {
   gtk = {
     enable = true;
     theme = {
-      package = pkgs.gruvbox-gtk-theme;
       name = "Gruvbox-Dark";
     };
     iconTheme = {
-      name = "oomox-gruvbox-dark";
-      package = pkgs.gruvbox-dark-icons-gtk;
+      name = "Gruvbox-Plus-Dark";
     };
   };
 
@@ -137,7 +131,7 @@ in {
     enable = true;
     iconTheme = {
       name = "Gruvbox-Plus-Dark";
-      package = pkgs.gruvbox-dark-icons-gtk;
+      package = pkgs.gruvbox-plus-icons;
     };
 
     settings = {
@@ -163,6 +157,13 @@ in {
         frame_color = "#${colors.gruvm.bg1}";
         foreground = "#${colors.gruvm.fg1}";
       };
+    };
+  };
+
+  home.file = {
+    ".config/hyprswitch.css" = {
+      text = builtins.readFile ./hyprswitch.css;
+      executable = false;
     };
   };
 }

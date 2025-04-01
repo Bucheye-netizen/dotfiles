@@ -3,21 +3,17 @@
   pkgs,
   inputs,
   ...
-}: let
-  invokeAI = import ../derivations/invoke-ai.nix {
-    fetchurl = pkgs.fetchurl;
-    appimageTools = pkgs.appimageTools;
-  };
-in {
+}: {
   imports = [./hardware-configuration.nix];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = ["nvidia-drm.fbdev=1"];
 
   # Graphics
   hardware.graphics.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = ["nvidia-drm.fbdev=1"];
+
   services.xserver = {
     enable = true;
     exportConfiguration = true;
@@ -38,6 +34,7 @@ in {
   fonts.packages = with pkgs; [
     source-serif-pro
     nerd-fonts.jetbrains-mono
+    lmodern
   ];
   fonts.fontconfig = {
     enable = true;
@@ -113,7 +110,6 @@ in {
     extraGroups = ["networkmanager" "wheel" "input" "uinput"];
     packages = with pkgs; [
       inputs.hyprswitch.packages.x86_64-linux.default
-      invokeAI
       libva
       libva-utils
       glxinfo
@@ -161,7 +157,6 @@ in {
       meson
       tldr
       coreutils-full
-      man-pages
       cmake
       bemoji
       google-cloud-sdk
@@ -196,9 +191,15 @@ in {
       element
       pomodoro
       timer
-      alacritty
-      helix
-      glow
+      mods
+      pop
+      m4
+      gnumake
+      tor-browser-bundle-bin
+      expressvpn
+      lsscsi
+      gparted
+      ipinfo
     ];
     shell = pkgs.fish;
   };
@@ -227,7 +228,10 @@ in {
     };
   };
 
-  environment.systemPackages = with pkgs; [neovim wget git];
+  services.expressvpn.enable = true;
+  services.tor.enable = true;
+
+  environment.systemPackages = with pkgs; [neovim wget git man-pages man-pages-posix];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
