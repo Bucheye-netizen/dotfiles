@@ -91,7 +91,7 @@ in {
         "SUPER_SHIFT, 3, movetoworkspace, 3"
         "SUPER_SHIFT, 4, movetoworkspace, 4"
 
-        "SUPER, TAB, exec, hyprswitch gui --mod-key super --key tab --max-switch-offset 9 --hide-active-window-border"
+        "SUPER, TAB, exec, hyprswitch gui --mod-key super --key tab --max-switch-offset 9"
       ];
       binde = [
         "SUPER_CTRL, H, resizeactive,-50 0"
@@ -108,7 +108,7 @@ in {
       ];
       exec-once = [
         "hyprctl setcursor 'Capitaine Cursors (Gruvbox)' 24"
-        "hyprswitch init --show-title --size-factor 5.5 --workspaces-per-row 4 &"
+        "hyprswitch init --show-title --size-factor 5.5 --workspaces-per-row 4 --custom-css ~/.config/hyprswitch.css &"
       ];
       bindm = ["SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow"];
       windowrulev2 = [

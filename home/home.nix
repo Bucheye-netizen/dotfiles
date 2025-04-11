@@ -70,6 +70,7 @@ in {
 
   programs.home-manager.enable = true;
   qt = {
+    platformTheme.name = "gtk";
     enable = true;
   };
 
@@ -93,6 +94,7 @@ in {
     enable = true;
     theme = {
       name = "Gruvbox-Dark";
+      package = pkgs.gruvbox-gtk-theme;
     };
     iconTheme = {
       name = "Gruvbox-Plus-Dark";

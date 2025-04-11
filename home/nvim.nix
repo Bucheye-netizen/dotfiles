@@ -4,15 +4,28 @@
     colorscheme = "gruvbox-material";
     extraPlugins = with pkgs.vimPlugins; [gruvbox-material-nvim];
     plugins = {
+      lz-n.enable = true;
       treesitter = {
         enable = true;
-
-        settings = {
-          ensure_installed = ["c" "rust" "cpp" "nix" "javascript" "haskell"];
-          highlight.enable = true;
-        };
-
+        settings.highlight.enable = true;
         nixGrammars = true;
+
+        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+          bash
+          json
+          lua
+          markdown
+          nix
+          toml
+          c
+          cpp
+          rust
+          git-config
+          git-rebase
+          gitcommit
+        ];
+        lazyLoad.enable = true;
+        lazyLoad.settings.event = "BufRead";
       };
       guess-indent.enable = true;
       conform-nvim = {
@@ -28,7 +41,6 @@
           format_on_save = ''{lsp_format = "fallback", timeout_ms = 500}'';
         };
       };
-      neogit.enable = true;
       fzf-lua = {
         enable = true;
         keymaps = {
@@ -45,10 +57,6 @@
       };
     };
 
-    extraConfigLua = ''
-      vim.loader.enable()
-    '';
-
     opts = {
       shiftwidth = 2;
       tabstop = 2;
@@ -56,6 +64,8 @@
       autoindent = true;
       number = true;
       ignorecase = true;
+      showcmd = false;
+      ruler = false;
     };
   };
 }

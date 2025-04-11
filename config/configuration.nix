@@ -11,6 +11,25 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = ["nvidia-drm.fbdev=1"];
 
+  security.polkit.enable = true;
+
+  # Enabling polkit_gnome
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+
   # Graphics
   hardware.graphics.enable = true;
 
@@ -200,6 +219,13 @@
       lsscsi
       gparted
       ipinfo
+      mediawriter
+      polkit_gnome
+      baobab
+      gnome-connections
+      tokei
+      page
+      chocolate-doom
     ];
     shell = pkgs.fish;
   };
