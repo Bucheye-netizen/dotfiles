@@ -17,7 +17,7 @@
       colors = import ./../util/colors.nix;
     in {
       # scrollback_pager = "nvim -c \"set norelativenumber nonumber nolist showtabline=0 foldcolumn=0\" -c \"autocmd TermOpen * normal G\" -c \"silent! write /tmp/kitty_scrollback_buffer | te cat /tmp/kitty_scrollback_buffer - \"";
-      scrollback_pager = "nvim --noplugin -c \"set signcolumn=no showtabline=0 nonumber foldcolumn=0 cmdheight=0 laststatus=0\" -c \"silent write! /tmp/kitty_scrollback_buffer | te cat /tmp/kitty_scrollback_buffer - \" -c \"normal G\"";
+      scrollback_pager = "nvim -R --noplugin -c \"set signcolumn=no showtabline=0 nonumber foldcolumn=0 cmdheight=0 laststatus=0\" -c \"silent write! /tmp/kitty_scrollback_buffer | te cat /tmp/kitty_scrollback_buffer - \" -c \"normal G\"";
       cursor_trail = 1;
       touch_scroll_multiplier = 2.0;
       cursor_trail_start_threshold = 0;

@@ -4,6 +4,10 @@
     colorscheme = "gruvbox-material";
     extraPlugins = with pkgs.vimPlugins; [gruvbox-material-nvim];
     plugins = {
+      comment = {
+        enable = true;
+        autoLoad = true;
+      };
       lz-n.enable = true;
       treesitter = {
         enable = true;
@@ -23,6 +27,9 @@
           git-config
           git-rebase
           gitcommit
+          vimdoc
+          typescript
+          json
         ];
         lazyLoad.enable = true;
         lazyLoad.settings.event = "BufRead";

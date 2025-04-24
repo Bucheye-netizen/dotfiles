@@ -36,8 +36,10 @@
   services.xserver = {
     enable = true;
     exportConfiguration = true;
-    videoDrivers = ["amdgpu" "nvidia"];
+    videoDrivers = ["nvidia"];
   };
+
+  # Loooking into dynamic boost also include maybe "amdgpu" as a kernel module
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -226,6 +228,9 @@
       tokei
       page
       chocolate-doom
+      vesktop
+      trippy
+      libresprite
     ];
     shell = pkgs.fish;
   };

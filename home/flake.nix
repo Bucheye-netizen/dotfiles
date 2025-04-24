@@ -41,6 +41,7 @@
         ./nvim.nix
         ./terminal/terminal.nix
         ./fastfetch.nix
+        ./helix.nix
       ];
 
       extraSpecialArgs = {
