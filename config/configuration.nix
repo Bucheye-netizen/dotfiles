@@ -10,8 +10,18 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = ["nvidia-drm.fbdev=1"];
+  boot.kernelModules = ["amdgpu"];
 
   security.polkit.enable = true;
+
+  nix.optimise.automatic = true;
+  nix.optimise.dates = ["03:45"];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   # Enabling polkit_gnome
   systemd = {
@@ -31,7 +41,13 @@
   };
 
   # Graphics
-  hardware.graphics.enable = true;
+  # hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      mesa
+    ];
+  };
 
   services.xserver = {
     enable = true;
@@ -189,9 +205,6 @@
       lazygit
       powertop
       acpi
-      maven
-      dhcpcd
-      vala
       qbittorrent
       lenovo-legion
       cbonsai
@@ -207,7 +220,6 @@
       gnome-themes-extra
       evince
       font-manager
-      conduwuit
       element-desktop
       element
       pomodoro
@@ -226,11 +238,11 @@
       baobab
       gnome-connections
       tokei
-      page
       chocolate-doom
       vesktop
-      trippy
       libresprite
+      lutris-free
+      wineWowPackages.full
     ];
     shell = pkgs.fish;
   };
