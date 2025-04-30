@@ -1,7 +1,7 @@
 {...}: {
   home.sessionVariables = {
     EDITOR = "hx";
-    VISUAL = "nvim";
+    VISUAL = "hx";
     MANPAGER = "nvim +Man!";
     MANWIDTH = "100";
   };
@@ -20,6 +20,7 @@
         insert = "bar";
         select = "underline";
       };
+      editor.soft-wrap.enable = true;
     };
     languages.auto-format = true;
     languages.language = [
@@ -50,7 +51,6 @@
     settings = let
       colors = import ./../util/colors.nix;
     in {
-      # scrollback_pager = "nvim -c \"set norelativenumber nonumber nolist showtabline=0 foldcolumn=0\" -c \"autocmd TermOpen * normal G\" -c \"silent! write /tmp/kitty_scrollback_buffer | te cat /tmp/kitty_scrollback_buffer - \"";
       scrollback_pager = "nvim -R --noplugin -c \"set signcolumn=no showtabline=0 nonumber foldcolumn=0 cmdheight=0 laststatus=0\" -c \"silent write! /tmp/kitty_scrollback_buffer | te cat /tmp/kitty_scrollback_buffer - \" -c \"normal G\"";
       cursor_trail = 1;
       touch_scroll_multiplier = 2.0;
@@ -63,8 +63,12 @@
       inactive_tab_background = "#${colors.gruvm.red}";
       active_border_color = "#${colors.gruvm.green}";
       inactive_border_color = "#${colors.gruvm.aqua}";
+      allow_remote_control = "yes";
     };
-    keybindings = {"alt+shift+tab" = "no_op";};
+    keybindings = {
+      "alt+shift+tab" = "no_op";
+      "ctrl+shift+enter" = "new_window_with_cwd";
+    };
     shellIntegration.enableFishIntegration = true;
   };
 

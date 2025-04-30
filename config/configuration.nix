@@ -243,6 +243,8 @@
       libresprite
       lutris-free
       wineWowPackages.full
+      texlab
+      vscode-langservers-extracted
     ];
     shell = pkgs.fish;
   };
