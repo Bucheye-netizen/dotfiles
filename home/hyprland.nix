@@ -29,13 +29,16 @@ in {
         border_size = 1;
       };
       input = {
+        scroll_factor = 1.5;
         sensitivity = 0.3;
-        touchpad.scroll_factor = 0.2;
+        touchpad = {
+          scroll_factor = 0.2;
+        };
       };
 
       device = {
-        name = "razer-razer-viper-mini";
-        sensitivity = 0.01;
+        name = "razer-razer-viper-mini-1";
+        sensitivity = -0.01;
       };
       animation = ["windows, 1, 5, default, popin 75%"];
       cursor = {
@@ -47,7 +50,7 @@ in {
         # Apps
         "SUPER, Q,exec,kitty"
         "SUPER, R, exec, fuzzel  --use-bold"
-        "SUPER, X, exec, google-chrome-stable"
+        "SUPER, X, exec, firefox"
         "SUPER, PERIOD, exec, bemoji --type"
 
         # "SUPER, Tab, cyclenext"
@@ -136,7 +139,7 @@ in {
       ipc = "off";
       splash = false;
       preload = ["${self}/wallpaper/gruvbox.png"];
-      wallpaper = ["eDP-2,${self}/wallpaper/gruvbox.png"];
+      wallpaper = ["eDP-1,${self}/wallpaper/gruvbox.png"];
     };
   };
 
@@ -155,7 +158,7 @@ in {
       };
 
       label = {
-        monitor = "eDP-2";
+        monitor = "eDP-1";
         text = "$TIME";
         color = active;
         font_size = 100;
@@ -166,7 +169,7 @@ in {
       };
 
       input-field = {
-        monitor = "eDP-2";
+        monitor = "eDP-1";
         size = "200, 50";
         outline_thickness = 3;
         dots_size = 0.33;

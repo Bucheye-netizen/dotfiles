@@ -40,8 +40,6 @@
     };
   };
 
-  # Graphics
-  # hardware.graphics.enable = true;
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -62,6 +60,7 @@
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
+
     prime = {
       nvidiaBusId = "PCI:1:0:0";
       amdgpuBusId = "PCI:5:0:0";
@@ -111,17 +110,35 @@
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
   };
-  programs.java.enable = true;
 
+  programs.java.enable = true;
   services.printing.enable = true;
 
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
+    jack.enable = true;
     pulse.enable = true;
+
+    # wireplumber.extraConfig."monitor.bluez.properties" = {
+    #   bluez5.roles = ["a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hsp_hs" "hsp_ag" "hfp_hf" "hfp_ag"];
+    #   bluez5.codecs = ["sbc" "sbc_xq" "aac"];
+    #   bluez5.enable-sbc-xq = true;
+    #   bluez5.hfphsp-backend = "native";
+    # };
+
+    wireplumber.configPackages = [
+      (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
+        monitor.bluez.properties = {
+          bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
+          bluez5.codecs = [ sbc sbc_xq aac ]
+          bluez5.enable-sbc-xq = true
+          bluez5.hfphsp-backend = "native"
+        }
+      '')
+    ];
   };
 
   hardware.bluetooth = {
@@ -146,6 +163,7 @@
     description = "Lisan";
     extraGroups = ["networkmanager" "wheel" "input" "uinput"];
     packages = with pkgs; [
+      pulseaudioFull
       inputs.hyprswitch.packages.x86_64-linux.default
       libva
       libva-utils
@@ -238,13 +256,24 @@
       baobab
       gnome-connections
       tokei
-      chocolate-doom
       vesktop
       libresprite
       lutris-free
       wineWowPackages.full
       texlab
+      superhtml
       vscode-langservers-extracted
+      markdown-oxide
+      typescript-language-server
+      polychromatic
+      openvpn
+      taplo
+      dig
+      zoom-us # this does not work.
+      wgsl-analyzer
+      hyperfine
+      calibre
+      msmtp
     ];
     shell = pkgs.fish;
   };

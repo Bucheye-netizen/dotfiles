@@ -15,15 +15,37 @@
     enable = true;
     settings = {
       theme = "gruvbox";
-      editor.cursor-shape = {
-        normal = "block";
-        insert = "bar";
-        select = "underline";
+      editor = {
+        cursor-shape = {
+          normal = "block";
+          insert = "bar";
+          select = "underline";
+        };
+        idle-timeout = 0;
+        completion-trigger-len = 1;
+        soft-wrap = {
+          enable = true;
+          wrap-indicator = "";
+        };
       };
-      editor.soft-wrap.enable = true;
     };
     languages.auto-format = true;
+    languages.language-server = {
+      wgsl-analyzer.command = "wgsl-analyzer";
+    };
     languages.language = [
+      {
+        name = "wgsl";
+        auto-format = true;
+        language-servers = ["wgsl-analyzer"];
+      }
+
+      {
+        name = "cpp";
+        auto-format = true;
+        formatter.command = "clang-format";
+      }
+
       {
         name = "rust";
         auto-format = true;
@@ -32,6 +54,16 @@
         name = "nix";
         formatter.command = "alejandra";
         auto-format = true;
+      }
+      {
+        name = "ligs";
+        file-types = ["ligs"];
+
+        indent = {
+          tab-width = 2;
+          unit = "  ";
+        };
+        scope = "source.ligs";
       }
     ];
   };
@@ -68,6 +100,7 @@
     keybindings = {
       "alt+shift+tab" = "no_op";
       "ctrl+shift+enter" = "new_window_with_cwd";
+      "ctrl+shift+n" = "new_tab_with_cwd";
     };
     shellIntegration.enableFishIntegration = true;
   };
