@@ -81,7 +81,7 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  time.timeZone = "Africa/Addis_Ababa";
+  time.timeZone = "America/Menominee";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {LC_TIME = "en_US.UTF-8";};
 
@@ -115,32 +115,13 @@
   services.printing.enable = true;
 
   security.rtkit.enable = true;
+
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    alsa.support32Bit = true;
-    jack.enable = true;
     pulse.enable = true;
-
-    # wireplumber.extraConfig."monitor.bluez.properties" = {
-    #   bluez5.roles = ["a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hsp_hs" "hsp_ag" "hfp_hf" "hfp_ag"];
-    #   bluez5.codecs = ["sbc" "sbc_xq" "aac"];
-    #   bluez5.enable-sbc-xq = true;
-    #   bluez5.hfphsp-backend = "native";
-    # };
-
-    wireplumber.configPackages = [
-      (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
-        monitor.bluez.properties = {
-          bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
-          bluez5.codecs = [ sbc sbc_xq aac ]
-          bluez5.enable-sbc-xq = true
-          bluez5.hfphsp-backend = "native"
-        }
-      '')
-    ];
   };
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -158,12 +139,22 @@
 
   programs.fish.enable = true;
 
+  users.users.bucheye = {
+    isNormalUser = true;
+    description = "Bucheye";
+    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio"];
+    packages = with pkgs; [
+      nsnake
+      kitty
+    ];
+    shell = pkgs.fish;
+  };
+
   users.users.lisan = {
     isNormalUser = true;
     description = "Lisan";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput"];
+    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio"];
     packages = with pkgs; [
-      pulseaudioFull
       inputs.hyprswitch.packages.x86_64-linux.default
       libva
       libva-utils
@@ -273,7 +264,9 @@
       wgsl-analyzer
       hyperfine
       calibre
-      msmtp
+      alsa-utils
+      lld
+      mold
     ];
     shell = pkgs.fish;
   };
