@@ -17,6 +17,8 @@
   nix.optimise.automatic = true;
   nix.optimise.dates = ["03:45"];
 
+  qt.enable = true;
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -70,6 +72,7 @@
   fonts.packages = with pkgs; [
     source-serif-pro
     nerd-fonts.jetbrains-mono
+    nerd-fonts.gohufont
     lmodern
   ];
   fonts.fontconfig = {
@@ -97,6 +100,7 @@
     withUWSM = true;
     xwayland.enable = true;
   };
+
   programs.uwsm.enable = true;
 
   environment.sessionVariables = {
@@ -112,6 +116,11 @@
   };
 
   programs.java.enable = true;
+
+  programs.fish.enable = true;
+
+  programs.firefox.enable = true;
+
   services.printing.enable = true;
 
   security.rtkit.enable = true;
@@ -137,15 +146,78 @@
     };
   };
 
-  programs.fish.enable = true;
-
   users.users.bucheye = {
     isNormalUser = true;
     description = "Bucheye";
     extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio"];
     packages = with pkgs; [
+      clang-tools
       nsnake
       kitty
+      helix
+      hyprpicker
+      hyprpaper
+      hypridle
+      fuzzel
+      trashy
+      alejandra
+      nixd
+      yazi
+      starship
+      fzf
+      ffmpeg
+      poppler
+      fd
+      ripgrep
+      resvg
+      inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+      google-chrome
+      nitch
+      prismlauncher
+      brightnessctl
+      rustup
+      acpi
+      ocaml
+      opam
+      ocamlPackages.utop
+      ocamlPackages.ocaml-lsp
+      ocamlPackages.ocamlformat
+      dune_3
+      gcc
+      mpv
+      m4
+      gnumake
+      eza
+      calibre
+      pulseaudio
+      pavucontrol
+      qbittorrent
+      vlc
+      hyprlock
+      file
+      font-manager
+      meson
+      mesonlsp
+      ninja
+      gpu-screen-recorder
+      cmake
+      stow
+      btop
+      fastfetch
+      geekbench
+      vesktop
+      lazygit
+      github-cli
+      hyprshot
+      nemo
+      zig
+      zls
+      foliate
+      tokei
+      cmake-format
+      cmake-lint
+      cmake-language-server
+      qtcreator
     ];
     shell = pkgs.fish;
   };
@@ -169,7 +241,6 @@
       libnotify
       lshw
       pciutils
-      wl-clipboard
       tree
       htop
       trashy
@@ -222,7 +293,6 @@
       ffmpeg
       inputs.hyprland-qtutils.packages."${pkgs.system}".default
       nitch
-      google-chrome
       prismlauncher
       zip
       pavucontrol
@@ -258,6 +328,7 @@
       typescript-language-server
       polychromatic
       openvpn
+      google-chrome
       taplo
       dig
       zoom-us # this does not work.
@@ -271,7 +342,6 @@
     shell = pkgs.fish;
   };
 
-  programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   powerManagement.enable = true;
@@ -298,7 +368,16 @@
   services.expressvpn.enable = true;
   services.tor.enable = true;
 
-  environment.systemPackages = with pkgs; [neovim wget git man-pages man-pages-posix];
+  environment.systemPackages = with pkgs; [
+    neovim
+    wget
+    git
+    man-pages
+    man-pages-posix
+    wl-clipboard
+    inputs.quickshell.packages.${pkgs.system}.default
+    kdePackages.qtdeclarative
+  ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
