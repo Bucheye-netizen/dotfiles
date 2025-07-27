@@ -9,7 +9,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = ["nvidia-drm.fbdev=1"];
+  boot.kernelParams = ["nvidia-drm.fbdev=1" "usbcore.autosuspend=-1"];
   boot.kernelModules = ["amdgpu"];
 
   security.polkit.enable = true;
@@ -74,6 +74,7 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.gohufont
     lmodern
+    noto-fonts
   ];
   fonts.fontconfig = {
     enable = true;
@@ -100,6 +101,7 @@
     withUWSM = true;
     xwayland.enable = true;
   };
+  programs.dconf.enable = true;
 
   programs.uwsm.enable = true;
 
@@ -209,7 +211,6 @@
       lazygit
       github-cli
       hyprshot
-      nemo
       zig
       zls
       foliate
@@ -218,6 +219,20 @@
       cmake-lint
       cmake-language-server
       qtcreator
+      anki
+      libreoffice
+      glib
+      usbutils
+      gparted
+      coreutils-full
+      google-cloud-sdk
+      nautilus
+      gsettings-desktop-schemas
+      gsettings-qt
+      dconf-editor
+      zip
+      weechat
+      obsidian
     ];
     shell = pkgs.fish;
   };
