@@ -75,6 +75,7 @@
     nerd-fonts.gohufont
     lmodern
     noto-fonts
+    stix-two
   ];
   fonts.fontconfig = {
     enable = true;
@@ -85,7 +86,7 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  time.timeZone = "America/Menominee";
+  time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {LC_TIME = "en_US.UTF-8";};
 
@@ -153,6 +154,7 @@
     description = "Bucheye";
     extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio"];
     packages = with pkgs; [
+      mumble
       clang-tools
       nsnake
       kitty
@@ -233,6 +235,13 @@
       zip
       weechat
       obsidian
+      openrct2
+      usbimager
+      typst
+      tinymist
+      halloy
+      waybar
+      hyprpanel
     ];
     shell = pkgs.fish;
   };
@@ -353,6 +362,8 @@
       alsa-utils
       lld
       mold
+      gnome-keyring
+      fractal
     ];
     shell = pkgs.fish;
   };
@@ -363,6 +374,7 @@
   powerManagement.powertop.enable = true;
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   services.gvfs.enable = true;
   services.kanata = {
