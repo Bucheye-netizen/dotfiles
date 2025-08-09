@@ -72,7 +72,7 @@
   fonts.packages = with pkgs; [
     source-serif-pro
     nerd-fonts.jetbrains-mono
-    nerd-fonts.gohufont
+    nerd-fonts.iosevka-term
     lmodern
     noto-fonts
     stix-two
@@ -81,6 +81,7 @@
     enable = true;
     defaultFonts.monospace = ["JetBrainsMono NF"];
     defaultFonts.serif = ["Source Serif Pro"];
+    defaultFonts.sansSerif = ["Noto Sans"];
   };
 
   networking.hostName = "nixos";
@@ -125,9 +126,7 @@
   programs.firefox.enable = true;
 
   services.printing.enable = true;
-
   security.rtkit.enable = true;
-
   services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
@@ -181,12 +180,6 @@
       brightnessctl
       rustup
       acpi
-      ocaml
-      opam
-      ocamlPackages.utop
-      ocamlPackages.ocaml-lsp
-      ocamlPackages.ocamlformat
-      dune_3
       gcc
       mpv
       m4
@@ -233,7 +226,6 @@
       gsettings-qt
       dconf-editor
       zip
-      weechat
       obsidian
       openrct2
       usbimager
@@ -242,128 +234,18 @@
       halloy
       waybar
       hyprpanel
-    ];
-    shell = pkgs.fish;
-  };
-
-  users.users.lisan = {
-    isNormalUser = true;
-    description = "Lisan";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio"];
-    packages = with pkgs; [
-      inputs.hyprswitch.packages.x86_64-linux.default
-      libva
-      libva-utils
-      glxinfo
-      clinfo
-      virtualglLib
-      vulkan-loader
-      vulkan-tools
-      wget
-      sl
-      kitty
-      libnotify
-      lshw
-      pciutils
-      tree
-      htop
-      trashy
-      fzf
-      nsnake
-      gcc
-      bottom
-      clang-tools
-      clang
-      rustup
-      openssl
-      pkg-config
-      swayimg
-      foliate
-      racket-minimal
-      unzip
-      newsflash
-      obsidian
-      nautilus
-      hyprshot
-      brightnessctl
-      prettierd
-      ripgrep
-      bun
-      libdbusmenu-gtk3
-      ani-cli
-      hyprpicker
-      doggo
-      vesktop
-      mpv
-      meson
-      tldr
-      coreutils-full
-      cmake
-      bemoji
-      google-cloud-sdk
-      amfora
-      wtype
-      gh
-      fd
-      sass
-      lazygit
-      powertop
-      acpi
-      qbittorrent
-      lenovo-legion
-      cbonsai
-      (haskellPackages.ghcWithPackages
-        (pkgs: [pkgs.stack pkgs.haskell-language-server]))
-      ffmpeg
-      inputs.hyprland-qtutils.packages."${pkgs.system}".default
-      nitch
-      prismlauncher
-      zip
-      pavucontrol
-      gnome-themes-extra
-      evince
-      font-manager
-      element-desktop
-      element
-      pomodoro
-      timer
-      mods
-      pop
-      m4
-      gnumake
-      tor-browser-bundle-bin
-      expressvpn
-      lsscsi
-      gparted
-      ipinfo
-      mediawriter
-      polkit_gnome
-      baobab
-      gnome-connections
-      tokei
-      vesktop
-      libresprite
-      lutris-free
-      wineWowPackages.full
-      texlab
-      superhtml
-      vscode-langservers-extracted
-      markdown-oxide
-      typescript-language-server
-      polychromatic
-      openvpn
-      google-chrome
-      taplo
-      dig
-      zoom-us # this does not work.
-      wgsl-analyzer
-      hyperfine
-      calibre
-      alsa-utils
-      lld
-      mold
-      gnome-keyring
       fractal
+      gnome-keyring
+      nzbget
+      neomutt
+      aerc
+      thunderbird
+      screen
+      minicom
+      vscode
+      zed-editor
+      nodejs
+      powertop
     ];
     shell = pkgs.fish;
   };
