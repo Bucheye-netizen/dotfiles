@@ -87,6 +87,7 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
+  # DC: America/New_York, RACINE: America/Chicago
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {LC_TIME = "en_US.UTF-8";};
@@ -143,7 +144,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd \"uwsm start hyprland-uwsm.desktop\"";
+        command = "${pkgs.greetd}/bin/agreety --cmd \"uwsm start hyprland-uwsm.desktop\"";
       };
     };
   };
@@ -165,9 +166,7 @@
       trashy
       alejandra
       nixd
-      yazi
       starship
-      fzf
       ffmpeg
       poppler
       fd
@@ -181,7 +180,6 @@
       rustup
       acpi
       gcc
-      mpv
       m4
       gnumake
       eza
@@ -226,6 +224,7 @@
       gsettings-qt
       dconf-editor
       zip
+      unzip
       obsidian
       openrct2
       usbimager
@@ -237,7 +236,6 @@
       fractal
       gnome-keyring
       nzbget
-      neomutt
       aerc
       thunderbird
       screen
@@ -246,6 +244,26 @@
       zed-editor
       nodejs
       powertop
+      waybar
+      killall
+      dunst
+      mullvad
+      mullvad-vpn
+      dig
+      amfora
+      evince
+      jdt-language-server
+      maven
+      gnome-solanum
+      jetbrains.idea-community
+      bash-language-server
+      shellcheck
+      jj
+      cpufetch
+      binsider
+      kalker
+      wiki-tui
+      libreoffice-fresh
     ];
     shell = pkgs.fish;
   };
@@ -257,6 +275,7 @@
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
   services.gnome.gnome-keyring.enable = true;
+  services.mullvad-vpn.enable = true;
 
   services.gvfs.enable = true;
   services.kanata = {
