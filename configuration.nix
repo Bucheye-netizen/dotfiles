@@ -11,6 +11,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = ["nvidia-drm.fbdev=1" "usbcore.autosuspend=-1"];
   boot.kernelModules = ["amdgpu"];
+  hardware.enableAllFirmware = true;
 
   security.polkit.enable = true;
 
@@ -70,6 +71,7 @@
   };
 
   fonts.packages = with pkgs; [
+    cantarell-fonts
     source-serif-pro
     nerd-fonts.jetbrains-mono
     nerd-fonts.iosevka-term
@@ -81,7 +83,7 @@
     enable = true;
     defaultFonts.monospace = ["JetBrainsMono NF"];
     defaultFonts.serif = ["Source Serif Pro"];
-    defaultFonts.sansSerif = ["Noto Sans"];
+    defaultFonts.sansSerif = ["IosevkaTerm Nerd Font"];
   };
 
   networking.hostName = "nixos";
@@ -264,6 +266,17 @@
       kalker
       wiki-tui
       libreoffice-fresh
+      typstyle
+      ty
+      ruff
+      uv
+      devenv
+      thonny
+      jupyter
+      conda
+      pandoc
+      zathura
+      slack
     ];
     shell = pkgs.fish;
   };
@@ -272,6 +285,7 @@
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
+  # services.tlp.enable = true;
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
   services.gnome.gnome-keyring.enable = true;
@@ -295,6 +309,7 @@
 
   services.expressvpn.enable = true;
   services.tor.enable = true;
+  services.gpsd.enable = true;
 
   environment.systemPackages = with pkgs; [
     neovim
@@ -307,6 +322,7 @@
     kdePackages.qtdeclarative
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.trusted-users = ["bucheye"];
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   system.stateVersion = "24.11";
