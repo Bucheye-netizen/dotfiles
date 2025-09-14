@@ -53,7 +53,7 @@
   services.xserver = {
     enable = true;
     exportConfiguration = true;
-    videoDrivers = ["nvidia"];
+    videoDrivers = ["amdgpu" "nvidia"];
   };
 
   # Loooking into dynamic boost also include maybe "amdgpu" as a kernel module
@@ -154,9 +154,8 @@
   users.users.bucheye = {
     isNormalUser = true;
     description = "Bucheye";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio"];
+    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio" "dialout"];
     packages = with pkgs; [
-      mumble
       clang-tools
       nsnake
       kitty
@@ -238,7 +237,6 @@
       fractal
       gnome-keyring
       nzbget
-      aerc
       thunderbird
       screen
       minicom
@@ -277,6 +275,11 @@
       pandoc
       zathura
       slack
+      kdePackages.ghostwriter
+      kdePackages.ksystemlog
+      tombi
+      jujutsu
+      swayimg
     ];
     shell = pkgs.fish;
   };
