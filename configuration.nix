@@ -101,14 +101,8 @@
     }
   ];
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
-  };
   programs.dconf.enable = true;
-
-  programs.uwsm.enable = true;
+  programs.niri.enable = true;
 
   environment.sessionVariables = {
     TERMINAL = "kitty";
@@ -146,7 +140,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd}/bin/agreety --cmd \"uwsm start hyprland-uwsm.desktop\"";
+        command = "${pkgs.greetd}/bin/agreety --cmd \"niri-session\"";
       };
     };
   };
@@ -280,6 +274,8 @@
       tombi
       jujutsu
       swayimg
+      xwayland-satellite
+      nix-tree
     ];
     shell = pkgs.fish;
   };
@@ -321,7 +317,6 @@
     man-pages
     man-pages-posix
     wl-clipboard
-    inputs.quickshell.packages.${pkgs.system}.default
     kdePackages.qtdeclarative
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
