@@ -163,6 +163,7 @@
       nixd
       starship
       ffmpeg
+      # why do I have this installed on my user system?
       poppler
       fd
       ripgrep
@@ -276,6 +277,11 @@
       swayimg
       xwayland-satellite
       nix-tree
+      capitaine-cursors
+      baobab
+      efivar
+      efibootmgr
+      efibooteditor
     ];
     shell = pkgs.fish;
   };
@@ -284,7 +290,6 @@
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
-  # services.tlp.enable = true;
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
   services.gnome.gnome-keyring.enable = true;
@@ -317,7 +322,6 @@
     man-pages
     man-pages-posix
     wl-clipboard
-    kdePackages.qtdeclarative
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.trusted-users = ["bucheye"];
