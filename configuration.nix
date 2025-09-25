@@ -2,12 +2,22 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [./hardware-configuration.nix];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # For secure boot purposes.
+  #
+  # Remmeber this when installing on a new system.
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = ["nvidia-drm.fbdev=1" "usbcore.autosuspend=-1"];
   boot.kernelModules = ["amdgpu"];
@@ -168,7 +178,6 @@
       fd
       ripgrep
       resvg
-      inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
       google-chrome
       nitch
       prismlauncher
@@ -279,9 +288,8 @@
       nix-tree
       capitaine-cursors
       baobab
-      efivar
-      efibootmgr
       efibooteditor
+      nixfmt
     ];
     shell = pkgs.fish;
   };
@@ -311,7 +319,6 @@
     };
   };
 
-  services.expressvpn.enable = true;
   services.tor.enable = true;
   services.gpsd.enable = true;
 
@@ -322,6 +329,9 @@
     man-pages
     man-pages-posix
     wl-clipboard
+    sbctl
+    efivar
+    efibootmgr
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.trusted-users = ["bucheye"];
