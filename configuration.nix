@@ -138,6 +138,7 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
   };
   hardware.bluetooth = {
@@ -194,7 +195,6 @@
       qbittorrent
       vlc
       hyprlock
-      file
       font-manager
       meson
       mesonlsp
@@ -290,6 +290,8 @@
       baobab
       efibooteditor
       nixfmt
+      nix-search-cli
+      cpufrequtils
     ];
     shell = pkgs.fish;
   };
