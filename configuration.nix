@@ -126,7 +126,10 @@
     localNetworkGameTransfers.openFirewall = true;
   };
 
-  programs.java.enable = true;
+  programs.java = {
+    package = pkgs.jdk17;
+    enable = true;
+  };
 
   programs.fish.enable = true;
 
@@ -204,7 +207,6 @@
       stow
       btop
       fastfetch
-      geekbench
       vesktop
       lazygit
       github-cli
@@ -231,7 +233,6 @@
       zip
       unzip
       obsidian
-      openrct2
       usbimager
       typst
       tinymist
