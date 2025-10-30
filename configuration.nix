@@ -56,7 +56,8 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      mesa
+      libvdpau-va-gl
+      nvidia-vaapi-driver
     ];
   };
 
@@ -117,6 +118,10 @@
   environment.sessionVariables = {
     TERMINAL = "kitty";
     NIXOS_OZONE_WL = "1";
+    CHROME_EXECUTABLE = "google-chrome-stable";
+    ANDROID_HOME = "${pkgs.androidenv.androidPkgs.androidsdk}";
+    ANDROID_SDK_ROOT = "${pkgs.androidenv.androidPkgs.androidsdk}/libexec/android-sdk";
+    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d";
   };
 
   programs.steam = {
@@ -134,6 +139,7 @@
   programs.fish.enable = true;
 
   programs.firefox.enable = true;
+  programs.adb.enable = true;
 
   services.printing.enable = true;
   security.rtkit.enable = true;
@@ -159,10 +165,19 @@
     };
   };
 
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+    };
+  };
+
   users.users.bucheye = {
     isNormalUser = true;
     description = "Bucheye";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio" "dialout"];
+    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio" "dialout" "kvm" "adbusers"];
     packages = with pkgs; [
       clang-tools
       nsnake
@@ -293,11 +308,24 @@
       nixfmt
       nix-search-cli
       cpufrequtils
+      bibtex-tidy
+      texlab
+      typora
+      android-studio
+      virt-manager
+      flutter
+      # android-tools
+      mesa-demos
+      jdk21
+      androidenv.androidPkgs.androidsdk
+      vulkan-tools
+      wayfire
     ];
     shell = pkgs.fish;
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.android_sdk.accept_license = true;
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
