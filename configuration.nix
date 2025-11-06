@@ -114,6 +114,17 @@
 
   programs.dconf.enable = true;
   programs.niri.enable = true;
+  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+
+  programs.wayfire = {
+    enable = false;
+    plugins = with pkgs.wayfirePlugins; [
+      wcm
+      # wf-shell
+      wayfire-shadows
+      wayfire-plugins-extra
+    ];
+  };
 
   environment.sessionVariables = {
     TERMINAL = "kitty";
@@ -122,6 +133,8 @@
     ANDROID_HOME = "${pkgs.androidenv.androidPkgs.androidsdk}";
     ANDROID_SDK_ROOT = "${pkgs.androidenv.androidPkgs.androidsdk}/libexec/android-sdk";
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d";
+    # fixing swing popups
+    _JAVA_AWT_WM_NONREPARENTING = 1;
   };
 
   programs.steam = {
@@ -260,7 +273,7 @@
       thunderbird
       screen
       minicom
-      vscode
+      vscode-fhs
       zed-editor
       nodejs
       powertop
