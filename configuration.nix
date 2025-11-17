@@ -89,6 +89,7 @@
     lmodern
     noto-fonts
     stix-two
+    lmodern
   ];
   fonts.fontconfig = {
     enable = true;
@@ -145,7 +146,7 @@
   };
 
   programs.java = {
-    package = pkgs.jdk17;
+    package = pkgs.jdk25;
     enable = true;
   };
 
@@ -153,16 +154,25 @@
 
   programs.firefox.enable = true;
   programs.adb.enable = true;
-
   services.printing.enable = true;
+
   security.rtkit.enable = true;
-  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  services.pipewire.extraConfig.pipewire."92-low-latency" = {
+    "context.properties" = {
+      "default.clock.rate" = 48000;
+      "default.clock.quantum" = 32;
+      "default.clock.min-quantum" = 32;
+      "default.clock.max-quantum" = 32;
+    };
+  };
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -332,7 +342,9 @@
       jdk21
       androidenv.androidPkgs.androidsdk
       vulkan-tools
-      wayfire
+      texliveMedium
+      sox
+      git-filter-repo
     ];
     shell = pkgs.fish;
   };
