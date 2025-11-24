@@ -131,8 +131,6 @@
     TERMINAL = "kitty";
     NIXOS_OZONE_WL = "1";
     CHROME_EXECUTABLE = "google-chrome-stable";
-    ANDROID_HOME = "${pkgs.androidenv.androidPkgs.androidsdk}";
-    ANDROID_SDK_ROOT = "${pkgs.androidenv.androidPkgs.androidsdk}/libexec/android-sdk";
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d";
     # fixing swing popups
     _JAVA_AWT_WM_NONREPARENTING = 1;
@@ -305,7 +303,6 @@
       cpufetch
       binsider
       kalker
-      wiki-tui
       libreoffice-fresh
       typstyle
       ty
@@ -340,17 +337,17 @@
       # android-tools
       mesa-demos
       jdk21
-      androidenv.androidPkgs.androidsdk
       vulkan-tools
       texliveMedium
       sox
       git-filter-repo
+      marksman
+      gource
     ];
     shell = pkgs.fish;
   };
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.android_sdk.accept_license = true;
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
