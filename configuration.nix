@@ -53,13 +53,7 @@
     };
   };
 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      libvdpau-va-gl
-      nvidia-vaapi-driver
-    ];
-  };
+  hardware.graphics.enable = true;
 
   services.xserver = {
     enable = true;
@@ -70,14 +64,18 @@
   # Loooking into dynamic boost also include maybe "amdgpu" as a kernel module
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = true;
+    powerManagement.enable = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
 
     prime = {
       nvidiaBusId = "PCI:1:0:0";
       amdgpuBusId = "PCI:5:0:0";
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
     };
   };
 
@@ -98,7 +96,7 @@
     defaultFonts.sansSerif = ["IosevkaTerm Nerd Font"];
   };
 
-  networking.hostName = "nixos";
+  networking.hostName = "thoughtbox";
   networking.networkmanager.enable = true;
 
   # DC: America/New_York, RACINE: America/Chicago
@@ -116,16 +114,6 @@
   programs.dconf.enable = true;
   programs.niri.enable = true;
   xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
-
-  programs.wayfire = {
-    enable = false;
-    plugins = with pkgs.wayfirePlugins; [
-      wcm
-      # wf-shell
-      wayfire-shadows
-      wayfire-plugins-extra
-    ];
-  };
 
   environment.sessionVariables = {
     TERMINAL = "kitty";
@@ -175,7 +163,14 @@
     enable = true;
     powerOnBoot = true;
   };
+
   services.blueman.enable = true;
+
+  location = {
+    latitude = 40.4270836;
+    longitude = -86.919464;
+    provider = "manual";
+  };
 
   services.greetd = {
     enable = true;
@@ -200,6 +195,7 @@
     description = "Bucheye";
     extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio" "dialout" "kvm" "adbusers"];
     packages = with pkgs; [
+      redshift
       clang-tools
       nsnake
       kitty
@@ -355,6 +351,7 @@
   services.upower.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.mullvad-vpn.enable = true;
+  services.syncthing.enable = true;
 
   services.gvfs.enable = true;
   services.kanata = {
