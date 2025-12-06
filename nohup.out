@@ -1,0 +1,6 @@
+[2025-12-05 23:38:47.022] [info] Using configuration file /home/bucheye/.config/waybar/config.jsonc
+[2025-12-05 23:38:47.025] [info] Discovered appearance 'dark'
+[2025-12-05 23:38:47.052] [info] Using CSS file /home/bucheye/.config/waybar/style.css
+[2025-12-05 23:38:47.064] [info] Niri IPC starting
+[2025-12-05 23:38:47.179] [error] Failed to query power-profiles-daemon via dbus: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name net.hadess.PowerProfiles was not provided by any .service files
+[2025-12-05 23:38:47.187] [info] Bar configured (width: 1707, height: 26) for output: eDP-1

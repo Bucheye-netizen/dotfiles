@@ -20,7 +20,11 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = ["nvidia-drm.fbdev=1" "usbcore.autosuspend=-1"];
-  boot.kernelModules = ["amdgpu"];
+  boot.kernelModules = [];
+  boot.extraModprobeConfig = ''
+    options snd-hda-intel power_save=0
+    options snd-hda-intel model=auto
+  '';
   hardware.enableAllFirmware = true;
 
   security.polkit.enable = true;
@@ -64,7 +68,9 @@
   # Loooking into dynamic boost also include maybe "amdgpu" as a kernel module
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;
+
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.production;
@@ -84,7 +90,6 @@
     source-serif-pro
     nerd-fonts.jetbrains-mono
     nerd-fonts.iosevka-term
-    lmodern
     noto-fonts
     stix-two
     lmodern
@@ -113,7 +118,12 @@
 
   programs.dconf.enable = true;
   programs.niri.enable = true;
-  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    config.common.default = "gtk";
+  };
 
   environment.sessionVariables = {
     TERMINAL = "kitty";
@@ -122,6 +132,7 @@
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d";
     # fixing swing popups
     _JAVA_AWT_WM_NONREPARENTING = 1;
+    _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true";
   };
 
   programs.steam = {
@@ -150,12 +161,12 @@
     pulse.enable = true;
   };
 
-  services.pipewire.extraConfig.pipewire."92-low-latency" = {
+  services.pipewire.extraConfig.pipewire."92-media-consumption" = {
     "context.properties" = {
       "default.clock.rate" = 48000;
-      "default.clock.quantum" = 32;
-      "default.clock.min-quantum" = 32;
-      "default.clock.max-quantum" = 32;
+      "default.clock.quantum" = 1024;
+      "default.clock.min-quantum" = 512;
+      "default.clock.max-quantum" = 2048;
     };
   };
 
@@ -185,7 +196,6 @@
     enable = true;
     qemu = {
       package = pkgs.qemu_kvm;
-      runAsRoot = true;
       swtpm.enable = true;
     };
   };
@@ -225,7 +235,6 @@
       gnumake
       eza
       calibre
-      pulseaudio
       pavucontrol
       qbittorrent
       vlc
@@ -269,7 +278,6 @@
       typst
       tinymist
       halloy
-      waybar
       hyprpanel
       fractal
       gnome-keyring
@@ -316,7 +324,6 @@
       tombi
       jujutsu
       swayimg
-      xwayland-satellite
       nix-tree
       capitaine-cursors
       baobab
@@ -334,20 +341,31 @@
       mesa-demos
       jdk21
       vulkan-tools
-      texliveMedium
+
+      (texliveMedium.withPackages (
+        ps:
+          with ps; [
+            enumitem
+          ]
+      ))
+
       sox
       git-filter-repo
       marksman
       gource
+      lutris
+      alsa-utils
     ];
     shell = pkgs.fish;
   };
 
   nixpkgs.config.allowUnfree = true;
 
+  # services.power-profiles-daemon.enable = true;
   powerManagement.enable = true;
-  powerManagement.powertop.enable = true;
-  services.power-profiles-daemon.enable = true;
+
+  services.tlp.enable = true;
+  services.auto-cpufreq.enable = true;
   services.upower.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.mullvad-vpn.enable = true;
