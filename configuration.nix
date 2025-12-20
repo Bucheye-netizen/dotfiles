@@ -226,7 +226,6 @@
       resvg
       google-chrome
       nitch
-      prismlauncher
       brightnessctl
       rustup
       acpi
@@ -348,13 +347,22 @@
             enumitem
           ]
       ))
-
       sox
       git-filter-repo
       marksman
       gource
       lutris
       alsa-utils
+      (pkgs.writeShellScriptBin "prismlauncher" ''
+        unset QT_STYLE_OVERRIDE
+        unset QT_QPA_PLATFORMTHEME
+        exec ${pkgs.prismlauncher}/bin/prismlauncher "$@"
+      '')
+      xwayland-satellite
+      webtorrent_desktop
+      kodi
+      loupe
+      foot
     ];
     shell = pkgs.fish;
   };
@@ -387,6 +395,8 @@
     };
   };
 
+  documentation.man.generateCaches = false;
+
   services.tor.enable = true;
   services.gpsd.enable = true;
 
@@ -400,6 +410,7 @@
     sbctl
     efivar
     efibootmgr
+    pulseaudio
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.trusted-users = ["bucheye"];
